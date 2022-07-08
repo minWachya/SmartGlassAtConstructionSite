@@ -16,4 +16,6 @@
     <string name="label_nav_home">홈</string>
     <string name="label_nav_list">목록</string>
     <string name="label_nav_setting">설정</string>
+    <string name="label_tab_building">건물</string>
+    <string name="label_tab_smartglass">스마트글래스</string>
 </resources>
