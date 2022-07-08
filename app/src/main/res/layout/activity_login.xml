@@ -29,6 +29,7 @@
 
     <EditText
         android:id="@+id/edit_id"
+        style="@style/TextMedium"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginHorizontal="40dp"
@@ -43,6 +44,7 @@
 
     <EditText
         android:id="@+id/edit_pw"
+        style="@style/TextMedium"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginHorizontal="40dp"

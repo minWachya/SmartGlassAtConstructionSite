@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.safetymanagement2022.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/navigation_list"
+        android:name="com.example.safetymanagement2022.ui.list.ListFragment"
+        android:label="ListFragment" />
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.example.safetymanagement2022.ui.setting.SettingFragment"
+        android:label="SettingFragment" />
+</navigation>
