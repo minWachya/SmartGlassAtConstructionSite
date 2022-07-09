@@ -8,15 +8,17 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabTabLayout"
-        android:layout_width="220dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="start"
         app:tabIndicatorColor="@color/app_gradient_end"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="3dp"
+        app:tabMode="scrollable"
         app:tabTextAppearance="@style/TextMedium.20"
         app:tabTextColor="@color/black">
 
