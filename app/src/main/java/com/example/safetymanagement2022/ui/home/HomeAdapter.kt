@@ -29,13 +29,10 @@ class HomeAdapter: ListAdapter<SafetyIssue, HomeAdapter.HomeViewHolder>(HomeDiff
 }
 
 class HomeDiffCallback: DiffUtil.ItemCallback<SafetyIssue>() {
-    // 제품 id 같으면 같은 제품
     override fun areItemsTheSame(oldItem: SafetyIssue, newItem: SafetyIssue): Boolean {
         return oldItem.rawDataId == newItem.rawDataId
     }
-    // 제품 id도 같을 때 다른 내용들도 모두 같은지?(업데이트 되었을 수도 있으니까)
     override fun areContentsTheSame(oldItem: SafetyIssue, newItem: SafetyIssue): Boolean {
         return oldItem == newItem
     }
-
 }

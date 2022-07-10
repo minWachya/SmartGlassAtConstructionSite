@@ -2,7 +2,6 @@
     <string name="app_name">SafetyManagement2022</string>
 
     <!--Login, Register-->
-    <string name="description_gradient_background">gradient background</string>
     <string name="hint_id">아이디</string>
     <string name="hint_pw">비밀번호</string>
     <string name="hint_pw2">비밀번호 확인</string>
@@ -19,7 +18,11 @@
     <string name="label_tab_building">건물</string>
     <string name="label_tab_smartglass">스마트글래스</string>
     <string name="label_title_setting">설정</string>
+
+    <!--description-->
+    <string name="description_gradient_background">gradient background</string>
     <string name="btn_connect_smartglass">스마트 글래스 연결하기</string>
     <string name="description_image_safety_issue">안전 문제 이미지</string>
     <string name="description_icon_location">위치 아이콘</string>
+    <string name="description_icon_building">건물 아이콘</string>
 </resources>

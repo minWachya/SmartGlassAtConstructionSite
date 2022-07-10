@@ -1,0 +1,44 @@
+{
+  "building_list": [
+    {
+      "building_id": "user12_constructionABC_1",
+      "name": "건물1",
+      "context": "서울 영등포구 63로 50에 지을 지상 63층 지하 12층 건물"
+    },
+    {
+      "building_id": "user12_constructionABC_2",
+      "name": "건물2",
+      "context": "서울특별시 도봉구 삼양로에 지을 지상 4층짜리 초등학교"
+    },
+    {
+      "building_id": "user12_constructionABC_3",
+      "name": "건물3",
+      "context": "서울시 양천구 신정동에 지을 지상 2층 단독주택"
+    },
+    {
+      "building_id": "user12_constructionABC_3",
+      "name": "건물4",
+      "context": "서울시 양천구 신정동에 지을 지상 2층 단독주택"
+    },
+    {
+      "building_id": "user12_constructionABC_3",
+      "name": "건물5",
+      "context": "서울시 양천구 신정동에 지을 지상 2층 단독주택"
+    },
+    {
+      "building_id": "user12_constructionABC_3",
+      "name": "건물6",
+      "context": "서울시 양천구 신정동에 지을 지상 2층 단독주택"
+    },
+    {
+      "building_id": "user12_constructionABC_3",
+      "name": "건물7",
+      "context": "서울시 양천구 신정동에 지을 지상 2층 단독주택"
+    },
+    {
+      "building_id": "user12_constructionABC_3",
+      "name": "건물8",
+      "context": "서울시 양천구 신정동에 지을 지상 2층 단독주택"
+    }
+  ]
+}
