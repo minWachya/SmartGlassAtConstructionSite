@@ -34,7 +34,6 @@ class LoginActivity: AppCompatActivity() {
             // 회원가입 화면으로 이동
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }

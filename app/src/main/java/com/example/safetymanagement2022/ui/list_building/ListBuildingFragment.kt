@@ -21,6 +21,7 @@ class ListBuildingFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // TODO: binding viewLifecycleOwner 할당 해줘야 함
     }
 
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="safetyIssue"
+            type="com.example.safetymanagement2022.model.SafetyIssue" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/tv_safety_issue"
+            imageUrl="@{safetyIssue.picture}"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="14dp"
+            android:layout_marginStart="18dp"
+            android:contentDescription="@string/description_image_safety_issue"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/image_crack" />
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/description_icon_location"
+            android:src="@drawable/ic_location"
+            app:layout_constraintStart_toEndOf="@id/tv_safety_issue"
+            app:layout_constraintTop_toTopOf="@id/tv_safety_issue" />
+
+        <TextView
+            android:id="@+id/tv_building"
+            style="@style/TextMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="18dp"
+            android:text="@{safetyIssue.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_location"
+            app:layout_constraintTop_toTopOf="@id/tv_safety_issue"
+            tools:text="건물1" />
+
+        <TextView
+            android:id="@+id/tv_detail"
+            style="@style/TextMedium"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="14dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="18dp"
+            android:maxLines="3"
+            android:text="@{safetyIssue.details}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_location"
+            app:layout_constraintTop_toBottomOf="@id/iv_location"
+            tools:text="어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
