@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.databinding.FragmentListSmartglassBinding
+import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 
 class ListSmartGlassFragment: Fragment() {
     private lateinit var binding: FragmentListSmartglassBinding
+    private val viewModel: ListSmartGlassViewModel by viewModels { MyViewModelFactory(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +26,11 @@ class ListSmartGlassFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        viewModel.listSmartGlassData.observe(viewLifecycleOwner) { data ->
+            binding.rvListSmartglass.adapter = ListSmartGlassAdapter().apply {
+                submitList(data.glassList)
+            }
+        }
     }
 
 }

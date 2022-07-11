@@ -8,8 +8,8 @@ class ListBuildingRemoteDataSource(private val assetLoader: AssetLoader) : ListB
     private val gson = Gson()
 
     override fun getListBuildingData(): ListBuildingData? {
-        return assetLoader.getJsonString("list_building.json").let { homeJsonString ->
-            gson.fromJson(homeJsonString, ListBuildingData::class.java)
+        return assetLoader.getJsonString("list_building.json").let { listBuildingJsonString ->
+            gson.fromJson(listBuildingJsonString, ListBuildingData::class.java)
         }
     }
 }

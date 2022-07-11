@@ -16,13 +16,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/item_list_building"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_list_building" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_create_building"
@@ -31,7 +30,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/app_deep_gray"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/description_btn_add_building"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

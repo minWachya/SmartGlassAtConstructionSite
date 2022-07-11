@@ -25,4 +25,7 @@
     <string name="description_image_safety_issue">안전 문제 이미지</string>
     <string name="description_icon_location">위치 아이콘</string>
     <string name="description_icon_building">건물 아이콘</string>
+    <string name="description_btn_add_building">견물 추가하기 버튼</string>
+    <string name="description_use_smart_glass">스마트 글래스 사용 여부 이미지</string>
+    <string name="description_btn_menu">상세 메뉴 버튼</string>
 </resources>

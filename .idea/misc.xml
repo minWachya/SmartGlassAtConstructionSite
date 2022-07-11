@@ -16,6 +16,7 @@
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/selecter_setting_icon.xml" value="0.1885" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/activity_register.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/activity_resgister.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/fragment_list.xml" value="0.25364583333333335" />
@@ -23,6 +24,7 @@
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/fragment_list_smartglass.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/item_list_building.xml" value="0.2526041666666667" />
+        <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/item_list_smartglass.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/item_safety_issue.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/menu/nav_main.xml" value="0.25364583333333335" />
       </map>

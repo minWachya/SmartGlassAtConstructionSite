@@ -1,0 +1,52 @@
+{
+  "glass_list": [
+    {
+      "glass_id": "glass1",
+      "glass_name": "glass1",
+      "building_name": "건물1",
+      "user_name": "이민영"
+    },
+    {
+      "glass_id": "glass2",
+      "glass_name": "glass2",
+      "building_name": "건물2",
+      "user_name": "이민영"
+    },
+    {
+      "glass_id": "glass3",
+      "glass_name": "glass3",
+      "building_name": "건물3",
+      "user_name": "이민영"
+    },
+    {
+      "glass_id": "glass4",
+      "glass_name": "glass4",
+      "building_name": "건물4",
+      "user_name": "이민영"
+    },
+    {
+      "glass_id": "glass5",
+      "glass_name": "glass5",
+      "building_name": "건물5",
+      "user_name": "이민영"
+    },
+    {
+      "glass_id": "glass6",
+      "glass_name": "glass6",
+      "building_name": "건물6",
+      "user_name": "이민영"
+    },
+    {
+      "glass_id": "glass7",
+      "glass_name": "glass7",
+      "building_name": "건물7",
+      "user_name": "이민영"
+    },
+    {
+      "glass_id": "glass8",
+      "glass_name": "glass8",
+      "building_name": "건물8",
+      "user_name": "이민영"
+    }
+  ]
+}
