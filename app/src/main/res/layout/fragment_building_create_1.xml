@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_menu_dot"
+            app:title="@string/toolbar_title_building_create"
+            app:titleTextAppearance="@style/TextMedium.20" />
+
+        <TextView
+            android:id="@+id/tv_explain"
+            style="@style/TextMedium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_explain_create_building_step1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolBar" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:max="2"
+            android:progress="1"
+            android:progressBackgroundTint="@color/app_gray"
+            android:progressTint="@color/app_gradient_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_explain" />
+
+        <TextView
+            android:id="@+id/tv_label_building_name"
+            style="@style/TextMedium.16.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/label_building_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+
+        <EditText
+            android:id="@+id/edit_building_name"
+            style="@style/TextMedium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_edit_gray_line"
+            android:hint="@string/label_building_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_building_name" />
+
+        <TextView
+            android:id="@+id/tv_label_memo"
+            style="@style/TextMedium.16.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/label_memo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_building_name" />
+
+        <EditText
+            android:id="@+id/edit_memo"
+            style="@style/TextMedium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_edit_gray_line"
+            android:gravity="top"
+            android:hint="@string/label_memo"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences|textMultiLine"
+            android:lines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_memo" />
+
+        <TextView
+            android:id="@+id/tv_label_floor"
+            style="@style/TextMedium.16.bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/label_floor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_memo" />
+
+        <TextView
+            android:id="@+id/tv_label_floor_max"
+            style="@style/TextMedium.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/label_floor_max"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_floor" />
+
+        <EditText
+            android:id="@+id/edit_floor_max"
+            style="@style/TextMedium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_edit_gray_line"
+            android:gravity="end"
+            android:hint="@string/hint_num_0"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_label_floor_max"
+            app:layout_constraintEnd_toStartOf="@id/tv_label_floor_num1"
+            app:layout_constraintStart_toEndOf="@id/tv_label_floor_max" />
+
+        <TextView
+            android:id="@+id/tv_label_floor_num1"
+            style="@style/TextMedium.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/label_floor_num"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_label_floor_max"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_label_floor_min"
+            style="@style/TextMedium.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="45dp"
+            android:text="@string/label_floor_min"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_floor_max" />
+
+        <EditText
+            android:id="@+id/edit_floor_min"
+            style="@style/TextMedium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_edit_gray_line"
+            android:gravity="end"
+            android:hint="@string/hint_num_0"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_label_floor_min"
+            app:layout_constraintEnd_toStartOf="@id/tv_label_floor_num2"
+            app:layout_constraintStart_toEndOf="@id/tv_label_floor_min" />
+
+        <TextView
+            android:id="@+id/tv_label_floor_num2"
+            style="@style/TextMedium.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/label_floor_num"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_label_floor_min"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/TextMedium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn"
+            android:enabled="false"
+            android:text="@string/label_btn_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

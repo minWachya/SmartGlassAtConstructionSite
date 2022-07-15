@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,8 +34,12 @@
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/app_deep_gray"
             android:contentDescription="@string/description_btn_add_building"
+            android:onClick="@{() -> viewModel.openCreateBuilding()}"
+            android:src="@drawable/ic_plus"
+            app:fabCustomSize="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_create_building"
+    app:startDestination="@id/building_create_1_fragment">
+
+    <fragment
+        android:id="@+id/building_create_1_fragment"
+        android:name="com.example.safetymanagement2022.ui.building_create.BuildingCreate1Fragment"
+        android:label="BuildingCreate1Fragment"
+        tools:layout="@layout/fragment_building_create_1" >
+        <action
+            android:id="@+id/action_building_create_1_to_building_create_2"
+            app:destination="@id/building_create_2_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/building_create_2_fragment"
+        android:name="com.example.safetymanagement2022.ui.building_create.BuildingCreate2Fragment"
+        android:label="BuildingCreate2Fragment"
+        tools:layout="@layout/fragment_building_create_2" />
+</navigation>

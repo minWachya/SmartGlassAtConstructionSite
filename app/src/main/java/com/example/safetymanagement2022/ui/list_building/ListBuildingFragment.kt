@@ -1,5 +1,6 @@
 package com.example.safetymanagement2022.ui.list_building
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.databinding.FragmentListBuildingBinding
+import com.example.safetymanagement2022.ui.building_create.BuildingCreateActivity
+import com.example.safetymanagement2022.ui.common.EventObserver
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 
 class ListBuildingFragment: Fragment() {
@@ -31,6 +34,15 @@ class ListBuildingFragment: Fragment() {
                 submitList(data.buildingList)
             }
         }
+
+        viewModel.openCreateBuildingEvent.observe(viewLifecycleOwner, EventObserver {
+            openCreateBuilding()
+        })
+    }
+
+    private fun openCreateBuilding() {
+        val intent = Intent(context, BuildingCreateActivity::class.java)
+        startActivity(intent)
     }
 
 }
