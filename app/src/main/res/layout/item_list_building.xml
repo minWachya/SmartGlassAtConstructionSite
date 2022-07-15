@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel" />
+
+        <variable
             name="building"
             type="com.example.safetymanagement2022.model.Building" />
     </data>
@@ -14,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="5dp"
-        android:background="@drawable/background_gradient_r15">
+        android:background="@drawable/background_gradient_r15"
+        android:onClick="@{() -> viewModel.openBuildingDetail(building.buildingId)}">
 
         <ImageView
             android:id="@+id/iv_building"

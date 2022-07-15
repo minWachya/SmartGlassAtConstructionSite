@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.databinding.ItemListBuildingBinding
 import com.example.safetymanagement2022.model.Building
 
-class ListBuildingAdapter: ListAdapter<Building, ListBuildingAdapter.ListBuildingViewHolder>(ListBuildingDiffCallback()) {
+class ListBuildingAdapter(val viewModel: ListBuildingViewModel): ListAdapter<Building, ListBuildingAdapter.ListBuildingViewHolder>(ListBuildingDiffCallback()) {
     private lateinit var binding: ItemListBuildingBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListBuildingViewHolder {
@@ -23,6 +23,7 @@ class ListBuildingAdapter: ListAdapter<Building, ListBuildingAdapter.ListBuildin
     inner class ListBuildingViewHolder(private val binding: ItemListBuildingBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(building: Building) {
             binding.building = building
+            binding.viewModel = viewModel
             binding.executePendingBindings()
         }
     }

@@ -11,8 +11,11 @@ class ListBuildingViewModel(private val listBuildingRepository: ListBuildingRepo
     private val _listBuildingData = MutableLiveData<ListBuildingData>()
     val listBuildingData: LiveData<ListBuildingData> = _listBuildingData
 
-    private val _openCreateBuildingEvent = MutableLiveData<Event<Unit>>()
-    val openCreateBuildingEvent: LiveData<Event<Unit>> get() = _openCreateBuildingEvent
+    private val _openCreateBuildingEvent = MutableLiveData<Unit>()
+    val openCreateBuildingEvent: LiveData<Unit> get() = _openCreateBuildingEvent
+
+    private val _openBuildingDetailEvent = MutableLiveData<String>()
+    val openBuildingDetailEvent: LiveData<String> get() = _openBuildingDetailEvent
 
     init {
         loadListBuildingDate()
@@ -26,6 +29,10 @@ class ListBuildingViewModel(private val listBuildingRepository: ListBuildingRepo
     }
 
     fun openCreateBuilding() {
-        _openCreateBuildingEvent.value = Event(Unit)
+        _openCreateBuildingEvent.value = Unit
+    }
+
+    fun openBuildingDetail(buildingId: String) {
+        _openBuildingDetailEvent.value = buildingId
     }
 }
