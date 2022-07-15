@@ -10,6 +10,7 @@ import com.example.safetymanagement2022.repository.list_building.ListBuildingRem
 import com.example.safetymanagement2022.repository.list_building.ListBuildingRepository
 import com.example.safetymanagement2022.repository.list_smartglass.ListSmartGlassRemoteDataSource
 import com.example.safetymanagement2022.repository.list_smartglass.ListSmartGlassRepository
+import com.example.safetymanagement2022.ui.building_create.BuildingCreateViewModel
 import com.example.safetymanagement2022.ui.home.HomeViewModel
 import com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel
 import com.example.safetymanagement2022.ui.list_smartglass.ListSmartGlassViewModel
@@ -31,6 +32,10 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
             modelClass.isAssignableFrom(ListSmartGlassViewModel::class.java) -> {
                 val repository = ListSmartGlassRepository(ListSmartGlassRemoteDataSource((AssetLoader(context))))
                 ListSmartGlassViewModel(repository) as T
+            }
+            // building - create
+            modelClass.isAssignableFrom(BuildingCreateViewModel::class.java) -> {
+                BuildingCreateViewModel() as T
             }
             else -> {
                 throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")

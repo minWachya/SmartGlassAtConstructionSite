@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.safetymanagement2022.ui.building_create.BuildingCreateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_menu_dot"
+            app:navigationIcon="@drawable/ic_back"
             app:title="@string/toolbar_title_building_create"
             app:titleTextAppearance="@style/TextMedium.20" />
 
@@ -200,6 +203,7 @@
             android:background="@drawable/selector_btn"
             android:enabled="false"
             android:text="@string/label_btn_next"
+            android:onClick="@{() -> viewModel.openBuildingCreateStep2()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
