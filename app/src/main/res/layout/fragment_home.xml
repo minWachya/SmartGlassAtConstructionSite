@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="home"
+            type="com.example.safetymanagement2022.model.HomeData" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -18,6 +21,7 @@
             <android.widget.Button
                 android:id="@+id/btn_connect_samrtglass"
                 style="@style/TextMedium.20"
+                invisibleManager="@{home.admin}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
@@ -38,10 +42,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
-                android:text="내가 발견한 안전 문제"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{home.title}"
+                app:layout_constraintEnd_toStartOf="@id/spinner"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_connect_samrtglass" />
+                app:layout_constraintTop_toBottomOf="@id/btn_connect_samrtglass"
+                tools:text="내가 발견한 안전 문제" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                style="@style/TextMedium.16"
+                android:entries="@{home.buildingList}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_safety_issue"
