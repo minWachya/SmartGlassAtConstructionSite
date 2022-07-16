@@ -33,18 +33,24 @@ class BuildingCreate2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        setNavigation()
         val buildingName = requireArguments().getString(KEY_BUILDING_NAME)
         val memo = requireArguments().getString(KEY_BUILDING_MEMO)
         val floorMax = requireArguments().getString(KEY_BUILDING_FLOOR_MAX)?.toIntOrNull() ?: 0
         val floorMin = requireArguments().getString(KEY_BUILDING_FLOOR_MIN)?.toIntOrNull() ?: 0
 
-        binding.rvFloorPlan.adapter = BuildingCreateAdapter(viewModel).apply {
-            submitList(getFloorList(floorMax, floorMin))
+        val list = getFloorList(floorMax, floorMin)
+        viewModel.setListFloorPlan(list)
+        setNavigation()
+
+        viewModel.listFloorPlan.observe(viewLifecycleOwner) {
+            binding.rvFloorPlan.adapter = BuildingCreateAdapter(viewModel).apply {
+                submitList(list)
+            }
         }
         viewModel.openButton2Event.observe(viewLifecycleOwner) {
             openBuildingCreateFinish()
         }
+
     }
 
     private fun openBuildingCreateFinish() {
@@ -59,8 +65,8 @@ class BuildingCreate2Fragment : Fragment() {
 
     private fun getFloorList(floorMax: Int, floorMin: Int): List<FloorPlanData> {
         val list = mutableListOf<FloorPlanData>()
-        for (i in floorMax downTo 1) list.add(FloorPlanData("지상 " + i + "층", ""))
-        for (i in 1..floorMin) list.add(FloorPlanData("지하 " + i + "층", ""))
+        for (i in floorMax downTo 1) list.add(FloorPlanData("지상 " + i + "층", null))
+        for (i in 1..floorMin) list.add(FloorPlanData("지하 " + i + "층", null))
         return list
     }
 

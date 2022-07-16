@@ -1,11 +1,9 @@
 package com.example.safetymanagement2022.ui.building_create
 
-import android.util.Log
+import android.graphics.Bitmap
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,23 +13,28 @@ import com.example.safetymanagement2022.model.FloorPlanData
 class BuildingCreateAdapter(val viewModel: BuildingCreateViewModel): ListAdapter<FloorPlanData, BuildingCreateAdapter.BuildingCreateViewHolder>(ListBuildingDiffCallback()) {
     private lateinit var binding: ItemFloorPlanBinding
 
+//    interface OnItemClickListener {
+//        fun onItemClick(v: View, position: Int): Bitmap?
+//    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuildingCreateViewHolder {
         binding = ItemFloorPlanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BuildingCreateViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BuildingCreateViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position)
     }
 
     inner class BuildingCreateViewHolder(private val binding: ItemFloorPlanBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(floor: FloorPlanData) {
+        fun bind(floor: FloorPlanData, position: Int) {
             binding.floor = floor
             binding.viewModel = viewModel
             binding.executePendingBindings()
 
 //            binding.ivFloorPlan.setOnClickListener {
-//                Log.d("mmm", floor.label)
+//                val bitmap = listener.onItemClick(itemView, position)
+//                viewModel.onClickFloorPlan(position, bitmap)
 //            }
         }
     }
