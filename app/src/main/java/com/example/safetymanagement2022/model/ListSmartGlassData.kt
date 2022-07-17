@@ -14,12 +14,13 @@ import com.google.gson.annotations.SerializedName
 */
 
 data class ListSmartGlassData(
-    @SerializedName("glass_list") val glassList: List<SmartGlass>
+    @SerializedName("glass_list") val glassList: List<SmartGlass>,
+    val admin: Int
 )
 
 data class SmartGlass(
     @SerializedName("glass_id") val glassId: String,
     @SerializedName("glass_name") val glassName: String,
-    @SerializedName("building_name") val buildingName: String,
-    @SerializedName("user_name") val userName: String
+    @SerializedName("building_name") val buildingName: String?,
+    @SerializedName("user_name") val userName: String?
 )

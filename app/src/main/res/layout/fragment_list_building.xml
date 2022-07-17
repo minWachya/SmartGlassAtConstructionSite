@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="admin"
+            type="Integer" />
+
+        <variable
             name="viewModel"
             type="com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel" />
     </data>
@@ -28,6 +32,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_create_building"
+            visibleManager="@{admin}"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginEnd="20dp"

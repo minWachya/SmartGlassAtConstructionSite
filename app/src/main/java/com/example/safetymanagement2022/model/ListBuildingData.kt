@@ -13,7 +13,8 @@ import com.google.gson.annotations.SerializedName
 */
 
 data class ListBuildingData(
-    @SerializedName("building_list" ) val buildingList: List<Building>
+    @SerializedName("building_list") val buildingList: List<Building>,
+    val admin: Int
 )
 
 data class Building(

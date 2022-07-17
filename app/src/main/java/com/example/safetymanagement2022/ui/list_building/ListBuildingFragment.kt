@@ -29,6 +29,7 @@ class ListBuildingFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        binding.admin = viewModel.listBuildingData.value?.admin ?: 0
 
         viewModel.listBuildingData.observe(viewLifecycleOwner) { data ->
             binding.rvListBuilding.adapter = ListBuildingAdapter(viewModel).apply {

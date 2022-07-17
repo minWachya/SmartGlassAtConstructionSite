@@ -45,10 +45,10 @@
             <TextView
                 android:id="@+id/tv_building_name"
                 style="@style/TextMedium"
+                setBuildingText="@{smartglass.buildingName}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@{smartglass.buildingName}"
                 app:layout_constraintStart_toStartOf="@id/tv_smartglass_name"
                 app:layout_constraintTop_toBottomOf="@id/tv_smartglass_name"
                 tools:text="건물1" />
@@ -56,25 +56,26 @@
             <TextView
                 android:id="@+id/tv_user_name"
                 style="@style/TextMedium"
+                setUserNameText="@{smartglass.userName}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="@{smartglass.userName}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_building_name"
                 app:layout_constraintTop_toBottomOf="@id/tv_building_name"
                 tools:text="이민영" />
 
             <ImageView
+                setImage="@{smartglass.userName}"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/description_use_smart_glass"
-                android:src="@drawable/ic_smartglass_off"
                 app:layout_constraintBottom_toBottomOf="@id/tv_user_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_building_name" />
+                app:layout_constraintTop_toTopOf="@id/tv_building_name"
+                tools:src="@drawable/ic_smartglass_on" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

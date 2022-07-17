@@ -1,4 +1,5 @@
 {
+  "admin": 1,
   "glass_list": [
     {
       "glass_id": "glass1",
@@ -9,8 +10,8 @@
     {
       "glass_id": "glass2",
       "glass_name": "glass2",
-      "building_name": "건물2",
-      "user_name": "이민영"
+      "building_name": null,
+      "user_name": null
     },
     {
       "glass_id": "glass3",
@@ -33,14 +34,14 @@
     {
       "glass_id": "glass6",
       "glass_name": "glass6",
-      "building_name": "건물6",
-      "user_name": "이민영"
+      "building_name": null,
+      "user_name": null
     },
     {
       "glass_id": "glass7",
       "glass_name": "glass7",
-      "building_name": "건물7",
-      "user_name": "이민영"
+      "building_name": null,
+      "user_name": null
     },
     {
       "glass_id": "glass8",
