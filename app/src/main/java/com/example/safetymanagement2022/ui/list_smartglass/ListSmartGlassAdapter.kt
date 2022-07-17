@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.databinding.ItemListSmartglassBinding
 import com.example.safetymanagement2022.model.SmartGlass
 
-class ListSmartGlassAdapter: ListAdapter<SmartGlass, ListSmartGlassAdapter.ListSmartGlassViewHolder>(ListBuildingDiffCallback()) {
+class ListSmartGlassAdapter(val admin: Int): ListAdapter<SmartGlass, ListSmartGlassAdapter.ListSmartGlassViewHolder>(ListBuildingDiffCallback()) {
     private lateinit var binding: ItemListSmartglassBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSmartGlassViewHolder {
@@ -23,6 +23,7 @@ class ListSmartGlassAdapter: ListAdapter<SmartGlass, ListSmartGlassAdapter.ListS
     inner class ListSmartGlassViewHolder(private val binding: ItemListSmartglassBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(smartGlass: SmartGlass) {
             binding.smartglass = smartGlass
+            binding.admin = admin
             binding.executePendingBindings()
         }
     }

@@ -22,6 +22,8 @@ class LoginActivity: AppCompatActivity() {
 
     private fun setNextButtonListener() {
         binding.btnNext.setOnClickListener {
+//            val id = binding.editId.text
+//            val password = binding.editPw.text
             // 메인 화면으로 이동
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)

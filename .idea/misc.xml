@@ -11,7 +11,7 @@
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_btn_top.xml" value="0.1845" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_edit.xml" value="0.259" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_edit_gray_line.xml" value="0.1655" />
-        <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_gradient_circle.xml" value="0.259" />
+        <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_gradient_circle.xml" value="0.176" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_gradient_r15.xml" value="0.1655" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_spinner_line.xml" value="0.1655" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/selecter_home_icon.xml" value="0.259" />
@@ -19,6 +19,7 @@
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/selecter_setting_icon.xml" value="0.1885" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/selector_btn.xml" value="0.1655" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/selector_home_icon.xml" value="0.1655" />
+        <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/selector_radio_btn.xml" value="0.1655" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout-v23/fragment_setting.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/activity_building_create.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/activity_building_detail.xml" value="0.25364583333333335" />

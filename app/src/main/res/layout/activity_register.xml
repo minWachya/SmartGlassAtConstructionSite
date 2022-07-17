@@ -13,7 +13,7 @@
         tools:context=".ui.register.RegisterActivity">
 
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="650dp"
             android:layout_height="0dp"
             android:background="@drawable/background_gradient_circle"
             android:contentDescription="@string/description_gradient_background"
@@ -108,6 +108,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_company_name" />
 
+        <RadioGroup
+            android:id="@+id/rGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/edit_name"
+            app:layout_constraintStart_toStartOf="@+id/edit_name"
+            app:layout_constraintTop_toBottomOf="@id/edit_name">
+
+            <RadioButton
+                android:id="@+id/rdoUser"
+                style="@style/TextMedium"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                android:background="@drawable/background_edit"
+                android:checked="true"
+                android:layout_marginStart="5dp"
+                android:layoutDirection="rtl"
+                android:text="@string/label_user"
+                android:textAlignment="textStart" />
+
+            <RadioButton
+                android:id="@+id/rdManager"
+                style="@style/TextMedium"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/background_edit"
+                android:layoutDirection="rtl"
+                android:text="@string/label_manager"
+                android:textAlignment="textStart" />
+        </RadioGroup>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
@@ -117,7 +156,7 @@
             app:layout_constraintGuide_percent="0.75" />
 
         <ImageButton
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_register"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="-40dp"
@@ -137,18 +176,28 @@
             app:layout_constraintBottom_toTopOf="@id/tv_policy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_next" />
+            app:layout_constraintTop_toBottomOf="@id/btn_register" />
 
         <TextView
             android:id="@+id/tv_policy"
             style="@style/TextMedium"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/str_policy"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_service" />
+
+        <CheckBox
+            android:id="@+id/cb_policy_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="위 약관들에 동의합니다."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_policy" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

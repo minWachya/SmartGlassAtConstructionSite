@@ -13,7 +13,7 @@
         tools:context=".ui.login.LoginActivity">
 
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="650dp"
             android:layout_height="0dp"
             android:background="@drawable/background_gradient_circle"
             android:contentDescription="@string/description_gradient_background"

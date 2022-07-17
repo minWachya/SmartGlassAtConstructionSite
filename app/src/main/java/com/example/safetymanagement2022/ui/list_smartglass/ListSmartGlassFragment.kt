@@ -25,10 +25,11 @@ class ListSmartGlassFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.admin = viewModel.listSmartGlassData.value?.admin ?: 0
+        val admin = viewModel.listSmartGlassData.value?.admin ?: 0
+        binding.admin = admin
 
         viewModel.listSmartGlassData.observe(viewLifecycleOwner) { data ->
-            binding.rvListSmartglass.adapter = ListSmartGlassAdapter().apply {
+            binding.rvListSmartglass.adapter = ListSmartGlassAdapter(admin).apply {
                 submitList(data.glassList)
             }
         }

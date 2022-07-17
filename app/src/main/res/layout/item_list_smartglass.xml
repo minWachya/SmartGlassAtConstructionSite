@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="admin"
+            type="Integer" />
+
+        <variable
             name="smartglass"
             type="com.example.safetymanagement2022.model.SmartGlass" />
     </data>
@@ -32,6 +36,7 @@
                 tools:text="SmartGlass-1" />
 
             <ImageView
+                visibleManager="@{admin}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"

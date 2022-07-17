@@ -45,6 +45,8 @@
     <string name="description_btn_menu">상세 메뉴 버튼</string>
     <string name="label_login">로그인</string>
     <string name="description_floor_plan_image">도면 이미지</string>
+    <string name="label_user">사용자</string>
+    <string name="label_manager">관리자</string>
 
 
 </resources>
