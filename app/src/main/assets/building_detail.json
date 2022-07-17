@@ -1,0 +1,37 @@
+{
+  "building_name": "건물1",
+  "max_floor": 3,
+  "min_floor": 1,
+  "drawing_list": [
+    "https://user-images.githubusercontent.com/61674991/179395769-f9da88d4-b423-4b3a-a93d-8919ba0e9ed5.png",
+    "https://user-images.githubusercontent.com/61674991/179395806-a8d50f5e-7047-4de6-8ff2-f341f06e8320.png",
+    "https://user-images.githubusercontent.com/61674991/179395824-d4830165-dd6a-495d-b61f-e3816712de46.png",
+    "https://user-images.githubusercontent.com/61674991/179395835-fa4f00c5-a254-4f1b-b943-f6c1668ccc47.png"
+  ],
+  "issue_list": [
+    {
+      "raw_data_id": "crack_user12_220629_1",
+      "name": "건물1",
+      "picture": "https://user-images.githubusercontent.com/61674991/178135390-87301b37-071e-4c17-8378-0f3690a363ea.png",
+      "floor": "1층",
+      "room": "101호",
+      "details": "4층 입구 오른쪽 위"
+    },
+    {
+      "raw_data_id": "crack_user12_220629_2",
+      "name": "건물1",
+      "picture": "https://user-images.githubusercontent.com/61674991/178135390-87301b37-071e-4c17-8378-0f3690a363ea.png",
+      "floor": "2층",
+      "room": "101호",
+      "details": "4층 입구 오른쪽 위"
+    },
+    {
+      "raw_data_id": "crack_user30_220630_1",
+      "name": "건물1",
+      "picture": "https://user-images.githubusercontent.com/61674991/178135390-87301b37-071e-4c17-8378-0f3690a363ea.png",
+      "floor": "2층",
+      "room": "101호",
+      "details": "4층 입구 오른쪽 위"
+    }
+  ]
+}

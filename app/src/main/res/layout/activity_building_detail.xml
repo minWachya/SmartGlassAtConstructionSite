@@ -1,23 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="detail"
+            type="com.example.safetymanagement2022.model.BuildingDetailData" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:id="@+id/slide_panel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        app:umanoDragView="@id/drawer"
+        app:umanoPanelHeight="200dp"
+        app:umanoShadowHeight="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="건물 상세"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/back_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="@{detail.buildingName}"
+                app:titleTextAppearance="@style/TextMedium.20"
+                tools:title="건물1" />
+
+            <TextView
+                android:id="@+id/tv_floor"
+                style="@style/TextMedium.16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tool_bar"
+                tools:text="지상 1층" />
+
+            <ImageView
+                imageUrl="@{detail.drawingList[detail.maxFloor-1]}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/description_floor_plan"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@id/guideline2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_floor" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/drawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_issue_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_safety_issue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 </layout>

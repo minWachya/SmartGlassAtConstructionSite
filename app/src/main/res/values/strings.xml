@@ -47,6 +47,7 @@
     <string name="description_floor_plan_image">도면 이미지</string>
     <string name="label_user">사용자</string>
     <string name="label_manager">관리자</string>
+    <string name="description_floor_plan">도면</string>
 
 
 </resources>

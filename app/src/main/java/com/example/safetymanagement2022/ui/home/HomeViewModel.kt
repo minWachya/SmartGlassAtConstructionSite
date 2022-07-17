@@ -11,11 +11,11 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     val homeData: LiveData<HomeData> = _homeData
 
     init {
-        loadHomeDate()
+        loadHomeData()
     }
 
     // 데이터 요청
-    private fun loadHomeDate() {
+    private fun loadHomeData() {
         val homeData = homeRepository.getHomeData()
         homeData?.let { data ->
             _homeData.value = data

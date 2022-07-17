@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.safetymanagement2022.AssetLoader
+import com.example.safetymanagement2022.repository.building_detail.BuildingDetailRemoteDataSource
+import com.example.safetymanagement2022.repository.building_detail.BuildingDetailRepository
 import com.example.safetymanagement2022.repository.home.HomeRemoteDataSource
 import com.example.safetymanagement2022.repository.home.HomeRepository
 import com.example.safetymanagement2022.repository.list_building.ListBuildingRemoteDataSource
@@ -11,6 +13,7 @@ import com.example.safetymanagement2022.repository.list_building.ListBuildingRep
 import com.example.safetymanagement2022.repository.list_smartglass.ListSmartGlassRemoteDataSource
 import com.example.safetymanagement2022.repository.list_smartglass.ListSmartGlassRepository
 import com.example.safetymanagement2022.ui.building_create.BuildingCreateViewModel
+import com.example.safetymanagement2022.ui.building_detail.BuildingDetailViewModel
 import com.example.safetymanagement2022.ui.home.HomeViewModel
 import com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel
 import com.example.safetymanagement2022.ui.list_smartglass.ListSmartGlassViewModel
@@ -36,6 +39,11 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
             // building - create
             modelClass.isAssignableFrom(BuildingCreateViewModel::class.java) -> {
                 BuildingCreateViewModel() as T
+            }
+            // building - detail
+            modelClass.isAssignableFrom(BuildingDetailViewModel::class.java) -> {
+                val repository = BuildingDetailRepository(BuildingDetailRemoteDataSource((AssetLoader(context))))
+                BuildingDetailViewModel(repository) as T
             }
             else -> {
                 throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")

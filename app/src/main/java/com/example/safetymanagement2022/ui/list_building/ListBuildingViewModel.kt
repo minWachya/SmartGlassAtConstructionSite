@@ -18,10 +18,10 @@ class ListBuildingViewModel(private val listBuildingRepository: ListBuildingRepo
     val openBuildingDetailEvent: LiveData<String> get() = _openBuildingDetailEvent
 
     init {
-        loadListBuildingDate()
+        loadListBuildingData()
     }
 
-    private fun loadListBuildingDate() {
+    private fun loadListBuildingData() {
         val listBuildingData = listBuildingRepository.getListBuildingData()
         listBuildingData?.let { data ->
             _listBuildingData.value = data

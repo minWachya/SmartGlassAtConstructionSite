@@ -11,10 +11,10 @@ class ListSmartGlassViewModel(private val listSmartGlassRepository: ListSmartGla
     val listSmartGlassData: LiveData<ListSmartGlassData> = _listSmartGlassData
 
     init {
-        loadListBuildingDate()
+        loadListBuildingData()
     }
 
-    private fun loadListBuildingDate() {
+    private fun loadListBuildingData() {
         val listSmartGlassData = listSmartGlassRepository.getListSmartGlassData()
         listSmartGlassData?.let { data ->
             _listSmartGlassData.value = data
