@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         app:umanoDragView="@id/drawer"
-        app:umanoPanelHeight="200dp"
+        app:umanoPanelHeight="150dp"
         app:umanoShadowHeight="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,13 +54,13 @@
                 android:layout_marginTop="14dp"
                 android:contentDescription="@string/description_floor_plan"
                 android:scaleType="centerCrop"
-                app:layout_constraintBottom_toTopOf="@id/guideline2"
+                app:layout_constraintBottom_toTopOf="@id/guideline1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_floor" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
+                android:id="@+id/guideline1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -73,15 +73,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/background_btn_top"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="60dp"
+                android:layout_height="3dp"
+                android:layout_margin="20dp"
+                app:layout_constraintEnd_toEndOf="@id/view1"
+                app:layout_constraintStart_toStartOf="@id/view1"
+                app:layout_constraintTop_toTopOf="@id/view1"
+                android:background="@color/app_gray"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_issue_detail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view1"
                 tools:listitem="@layout/item_safety_issue" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
