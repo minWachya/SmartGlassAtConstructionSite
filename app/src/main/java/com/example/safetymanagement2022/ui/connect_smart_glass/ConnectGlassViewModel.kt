@@ -1,10 +1,10 @@
-package com.example.safetymanagement2022.ui.smart_glass_connect
+package com.example.safetymanagement2022.ui.connect_smart_glass
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.safetymanagement2022.model.ConnectGlassData
-import com.example.safetymanagement2022.repository.smart_glass_connect.ConnectGlassRepository
+import com.example.safetymanagement2022.repository.connect_smart_glass.ConnectGlassRepository
 
 class ConnectGlassViewModel(private val repository: ConnectGlassRepository): ViewModel() {
     private val _glassList = MutableLiveData<ConnectGlassData>()
