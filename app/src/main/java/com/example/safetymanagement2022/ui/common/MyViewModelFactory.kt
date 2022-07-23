@@ -12,11 +12,14 @@ import com.example.safetymanagement2022.repository.list_building.ListBuildingRem
 import com.example.safetymanagement2022.repository.list_building.ListBuildingRepository
 import com.example.safetymanagement2022.repository.list_smartglass.ListSmartGlassRemoteDataSource
 import com.example.safetymanagement2022.repository.list_smartglass.ListSmartGlassRepository
+import com.example.safetymanagement2022.repository.smart_glass_connect.ConnectGlassRemoteDataSource
+import com.example.safetymanagement2022.repository.smart_glass_connect.ConnectGlassRepository
 import com.example.safetymanagement2022.ui.building_create.BuildingCreateViewModel
 import com.example.safetymanagement2022.ui.building_detail.BuildingDetailViewModel
 import com.example.safetymanagement2022.ui.home.HomeViewModel
 import com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel
 import com.example.safetymanagement2022.ui.list_smartglass.ListSmartGlassViewModel
+import com.example.safetymanagement2022.ui.smart_glass_connect.ConnectGlassViewModel
 
 class MyViewModelFactory(private val context: Context): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -44,6 +47,11 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
             modelClass.isAssignableFrom(BuildingDetailViewModel::class.java) -> {
                 val repository = BuildingDetailRepository(BuildingDetailRemoteDataSource((AssetLoader(context))))
                 BuildingDetailViewModel(repository) as T
+            }
+            // connect - glass (dialog)
+            modelClass.isAssignableFrom(ConnectGlassViewModel::class.java) -> {
+                val repository = ConnectGlassRepository(ConnectGlassRemoteDataSource((AssetLoader(context))))
+                ConnectGlassViewModel(repository) as T
             }
             else -> {
                 throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")

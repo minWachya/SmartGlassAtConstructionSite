@@ -7,3 +7,6 @@ const val KEY_BUILDING_FLOOR_MIN = "building_floor_min"
 
 const val KEY_MANAGER = 1
 const val KEY_USER = 0
+
+const val KEY_ENABLE = 1
+const val KEY_ABLE = 0
