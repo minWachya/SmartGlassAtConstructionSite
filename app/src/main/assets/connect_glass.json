@@ -1,0 +1,29 @@
+{
+  "glass_list": [
+    {
+      "glass_id": "glass_111",
+      "glass_name": "글래스1",
+      "enable": 1
+    },
+    {
+      "glass_id": "glass_112",
+      "glass_name": "글래스2",
+      "enable": 1
+    },
+    {
+      "glass_id": "glass_113",
+      "glass_name": "글래스3",
+      "enable": 0
+    },
+    {
+      "glass_id": "glass_114",
+      "glass_name": "글래스4",
+      "enable": 0
+    },
+    {
+      "glass_id": "glass_115",
+      "glass_name": "글래스5",
+      "enable": 0
+    }
+  ]
+}

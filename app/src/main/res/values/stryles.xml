@@ -14,6 +14,12 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="TextMedium.bold" >
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextMedium.bold.Orange" >
+        <item name="android:textColor">@color/app_gradient_end</item>
+    </style>
     <style name="TextMedium.16" >
         <item name="android:textSize">16sp</item>
     </style>
