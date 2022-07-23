@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.databinding.FragmentHomeBinding
 import com.example.safetymanagement2022.model.SafetyIssue
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
-import com.example.safetymanagement2022.ui.smart_glass_connect.SelectSmartGlassDialog
+import com.example.safetymanagement2022.ui.connect_smart_glass.SelectSmartGlassDialog
 
 class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeBinding

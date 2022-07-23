@@ -1,0 +1,16 @@
+{
+  "building_list": [
+    {
+      "building_id": "bd1",
+      "building_name": "건물1"
+    },
+    {
+      "building_id": "bd2",
+      "building_name": "건물2"
+    },
+    {
+      "building_id": "bd3",
+      "building_name": "건물3"
+    }
+  ]
+}

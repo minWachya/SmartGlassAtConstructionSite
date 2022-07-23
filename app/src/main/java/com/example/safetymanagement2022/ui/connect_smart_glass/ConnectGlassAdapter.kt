@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.smart_glass_connect
+package com.example.safetymanagement2022.ui.connect_smart_glass
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.databinding.ItemDialogSmartGlassBinding
 import com.example.safetymanagement2022.model.ConnectSmartGlass
 
-class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.ConnectGlassViewHolder>(ListBuildingDiffCallback()) {
+class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.ConnectGlassViewHolder>(
+    GlassDiffCallback()) {
     private lateinit var binding: ItemDialogSmartGlassBinding
-    var selectedSmartGlassId: String? = ""
+    private var selectedSmartGlassId: String = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConnectGlassViewHolder {
         binding = ItemDialogSmartGlassBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,10 +33,10 @@ class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.Co
         }
     }
 
-    fun getSmartGlassId(): String? = selectedSmartGlassId
+    fun getSmartGlassId(): String = selectedSmartGlassId
 }
 
-class ListBuildingDiffCallback: DiffUtil.ItemCallback<ConnectSmartGlass>() {
+class GlassDiffCallback: DiffUtil.ItemCallback<ConnectSmartGlass>() {
     override fun areItemsTheSame(oldItem: ConnectSmartGlass, newItem: ConnectSmartGlass): Boolean {
         return oldItem.smartGlassId == newItem.smartGlassId
     }

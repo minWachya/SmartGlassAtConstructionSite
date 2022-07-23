@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.safetymanagement2022.model.HomeData
 import com.example.safetymanagement2022.repository.home.HomeRepository
-import com.example.safetymanagement2022.ui.smart_glass_connect.SelectSmartGlassDialog
 
 class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     private val _homeData = MutableLiveData<HomeData>()
