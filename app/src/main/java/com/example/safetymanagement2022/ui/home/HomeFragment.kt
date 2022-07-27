@@ -55,6 +55,7 @@ class HomeFragment: Fragment() {
 
     private fun setConnectGlassBtn() {
         binding.btnConnectSamrtglass.setOnClickListener {
+            // 스마트 글래스 선택 > 건물 선택
             SelectSmartGlassDialog(requireContext()).show(parentFragmentManager, "SelectSmartGlassDialog")
         }
     }
