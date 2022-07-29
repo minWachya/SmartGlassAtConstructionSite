@@ -26,6 +26,7 @@
         <activity android:name=".ui.building_create.BuildingCreateActivity" />
         <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".ui.building_detail.BuildingDetailActivity" />
+        <activity android:name=".ui.glass_create.GlassCreateActivity" />
     </application>
 
 </manifest>

@@ -45,6 +45,12 @@
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/item_list_smartglass.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/layout/item_safety_issue.xml" value="0.25364583333333335" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/menu/nav_main.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_building_create.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/activity_building_detail.xml" value="0.23233695652173914" />
+        <entry key="app/src/main/res/layout/activity_glass_create.xml" value="0.30505828857421874" />
+        <entry key="app/src/main/res/layout/fragment_building_create_1.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/fragment_list_building.xml" value="0.23233695652173914" />
+        <entry key="app/src/main/res/layout/fragment_list_smartglass.xml" value="0.23233695652173914" />
       </map>
     </option>
   </component>
