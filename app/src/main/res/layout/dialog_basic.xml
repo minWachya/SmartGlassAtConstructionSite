@@ -16,11 +16,10 @@
         <TextView
             android:id="@+id/customTvTitle"
             style="@style/TextMedium.16.bold"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingHorizontal="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="스마트 글래스 추가 완료" />
@@ -28,12 +27,10 @@
         <TextView
             android:id="@+id/customTvContent"
             style="@style/TextMedium"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:paddingHorizontal="20dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customTvTitle"
             tools:text="정상적으로 추가 완료 되었습니다." />
