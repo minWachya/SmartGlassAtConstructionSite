@@ -34,6 +34,10 @@
     <string name="label_btn_finish">완료</string>
     <string name="label_explain_create_building_step2">도면을 추가해주세요.</string>
 
+    <string name="toolbar_title_glass_create">스마트 글래스 추가</string>
+    <string name="label_explain_create_glass">스마트 글래스 정보를 입력해주세요.</string>
+    <string name="label_glass_name">스마트 글래스명</string>
+
     <!--description-->
     <string name="description_gradient_background">gradient background</string>
     <string name="description_image_safety_issue">안전 문제 이미지</string>

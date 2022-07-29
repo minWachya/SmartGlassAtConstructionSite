@@ -10,6 +10,9 @@ class ListSmartGlassViewModel(private val listSmartGlassRepository: ListSmartGla
     private val _listSmartGlassData = MutableLiveData<ListSmartGlassData>()
     val listSmartGlassData: LiveData<ListSmartGlassData> = _listSmartGlassData
 
+    private val _openCreateGlassEvent = MutableLiveData<Unit>()
+    val openCreateGlassEvent: LiveData<Unit> get() = _openCreateGlassEvent
+
     init {
         loadListBuildingData()
     }
@@ -19,5 +22,9 @@ class ListSmartGlassViewModel(private val listSmartGlassRepository: ListSmartGla
         listSmartGlassData?.let { data ->
             _listSmartGlassData.value = data
         }
+    }
+
+    fun openCreateGlass() {
+        _openCreateGlassEvent.value = Unit
     }
 }
