@@ -13,4 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    
+    <style name="ThemeOverlay.NumberPicker" parent="Theme.SafetyManagement2022">
+        <item name="colorControlNormal">@color/app_gradient_end</item>
+    </style>
 </resources>

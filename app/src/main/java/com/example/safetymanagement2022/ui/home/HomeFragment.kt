@@ -39,8 +39,6 @@ class HomeFragment: Fragment() {
         val listSpinner = viewModel.homeData.value?.buildingList ?: listOf()
         val adapter = HomeAdapter(listIssue)
 
-        fetchHome()
-
         viewModel.homeData.observe(viewLifecycleOwner) { data ->
             binding.rvSafetyIssue.adapter = adapter
         }
@@ -49,25 +47,6 @@ class HomeFragment: Fragment() {
         setSpinner(adapter, listSpinner)
         setConnectGlassBtn()
 
-    }
-
-    private fun fetchHome() {
-        val call = RetrofitClient.serviceApiUser.fetchHome("seongmin")
-        call.enqueue(object : retrofit2.Callback<HomeData> {
-            // 응답 성공 시
-            override fun onResponse(call: Call<HomeData>, response: Response<HomeData>) {
-                if (response.isSuccessful) {
-                    val result : HomeData = response.body()!!
-                    Log.d("mmm frag", result.toString())
-                }
-            }
-
-            // 응답 실패 시
-            override fun onFailure(call: Call<HomeData>, t: Throwable) {
-                Toast.makeText(context, "에러 발생", Toast.LENGTH_SHORT).show()
-                Log.d("mmm frag home server connect fail", t.message.toString())
-            }
-        })
     }
 
     private fun setSpinner(adapter: HomeAdapter, list: List<String>) {
