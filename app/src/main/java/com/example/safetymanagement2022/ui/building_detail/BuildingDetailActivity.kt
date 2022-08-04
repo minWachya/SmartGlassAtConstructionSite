@@ -1,12 +1,19 @@
 package com.example.safetymanagement2022.ui.building_detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safetymanagement2022.databinding.ActivityBuildingDetailBinding
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
+import java.lang.Integer.max
+import kotlin.math.min
 
-class BuildingDetailActivity  : AppCompatActivity() {
+interface SelectedFloorInterface {
+    fun onSelectedFloor(floorText: String, minMax: Int, floor: Int)
+}
+
+class BuildingDetailActivity  : AppCompatActivity(), SelectedFloorInterface {
     private lateinit var binding: ActivityBuildingDetailBinding
     private val viewModel: BuildingDetailViewModel by viewModels { MyViewModelFactory(applicationContext) }
 
@@ -19,8 +26,21 @@ class BuildingDetailActivity  : AppCompatActivity() {
         viewModel.detailData.observe(this@BuildingDetailActivity) { data ->
             binding.detail = data
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
+            setShowSelectFloorDialog(data.minFloor, data.maxFloor)
         }
 
     }
+
+    private fun setShowSelectFloorDialog(minFloor: Int, maxFloor: Int) {
+        binding.tvFloor.setOnClickListener {
+            SelectFloorDialog(minFloor, maxFloor).show(supportFragmentManager, "SelectFloorDialog")
+
+        }
+    }
+
+    override fun onSelectedFloor(floorText: String, minMax: Int, floor: Int) {
+        binding.tvFloor.text = floorText
+    }
+
 
 }
