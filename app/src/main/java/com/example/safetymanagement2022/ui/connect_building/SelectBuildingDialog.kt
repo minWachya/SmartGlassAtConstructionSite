@@ -7,12 +7,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import com.example.safetymanagement2022.common.KEY_DIALOG_BUILDING
+import com.example.safetymanagement2022.common.KEY_DIALOG_BUILDING_ID
+import com.example.safetymanagement2022.common.KEY_DIALOG_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.DialogSelectBuildingBinding
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 
-class SelectBuildingDialog(context: Context, val glassId : String) : DialogFragment() {
+class SelectBuildingDialog(context: Context) : DialogFragment() {
     private var _binding: DialogSelectBuildingBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ConnectBuildingViewModel by viewModels { MyViewModelFactory(context) }
@@ -38,14 +43,15 @@ class SelectBuildingDialog(context: Context, val glassId : String) : DialogFragm
         }
         // 다음 버튼
         binding.btnOk.setOnClickListener {
-            val buildingId = getBuildingId()
+            setFragmentResult(KEY_DIALOG_BUILDING, bundleOf(
+                KEY_DIALOG_BUILDING_ID to adapter.getBuildingId(),
+                KEY_DIALOG_BUILDING_NAME to adapter.getBuildingName()
+            ))
             dismiss()
         }
 
         return view
     }
-
-    private fun getBuildingId(): String = adapter.getBuildingId()
 
     override fun onDestroyView() {
         super.onDestroyView()

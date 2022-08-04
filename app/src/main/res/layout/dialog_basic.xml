@@ -45,6 +45,7 @@
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/customTvBtn2"
+            app:layout_constraintStart_toEndOf="@id/customTvContent"
             app:layout_constraintTop_toBottomOf="@+id/customTvContent"
             tools:text="이전" />
 
