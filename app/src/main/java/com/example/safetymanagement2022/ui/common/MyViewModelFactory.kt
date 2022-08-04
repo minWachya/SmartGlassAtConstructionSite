@@ -29,7 +29,7 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
         return when {
             // home
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                val repository = HomeRepository(HomeRemoteDataSource((AssetLoader(context))))
+                val repository = HomeRepository(HomeRemoteDataSource(("seongmin")))
                 HomeViewModel(repository) as T
             }
             // list - building
