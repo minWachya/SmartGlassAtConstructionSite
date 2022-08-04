@@ -16,6 +16,7 @@ class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.Co
     GlassDiffCallback()) {
     private lateinit var binding: ItemDialogSmartGlassBinding
     private var selectedSmartGlassId: String = ""
+    private var selectedSmartGlassName: String = ""
 
     private var prevView: TextView? = null
     private var currView: TextView? = null
@@ -36,6 +37,7 @@ class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.Co
 
             binding.tvGlassName.setOnClickListener {
                 selectedSmartGlassId = glass.smartGlassId
+                selectedSmartGlassName = glass.smartGlassName
 
                 if(currView == null) {
                     prevView = binding.tvGlassName
@@ -52,6 +54,7 @@ class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.Co
     }
 
     fun getSmartGlassId(): String = selectedSmartGlassId
+    fun getSmartGlassName(): String = selectedSmartGlassName
 }
 
 class GlassDiffCallback: DiffUtil.ItemCallback<ConnectSmartGlass>() {

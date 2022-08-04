@@ -14,6 +14,7 @@ class ConnectBuildingAdapter: ListAdapter<ConnectBuilding, ConnectBuildingAdapte
     ListBuildingDiffCallback()) {
     private lateinit var binding: ItemDialogBuildingBinding
     private var selectedBuildingId: String = ""
+    private var selectedBuildingName: String = ""
 
     private var currView: TextView? = null
 
@@ -33,6 +34,7 @@ class ConnectBuildingAdapter: ListAdapter<ConnectBuilding, ConnectBuildingAdapte
 
             binding.tvBuildingName.setOnClickListener {
                 selectedBuildingId = building.buildingId
+                selectedBuildingName = building.buildingName
 
                 if(currView == null) {
                     currView = binding.tvBuildingName
@@ -47,6 +49,7 @@ class ConnectBuildingAdapter: ListAdapter<ConnectBuilding, ConnectBuildingAdapte
     }
 
     fun getBuildingId(): String = selectedBuildingId
+    fun getBuildingName(): String = selectedBuildingName
 }
 
 class ListBuildingDiffCallback: DiffUtil.ItemCallback<ConnectBuilding>() {

@@ -10,3 +10,10 @@ const val KEY_USER = 0
 
 const val KEY_ENABLE = 1
 const val KEY_ABLE = 0
+
+const val KEY_DIALOG_GLASS = "glass"
+const val KEY_DIALOG_GLASS_ID = "glassId"
+const val KEY_DIALOG_GLASS_NAME = "glassName"
+const val KEY_DIALOG_BUILDING = "building"
+const val KEY_DIALOG_BUILDING_ID = "buildingId"
+const val KEY_DIALOG_BUILDING_NAME = "buildingName"

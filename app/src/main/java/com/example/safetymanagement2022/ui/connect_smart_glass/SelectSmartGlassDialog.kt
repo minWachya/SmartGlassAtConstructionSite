@@ -7,11 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import com.example.safetymanagement2022.common.KEY_DIALOG_GLASS
+import com.example.safetymanagement2022.common.KEY_DIALOG_GLASS_ID
+import com.example.safetymanagement2022.common.KEY_DIALOG_GLASS_NAME
 import com.example.safetymanagement2022.databinding.DialogSelectSmartGlassBinding
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
-import com.example.safetymanagement2022.ui.connect_building.SelectBuildingDialog
 
 class SelectSmartGlassDialog(context: Context) : DialogFragment() {
     private var _binding: DialogSelectSmartGlassBinding? = null
@@ -39,15 +43,17 @@ class SelectSmartGlassDialog(context: Context) : DialogFragment() {
         }
         // 다음 버튼
         binding.btnNext.setOnClickListener {
-            val glassId = getSmartGlassId()
-            SelectBuildingDialog(requireContext(), glassId).show(parentFragmentManager, "SelectBuildingDialog")
+            val glassId = adapter. getSmartGlassId()
+            val glassName = adapter.getSmartGlassName()
+            setFragmentResult(KEY_DIALOG_GLASS, bundleOf(
+                KEY_DIALOG_GLASS_ID to glassId,
+                KEY_DIALOG_GLASS_NAME to glassName
+            ))
             dismiss()
         }
 
         return view
     }
-
-    private fun getSmartGlassId(): String = adapter.getSmartGlassId()
 
     override fun onDestroyView() {
         super.onDestroyView()
