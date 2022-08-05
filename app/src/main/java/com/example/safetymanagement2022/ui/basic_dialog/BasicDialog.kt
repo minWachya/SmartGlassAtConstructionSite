@@ -1,5 +1,6 @@
 package com.example.safetymanagement2022.ui.basic_dialog
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,10 +10,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import com.example.safetymanagement2022.databinding.DialogBasicBinding
+import com.example.safetymanagement2022.ui.common.BasicDialogReturnValueInterface
 
 class BasicDialog (val title: String, val content: String, val btn1: String, val btn2: String) : DialogFragment() {
     private var _binding: DialogBasicBinding? = null
     private val binding get() = _binding!!
+
+    private var mCallback: BasicDialogReturnValueInterface? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = DialogBasicBinding.inflate(inflater, container, false)
@@ -28,18 +32,26 @@ class BasicDialog (val title: String, val content: String, val btn1: String, val
 
         // 버튼1 클릭: 이전
         binding.customTvBtn1.setOnClickListener {
+            mCallback?.onClickBtn1()
             dismiss()
         }
         // 버튼2 클릭: 완료
         binding.customTvBtn2.setOnClickListener {
+            mCallback?.onClickBtn2()
             dismiss()
         }
 
         return view
     }
 
-    fun setBtn1ClickListener(listener: View.OnClickListener) = binding.customTvBtn1.setOnClickListener(listener)
-    fun setBtn12ClickListener(listener: View.OnClickListener) = binding.customTvBtn2.setOnClickListener(listener)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mCallback = try {
+            activity as BasicDialogReturnValueInterface
+        } catch (e: ClassCastException) {
+            null
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

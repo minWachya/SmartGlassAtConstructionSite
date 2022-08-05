@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.safetymanagement2022.databinding.ActivityGlassCreateBinding
 import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
+import com.example.safetymanagement2022.ui.common.BasicDialogReturnValueInterface
 
-class GlassCreateActivity : AppCompatActivity() {
+class GlassCreateActivity : AppCompatActivity(), BasicDialogReturnValueInterface {
     private lateinit var binding: ActivityGlassCreateBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +30,12 @@ class GlassCreateActivity : AppCompatActivity() {
     private fun setFinishBtnListener() {
         binding.btnFinish.setOnClickListener {
             val glassName = binding.editGlassName.text
-            val dialog = BasicDialog("스마트 글래스 추가 완료", "‘$glassName’가 정상적으로  추가되었습니다.",
-            "", "확인")
-            dialog.setBtn1ClickListener{this@GlassCreateActivity.finish()}
-            dialog.setBtn12ClickListener { this@GlassCreateActivity.finish() }
-            dialog.show(supportFragmentManager, "CustomDialog")
+            BasicDialog("스마트 글래스 추가 완료", "‘$glassName’가 정상적으로  추가되었습니다.",
+            "", "확인").show(supportFragmentManager, "CustomDialog")
         }
     }
+
+    override fun onClickBtn1() { }
+    override fun onClickBtn2() { finish() }
 
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.databinding.FragmentListSmartglassBinding
-import com.example.safetymanagement2022.ui.building_create.BuildingCreateActivity
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 import com.example.safetymanagement2022.ui.glass_create.GlassCreateActivity
 
