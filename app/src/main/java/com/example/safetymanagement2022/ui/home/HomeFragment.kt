@@ -19,6 +19,7 @@ import com.example.safetymanagement2022.ui.connect_smart_glass.SelectSmartGlassD
 class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels { MyViewModelFactory(requireContext()) }
+    private lateinit var homeAdapter: HomeAdapter
 
     private var glassId = ""
     private var glassName = ""
@@ -37,27 +38,30 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.home = viewModel.homeData.value
-        val listIssue = (viewModel.homeData.value?.issueList ?: arrayListOf()) as ArrayList<SafetyIssue>
-        val listSpinner = viewModel.homeData.value?.buildingList ?: listOf()
-        val adapter = HomeAdapter(listIssue)
 
-        viewModel.homeData.observe(viewLifecycleOwner) { data ->
-            binding.rvSafetyIssue.adapter = adapter
-        }
-
-        // 관리자 모드
-        setSpinner(adapter, listSpinner)
-        setConnectGlassBtn()
-
+        setLayout("seongmin")
     }
 
-    private fun setSpinner(adapter: HomeAdapter, list: List<String>) {
+    private fun setLayout(userId: String) {
+        viewModel.loadHomeData(userId)
+        viewModel.homeData.observe(viewLifecycleOwner) { homeData ->
+            binding.home = homeData
+            homeAdapter = HomeAdapter(homeData.issueList)
+            binding.rvSafetyIssue.adapter = homeAdapter
+
+            // 관리자 모드
+            if(homeData.admin == KEY_MANAGER) setSpinner(homeData.buildingList ?: listOf())
+            // 사용자 모드
+            else setConnectGlassBtn()
+        }
+    }
+
+    private fun setSpinner(list: List<String>) {
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if(position == 0) adapter.filter.filter("")
-                else adapter.filter.filter(list[position])
+                if(position == 0) homeAdapter.filter.filter("")
+                else homeAdapter.filter.filter(list[position])
             }
         }
     }
