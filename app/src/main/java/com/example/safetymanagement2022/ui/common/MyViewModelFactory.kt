@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.safetymanagement2022.AssetLoader
+import com.example.safetymanagement2022.ServiceLoader.provideApiClient
 import com.example.safetymanagement2022.repository.building_detail.BuildingDetailRemoteDataSource
 import com.example.safetymanagement2022.repository.building_detail.BuildingDetailRepository
 import com.example.safetymanagement2022.repository.home.HomeRemoteDataSource
@@ -29,7 +30,7 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
         return when {
             // home
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                val repository = HomeRepository(HomeRemoteDataSource(("seongmin")))
+                val repository = HomeRepository(HomeRemoteDataSource(provideApiClient()))
                 HomeViewModel(repository) as T
             }
             // list - building
