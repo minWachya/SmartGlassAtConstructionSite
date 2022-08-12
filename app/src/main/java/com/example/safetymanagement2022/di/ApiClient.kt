@@ -1,5 +1,6 @@
 package com.example.safetymanagement2022.di
 
+import com.example.safetymanagement2022.model.ConnectBuildingData
 import com.example.safetymanagement2022.model.ConnectGlassData
 import com.example.safetymanagement2022.model.HomeData
 import okhttp3.OkHttpClient
@@ -16,6 +17,8 @@ interface ApiClient {
     suspend fun fetchHome(@Path("user_id") userId: String): HomeData
     @GET("/home/user/list/connect/1/{user_id}")
     suspend fun fetchConnectGlass(@Path("user_id") userId: String): ConnectGlassData
+    @GET("/home/user/list/connect/2/{user_id}")
+    suspend fun fetchConnectBuilding(@Path("user_id") userId: String): ConnectBuildingData
 
     // ApiClient 객체 생성
     companion object {

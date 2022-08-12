@@ -59,7 +59,7 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
             }
             // connect - building (dialog)
             modelClass.isAssignableFrom(ConnectBuildingViewModel::class.java) -> {
-                val repository = ConnectBuildingRepository(ConnectBuildingRemoteDataSource((AssetLoader(context))))
+                val repository = ConnectBuildingRepository(ConnectBuildingRemoteDataSource((provideApiClient())))
                 ConnectBuildingViewModel(repository) as T
             }
             else -> {
