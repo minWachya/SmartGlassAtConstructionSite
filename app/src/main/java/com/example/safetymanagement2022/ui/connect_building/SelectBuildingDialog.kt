@@ -17,7 +17,7 @@ import com.example.safetymanagement2022.common.KEY_DIALOG_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.DialogSelectBuildingBinding
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 
-class SelectBuildingDialog(context: Context) : DialogFragment() {
+class SelectBuildingDialog(context: Context, val userId: String) : DialogFragment() {
     private var _binding: DialogSelectBuildingBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ConnectBuildingViewModel by viewModels { MyViewModelFactory(context) }
@@ -30,7 +30,8 @@ class SelectBuildingDialog(context: Context) : DialogFragment() {
         // 레이아웃 배경을 투명하게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        // 스마트 글래스 목록 연결
+        // 빌딩 목록 연결
+        viewModel.loadConnectBuildingData(userId)
         viewModel.buildingList.observe(viewLifecycleOwner) { data ->
             binding.rvBuilding.adapter = adapter.apply {
                 submitList(data.list)

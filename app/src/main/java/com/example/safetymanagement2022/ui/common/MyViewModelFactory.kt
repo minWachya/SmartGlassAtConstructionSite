@@ -54,12 +54,12 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
             }
             // connect - glass (dialog)
             modelClass.isAssignableFrom(ConnectGlassViewModel::class.java) -> {
-                val repository = ConnectGlassRepository(ConnectGlassRemoteDataSource((AssetLoader(context))))
+                val repository = ConnectGlassRepository(ConnectGlassRemoteDataSource((provideApiClient())))
                 ConnectGlassViewModel(repository) as T
             }
             // connect - building (dialog)
             modelClass.isAssignableFrom(ConnectBuildingViewModel::class.java) -> {
-                val repository = ConnectBuildingRepository(ConnectBuildingRemoteDataSource((AssetLoader(context))))
+                val repository = ConnectBuildingRepository(ConnectBuildingRemoteDataSource((provideApiClient())))
                 ConnectBuildingViewModel(repository) as T
             }
             else -> {

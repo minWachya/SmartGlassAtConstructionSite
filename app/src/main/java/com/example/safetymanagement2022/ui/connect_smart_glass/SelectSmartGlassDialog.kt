@@ -17,7 +17,7 @@ import com.example.safetymanagement2022.common.KEY_DIALOG_GLASS_NAME
 import com.example.safetymanagement2022.databinding.DialogSelectSmartGlassBinding
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 
-class SelectSmartGlassDialog(context: Context) : DialogFragment() {
+class SelectSmartGlassDialog(context: Context, val userId: String) : DialogFragment() {
     private var _binding: DialogSelectSmartGlassBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ConnectGlassViewModel by viewModels { MyViewModelFactory(context) }
@@ -31,6 +31,7 @@ class SelectSmartGlassDialog(context: Context) : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         // 스마트 글래스 목록 연결
+        viewModel.loadConnectGlassData(userId)
         viewModel.glassList.observe(viewLifecycleOwner) { data ->
             binding.rvSmartGlass.adapter = adapter.apply {
                 submitList(data.list)

@@ -4,7 +4,7 @@ import com.example.safetymanagement2022.model.ConnectBuildingData
 
 class ConnectBuildingRepository(private val assetDataSource: ConnectBuildingRemoteDataSource) {
 
-    fun getConnectBuildingData(): ConnectBuildingData? {
-        return assetDataSource.getConnectBuildingData()
+    suspend fun getConnectBuildingData(userId: String): ConnectBuildingData {
+        return assetDataSource.getConnectBuildingData(userId)
     }
 }

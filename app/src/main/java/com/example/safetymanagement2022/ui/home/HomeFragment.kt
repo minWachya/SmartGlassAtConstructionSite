@@ -52,7 +52,7 @@ class HomeFragment: Fragment() {
             // 관리자 모드
             if(homeData.admin == KEY_MANAGER) setSpinner(homeData.buildingList ?: listOf())
             // 사용자 모드
-            else setConnectGlassBtn()
+            else setConnectGlassBtn(userId)
         }
     }
 
@@ -66,12 +66,12 @@ class HomeFragment: Fragment() {
         }
     }
 
-    private fun setConnectGlassBtn() {
+    private fun setConnectGlassBtn(userId: String) {
         binding.btnConnectSamrtglass.setOnClickListener {
             // 스마트 글래스 선택 Dialog
-            val glassDialog = SelectSmartGlassDialog(requireContext())
+            val glassDialog = SelectSmartGlassDialog(requireContext(), userId)
             // 건물 선택 Dialog
-            val buildingDialog = SelectBuildingDialog(requireContext())
+            val buildingDialog = SelectBuildingDialog(requireContext(), userId)
 
             parentFragmentManager.setFragmentResultListener(KEY_DIALOG_GLASS, viewLifecycleOwner) { key, bundle ->
                 glassId = bundle.get(KEY_DIALOG_GLASS_ID).toString()
