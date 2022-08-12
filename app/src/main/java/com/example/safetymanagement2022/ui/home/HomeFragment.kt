@@ -9,8 +9,8 @@ import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.common.*
+import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
 import com.example.safetymanagement2022.databinding.FragmentHomeBinding
-import com.example.safetymanagement2022.model.SafetyIssue
 import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 import com.example.safetymanagement2022.ui.connect_building.SelectBuildingDialog
@@ -21,9 +21,9 @@ class HomeFragment: Fragment() {
     private val viewModel: HomeViewModel by viewModels { MyViewModelFactory(requireContext()) }
     private lateinit var homeAdapter: HomeAdapter
 
-    private var glassId = ""
+    private var glassId = -1
     private var glassName = ""
-    private var buildingId = ""
+    private var buildingId = -1
     private var buildingName = ""
 
     override fun onCreateView(
@@ -74,12 +74,12 @@ class HomeFragment: Fragment() {
             val buildingDialog = SelectBuildingDialog(requireContext(), userId)
 
             parentFragmentManager.setFragmentResultListener(KEY_DIALOG_GLASS, viewLifecycleOwner) { key, bundle ->
-                glassId = bundle.get(KEY_DIALOG_GLASS_ID).toString()
+                glassId = bundle.get(KEY_DIALOG_GLASS_ID).toString().toInt()
                 glassName = bundle.get(KEY_DIALOG_GLASS_NAME).toString()
                 buildingDialog.show(parentFragmentManager, "SelectBuildingDialog")
             }
             parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BUILDING, viewLifecycleOwner) { key, bundle ->
-                buildingId = bundle.get(KEY_DIALOG_BUILDING_ID).toString()
+                buildingId = bundle.get(KEY_DIALOG_BUILDING_ID).toString().toInt()
                 buildingName = bundle.get(KEY_DIALOG_BUILDING_NAME).toString()
 
                 // 확인 Dialog
@@ -92,8 +92,20 @@ class HomeFragment: Fragment() {
                     "", "연결하기")
                 confirmDialog.show(parentFragmentManager, "BasicDialog")
             }
+            parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BASIC_BTN2_CLICK, viewLifecycleOwner) { key, bundle ->
+                val request = ConnectIotRequest("seongmin", glassId, buildingId)
+                postConnectIot(request)
+            }
 
             glassDialog.show(parentFragmentManager, "SelectSmartGlassDialog")
+        }
+    }
+
+    private fun postConnectIot(body: ConnectIotRequest) {
+        viewModel.postConnectIot(body)
+        viewModel.connectIotResponse.observe(viewLifecycleOwner) { response ->
+            Log.d("mmm", "${response.connectMessage}")
+            Log.d("mmm", "된거임 만거임")
         }
     }
 

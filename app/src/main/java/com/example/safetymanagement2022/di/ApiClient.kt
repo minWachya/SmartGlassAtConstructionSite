@@ -1,13 +1,18 @@
 package com.example.safetymanagement2022.di
 
+import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
+import com.example.safetymanagement2022.data.remote.model.response.ConnectIotResponse
 import com.example.safetymanagement2022.model.ConnectBuildingData
 import com.example.safetymanagement2022.model.ConnectGlassData
 import com.example.safetymanagement2022.model.HomeData
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiClient {
@@ -19,6 +24,8 @@ interface ApiClient {
     suspend fun fetchConnectGlass(@Path("user_id") userId: String): ConnectGlassData
     @GET("/home/user/list/connect/2/{user_id}")
     suspend fun fetchConnectBuilding(@Path("user_id") userId: String): ConnectBuildingData
+    @POST("/home/connect/iot")
+    suspend fun postConnectIot(@Body body: ConnectIotRequest): ConnectIotResponse
 
     // ApiClient 객체 생성
     companion object {
