@@ -24,7 +24,7 @@ interface ApiClient {
     suspend fun fetchConnectGlass(@Path("user_id") userId: String): ConnectGlassData
     @GET("/home/user/list/connect/2/{user_id}")
     suspend fun fetchConnectBuilding(@Path("user_id") userId: String): ConnectBuildingData
-    @POST("/home/connect/iot")
+    @POST("/home/user/connect/iot")
     suspend fun postConnectIot(@Body body: ConnectIotRequest): ConnectIotResponse
 
     // ApiClient 객체 생성
