@@ -11,6 +11,8 @@ const val KEY_USER = 0
 const val KEY_ENABLE = 1
 const val KEY_ABLE = 0
 
+const val KEY_DIALOG_BASIC_BTN1_CLICK = "click btn 1"
+const val KEY_DIALOG_BASIC_BTN2_CLICK = "click btn 2"
 const val KEY_DIALOG_GLASS = "glass"
 const val KEY_DIALOG_GLASS_ID = "glassId"
 const val KEY_DIALOG_GLASS_NAME = "glassName"

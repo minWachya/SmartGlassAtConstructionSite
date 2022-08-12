@@ -4,11 +4,15 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
+import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.DialogBasicBinding
 import com.example.safetymanagement2022.ui.common.BasicDialogReturnValueInterface
 
@@ -32,12 +36,14 @@ class BasicDialog (val title: String, val content: String, val btn1: String, val
 
         // 버튼1 클릭: 이전
         binding.customTvBtn1.setOnClickListener {
-            mCallback?.onClickBtn1()
+            if(mCallback != null) mCallback?.onClickBtn1()
+            else setFragmentResult(KEY_DIALOG_BASIC_BTN1_CLICK, bundleOf())
             dismiss()
         }
         // 버튼2 클릭: 완료
         binding.customTvBtn2.setOnClickListener {
-            mCallback?.onClickBtn2()
+            if(mCallback != null) mCallback?.onClickBtn2()
+            else setFragmentResult(KEY_DIALOG_BASIC_BTN2_CLICK, bundleOf())
             dismiss()
         }
 
@@ -47,8 +53,10 @@ class BasicDialog (val title: String, val content: String, val btn1: String, val
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mCallback = try {
+            Log.d("mmm", "0")
             activity as BasicDialogReturnValueInterface
         } catch (e: ClassCastException) {
+            Log.d("mmm", "null^^")
             null
         }
     }
