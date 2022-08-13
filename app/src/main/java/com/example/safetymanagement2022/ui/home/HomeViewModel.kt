@@ -17,10 +17,13 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     private val _connectIotResponse = MutableLiveData<ConnectIotResponse>()
     val connectIotResponse: LiveData<ConnectIotResponse> = _connectIotResponse
 
+    private val _disConnectIotResponse = MutableLiveData<String>()
+    val disConnectIotResponse: LiveData<String> = _disConnectIotResponse
+
     // 데이터 요청
     fun loadHomeData(userId: String) {
         viewModelScope.launch {
-            val homeData = homeRepository.getHomeData(userId)
+            val homeData = homeRepository.fetchHomeData(userId)
             _homeData.value = homeData
         }
     }
@@ -29,6 +32,12 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
         viewModelScope.launch {
             val connectIotResponse = homeRepository.postConnectIot(body)
             _connectIotResponse.value = connectIotResponse
+        }
+    }
+    fun fetchDisConnectIot(userId: String) {
+        viewModelScope.launch {
+            val disConnectIotResponse = homeRepository.fetchDisConnectIot(userId)
+            _disConnectIotResponse.value = disConnectIotResponse
         }
     }
 }

@@ -13,4 +13,8 @@ class HomeRemoteDataSource(private val apiClient: ApiClient) : HomeDataSource {
     override suspend fun postConnectIot(body: ConnectIotRequest): ConnectIotResponse {
         return apiClient.postConnectIot(body)
     }
+
+    override suspend fun fetchDisConnectIot(userId: String): String {
+        return apiClient.fetchDisConnectIot(userId)
+    }
 }

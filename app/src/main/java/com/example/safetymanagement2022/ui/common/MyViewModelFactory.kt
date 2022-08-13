@@ -17,6 +17,10 @@ import com.example.safetymanagement2022.repository.connect_building.ConnectBuild
 import com.example.safetymanagement2022.repository.connect_building.ConnectBuildingRepository
 import com.example.safetymanagement2022.repository.connect_smart_glass.ConnectGlassRemoteDataSource
 import com.example.safetymanagement2022.repository.connect_smart_glass.ConnectGlassRepository
+import com.example.safetymanagement2022.repository.login.LoginRemoteDataSource
+import com.example.safetymanagement2022.repository.login.LoginRepository
+import com.example.safetymanagement2022.repository.register.RegisterRemoteDataSource
+import com.example.safetymanagement2022.repository.register.RegisterRepository
 import com.example.safetymanagement2022.ui.building_create.BuildingCreateViewModel
 import com.example.safetymanagement2022.ui.building_detail.BuildingDetailViewModel
 import com.example.safetymanagement2022.ui.home.HomeViewModel
@@ -24,6 +28,8 @@ import com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel
 import com.example.safetymanagement2022.ui.list_smartglass.ListSmartGlassViewModel
 import com.example.safetymanagement2022.ui.connect_building.ConnectBuildingViewModel
 import com.example.safetymanagement2022.ui.connect_smart_glass.ConnectGlassViewModel
+import com.example.safetymanagement2022.ui.login.LoginViewModel
+import com.example.safetymanagement2022.ui.register.RegisterViewModel
 
 class MyViewModelFactory(private val context: Context): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -61,6 +67,16 @@ class MyViewModelFactory(private val context: Context): ViewModelProvider.Factor
             modelClass.isAssignableFrom(ConnectBuildingViewModel::class.java) -> {
                 val repository = ConnectBuildingRepository(ConnectBuildingRemoteDataSource((provideApiClient())))
                 ConnectBuildingViewModel(repository) as T
+            }
+            // setting - login
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                val repository = LoginRepository(LoginRemoteDataSource((provideApiClient())))
+                LoginViewModel(repository) as T
+            }
+            // setting - register
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+                val repository = RegisterRepository(RegisterRemoteDataSource((provideApiClient())))
+                RegisterViewModel(repository) as T
             }
             else -> {
                 throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")
