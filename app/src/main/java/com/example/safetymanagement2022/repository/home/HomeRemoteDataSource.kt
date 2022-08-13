@@ -2,6 +2,7 @@ package com.example.safetymanagement2022.repository.home
 
 import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
 import com.example.safetymanagement2022.data.remote.model.response.ConnectIotResponse
+import com.example.safetymanagement2022.data.remote.model.response.DisConnectResponse
 import com.example.safetymanagement2022.di.ApiClient
 import com.example.safetymanagement2022.model.HomeData
 
@@ -14,7 +15,7 @@ class HomeRemoteDataSource(private val apiClient: ApiClient) : HomeDataSource {
         return apiClient.postConnectIot(body)
     }
 
-    override suspend fun fetchDisConnectIot(userId: String): String {
+    override suspend fun fetchDisConnectIot(userId: String): DisConnectResponse {
         return apiClient.fetchDisConnectIot(userId)
     }
 }

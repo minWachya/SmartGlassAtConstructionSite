@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
 import com.example.safetymanagement2022.data.remote.model.response.ConnectIotResponse
+import com.example.safetymanagement2022.data.remote.model.response.DisConnectResponse
 import com.example.safetymanagement2022.model.HomeData
 import com.example.safetymanagement2022.repository.home.HomeRepository
 import kotlinx.coroutines.launch
@@ -17,10 +18,9 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     private val _connectIotResponse = MutableLiveData<ConnectIotResponse>()
     val connectIotResponse: LiveData<ConnectIotResponse> = _connectIotResponse
 
-    private val _disConnectIotResponse = MutableLiveData<String>()
-    val disConnectIotResponse: LiveData<String> = _disConnectIotResponse
+    private val _disConnectIotResponse = MutableLiveData<DisConnectResponse>()
+    val disConnectIotResponse: LiveData<DisConnectResponse> = _disConnectIotResponse
 
-    // 데이터 요청
     fun loadHomeData(userId: String) {
         viewModelScope.launch {
             val homeData = homeRepository.fetchHomeData(userId)

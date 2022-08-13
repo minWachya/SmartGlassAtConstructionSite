@@ -1,5 +1,6 @@
 package com.example.safetymanagement2022.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -52,7 +53,7 @@ class HomeFragment : Fragment() {
             // 관리자 모드
             if (homeData.admin == KEY_MANAGER) setSpinner(homeData.buildingList ?: listOf())
             // 사용자 모드
-            else setConnectGlassBtnListener(userId)
+            else setConnectGlassBtnListener(userId, viewModel.homeData.value?.isConnected!!.toInt())
         }
     }
 
@@ -71,9 +72,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setConnectGlassBtnListener(userId: String) {
+    private fun setConnectGlassBtnListener(userId: String, isConnected: Int) {
         binding.btnConnectSamrtglass.setOnClickListener {
-            if (viewModel.homeData.value?.isConnected == KEY_ENABLE) disConnectIot(userId)
+            if (isConnected == KEY_ENABLE) disConnectIot(userId)
             else setConnectIot(userId)
         }
     }
@@ -85,16 +86,15 @@ class HomeFragment : Fragment() {
         val buildingDialog = SelectBuildingDialog(requireContext(), userId)
 
         parentFragmentManager.setFragmentResultListener(KEY_DIALOG_GLASS,
-            viewLifecycleOwner) { key, bundle ->
+            viewLifecycleOwner) { _, bundle ->
             glassId = bundle.get(KEY_DIALOG_GLASS_ID).toString().toInt()
             glassName = bundle.get(KEY_DIALOG_GLASS_NAME).toString()
             buildingDialog.show(parentFragmentManager, "SelectBuildingDialog")
         }
         parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BUILDING,
-            viewLifecycleOwner) { key, bundle ->
+            viewLifecycleOwner) { _, bundle ->
             buildingId = bundle.get(KEY_DIALOG_BUILDING_ID).toString().toInt()
             buildingName = bundle.get(KEY_DIALOG_BUILDING_NAME).toString()
-
             // 확인 Dialog
             val confirmDialog = BasicDialog("연결 확인",
                 """
@@ -106,7 +106,7 @@ class HomeFragment : Fragment() {
             confirmDialog.show(parentFragmentManager, "BasicDialog")
         }
         parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BASIC_BTN2_CLICK,
-            viewLifecycleOwner) { key, bundle ->
+            viewLifecycleOwner) { _, _ ->
             val request = ConnectIotRequest(userId, glassId, buildingId)
             postConnectIot(request)
         }
@@ -118,11 +118,17 @@ class HomeFragment : Fragment() {
         viewModel.postConnectIot(body)
         viewModel.connectIotResponse.observe(viewLifecycleOwner) { response ->
             Log.d("mmm home-connect", "${response.connectMessage}")
+            saveGlassInfo()
+            setLayout(body.userId)
         }
     }
 
     private fun disConnectIot(userId: String) {
         // 연결 종료 확인 Dialog
+        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
+//        val glassName = sharedPref.getString(LOCAL_GLASS_NAME, "")
+//        val buildingName = sharedPref.getString(LOCAL_BUILDING_NAME, "")
+
         val confirmDialog = BasicDialog("연결 종료",
             """
                스마트 글래스: ‘${glassName}’
@@ -132,11 +138,30 @@ class HomeFragment : Fragment() {
             "", "연결 종료하기")
         confirmDialog.show(parentFragmentManager, "BasicDialog")
         parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BASIC_BTN2_CLICK,
-            viewLifecycleOwner) { key, bundle ->
+            viewLifecycleOwner) { _, _ ->
             viewModel.fetchDisConnectIot(userId)
             viewModel.disConnectIotResponse.observe(viewLifecycleOwner) { response ->
-                Log.d("mmm home-disconnect", "${response}")
+                Log.d("mmm home-disconnect", "${response.message}")
+                removeGlassInfo()
+                setLayout(userId)
             }
+        }
+    }
+
+    private fun saveGlassInfo() {
+        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putInt(LOCAL_GLASS_NAME, glassId)
+            putInt(LOCAL_BUILDING_NAME, buildingId)
+            apply()
+        }
+    }
+    private fun removeGlassInfo() {
+        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            remove(LOCAL_GLASS_NAME)
+            remove(LOCAL_BUILDING_NAME)
+            apply()
         }
     }
 }

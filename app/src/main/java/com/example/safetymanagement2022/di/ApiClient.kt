@@ -5,6 +5,7 @@ import com.example.safetymanagement2022.data.remote.model.request.CreateBuilding
 import com.example.safetymanagement2022.data.remote.model.request.LoginRequest
 import com.example.safetymanagement2022.data.remote.model.request.RegisterRequest
 import com.example.safetymanagement2022.data.remote.model.response.ConnectIotResponse
+import com.example.safetymanagement2022.data.remote.model.response.DisConnectResponse
 import com.example.safetymanagement2022.data.remote.model.response.LoginResponse
 import com.example.safetymanagement2022.data.remote.model.response.RegisterResponse
 import com.example.safetymanagement2022.model.*
@@ -29,8 +30,8 @@ interface ApiClient {
     suspend fun fetchConnectBuilding(@Path("user_id") userId: String): ConnectBuildingData
     @POST("/home/user/connect/iot")
     suspend fun postConnectIot(@Body body: ConnectIotRequest): ConnectIotResponse
-    @GET("/home/disconnect/iot/{user_id}")
-    suspend fun fetchDisConnectIot(@Path("user_id") userId: String): String
+    @GET("/home/user/disconnect/iot/{user_id}")
+    suspend fun fetchDisConnectIot(@Path("user_id") userId: String): DisConnectResponse
 
     // list
     @GET("?/{user_id}")
@@ -40,7 +41,7 @@ interface ApiClient {
 //    @GET("?/{building_id}") + 층수??
 //    suspend fun fetchBuildingDetail(@Path("building_id") buildingId: String): BuildingDetailData
     @GET("?/{user_id}")
-    suspend fun fetchListGlass(@Path("user_id") userId: String): ListSmartGlassData
+    suspend fun fetchListGlass(@Path("user_id") userId: String): String
 
     // accounts
     @POST("?")
