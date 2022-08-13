@@ -17,7 +17,7 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
     private val binding get() = _binding!!
 
     private val floorArr = ArrayList<String>()
-    private val minMaxArr = arrayListOf("지상", "지하")
+    private val minMaxArr = arrayListOf("지하", "지상")
 
     private lateinit var mCallback: SelectedFloorInterface
 

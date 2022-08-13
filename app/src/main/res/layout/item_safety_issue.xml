@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="safetyIssue"
             type="com.example.safetymanagement2022.model.SafetyIssue" />
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="18dp"
-            android:text="@{safetyIssue.name}"
+            android:text="@{safetyIssue.buildingName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_location"
             app:layout_constraintTop_toTopOf="@id/tv_safety_issue"

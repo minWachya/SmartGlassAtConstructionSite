@@ -29,9 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
+            android:text="@string/label_register"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="회원가입" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/edit_id"
@@ -125,10 +125,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_gravity="start"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/background_edit"
                 android:checked="true"
-                android:layout_marginStart="5dp"
                 android:layoutDirection="rtl"
                 android:text="@string/label_user"
                 android:textAlignment="textStart" />
