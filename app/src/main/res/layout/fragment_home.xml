@@ -22,6 +22,8 @@
                 android:id="@+id/btn_connect_samrtglass"
                 style="@style/TextMedium.20"
                 invisibleManager="@{home.admin}"
+                setBgColor="@{home.isConnected}"
+                setBtnText="@{home.isConnected}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
