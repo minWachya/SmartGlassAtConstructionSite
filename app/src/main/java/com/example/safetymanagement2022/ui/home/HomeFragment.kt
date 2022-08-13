@@ -16,7 +16,7 @@ import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 import com.example.safetymanagement2022.ui.connect_building.SelectBuildingDialog
 import com.example.safetymanagement2022.ui.connect_smart_glass.SelectSmartGlassDialog
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels { MyViewModelFactory(requireContext()) }
     private lateinit var homeAdapter: HomeAdapter
@@ -50,64 +50,93 @@ class HomeFragment: Fragment() {
             binding.rvSafetyIssue.adapter = homeAdapter
 
             // 관리자 모드
-            if(homeData.admin == KEY_MANAGER) setSpinner(homeData.buildingList ?: listOf())
+            if (homeData.admin == KEY_MANAGER) setSpinner(homeData.buildingList ?: listOf())
             // 사용자 모드
-            else setConnectGlassBtn(userId)
+            else setConnectGlassBtnListener(userId)
         }
     }
 
     private fun setSpinner(list: List<String>) {
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if(position == 0) homeAdapter.filter.filter("")
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long,
+            ) {
+                if (position == 0) homeAdapter.filter.filter("")
                 else homeAdapter.filter.filter(list[position])
             }
         }
     }
 
-    private fun setConnectGlassBtn(userId: String) {
+    private fun setConnectGlassBtnListener(userId: String) {
         binding.btnConnectSamrtglass.setOnClickListener {
-            // 스마트 글래스 선택 Dialog
-            val glassDialog = SelectSmartGlassDialog(requireContext(), userId)
-            // 건물 선택 Dialog
-            val buildingDialog = SelectBuildingDialog(requireContext(), userId)
+            if (viewModel.homeData.value?.isConnected == KEY_ENABLE) disConnectIot(userId)
+            else setConnectIot(userId)
+        }
+    }
 
-            parentFragmentManager.setFragmentResultListener(KEY_DIALOG_GLASS, viewLifecycleOwner) { key, bundle ->
-                glassId = bundle.get(KEY_DIALOG_GLASS_ID).toString().toInt()
-                glassName = bundle.get(KEY_DIALOG_GLASS_NAME).toString()
-                buildingDialog.show(parentFragmentManager, "SelectBuildingDialog")
-            }
-            parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BUILDING, viewLifecycleOwner) { key, bundle ->
-                buildingId = bundle.get(KEY_DIALOG_BUILDING_ID).toString().toInt()
-                buildingName = bundle.get(KEY_DIALOG_BUILDING_NAME).toString()
+    private fun setConnectIot(userId: String) {
+        // 스마트 글래스 선택 Dialog
+        val glassDialog = SelectSmartGlassDialog(requireContext(), userId)
+        // 건물 선택 Dialog
+        val buildingDialog = SelectBuildingDialog(requireContext(), userId)
 
-                // 확인 Dialog
-                val confirmDialog = BasicDialog("연결 확인",
-                    """
+        parentFragmentManager.setFragmentResultListener(KEY_DIALOG_GLASS,
+            viewLifecycleOwner) { key, bundle ->
+            glassId = bundle.get(KEY_DIALOG_GLASS_ID).toString().toInt()
+            glassName = bundle.get(KEY_DIALOG_GLASS_NAME).toString()
+            buildingDialog.show(parentFragmentManager, "SelectBuildingDialog")
+        }
+        parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BUILDING,
+            viewLifecycleOwner) { key, bundle ->
+            buildingId = bundle.get(KEY_DIALOG_BUILDING_ID).toString().toInt()
+            buildingName = bundle.get(KEY_DIALOG_BUILDING_NAME).toString()
+
+            // 확인 Dialog
+            val confirmDialog = BasicDialog("연결 확인",
+                """
                     스마트 글래스: ‘${glassName}’
                     건물명: ‘${buildingName}’
                     로 연결하시겠습니까?
                     """.trimIndent(),
-                    "", "연결하기")
-                confirmDialog.show(parentFragmentManager, "BasicDialog")
-            }
-            parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BASIC_BTN2_CLICK, viewLifecycleOwner) { key, bundle ->
-                val request = ConnectIotRequest("seongmin", glassId, buildingId)
-                postConnectIot(request)
-            }
-
-            glassDialog.show(parentFragmentManager, "SelectSmartGlassDialog")
+                "", "연결하기")
+            confirmDialog.show(parentFragmentManager, "BasicDialog")
         }
+        parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BASIC_BTN2_CLICK,
+            viewLifecycleOwner) { key, bundle ->
+            val request = ConnectIotRequest(userId, glassId, buildingId)
+            postConnectIot(request)
+        }
+
+        glassDialog.show(parentFragmentManager, "SelectSmartGlassDialog")
     }
 
     private fun postConnectIot(body: ConnectIotRequest) {
         viewModel.postConnectIot(body)
         viewModel.connectIotResponse.observe(viewLifecycleOwner) { response ->
-            Log.d("mmm", "${response.connectMessage}")
-            Log.d("mmm", "된거임 만거임")
+            Log.d("mmm home-connect", "${response.connectMessage}")
         }
     }
 
-
+    private fun disConnectIot(userId: String) {
+        // 연결 종료 확인 Dialog
+        val confirmDialog = BasicDialog("연결 종료",
+            """
+               스마트 글래스: ‘${glassName}’
+               건물명: ‘${buildingName}’
+               연결을 종료하시겠습니까?
+               """.trimIndent(),
+            "", "연결 종료하기")
+        confirmDialog.show(parentFragmentManager, "BasicDialog")
+        parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BASIC_BTN2_CLICK,
+            viewLifecycleOwner) { key, bundle ->
+            viewModel.fetchDisConnectIot(userId)
+            viewModel.disConnectIotResponse.observe(viewLifecycleOwner) { response ->
+                Log.d("mmm home-disconnect", "${response}")
+            }
+        }
+    }
 }

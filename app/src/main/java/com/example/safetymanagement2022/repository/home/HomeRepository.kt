@@ -5,12 +5,16 @@ import com.example.safetymanagement2022.data.remote.model.response.ConnectIotRes
 import com.example.safetymanagement2022.model.HomeData
 
 class HomeRepository(private val assetDataSource: HomeRemoteDataSource) {
-    suspend fun getHomeData(userId: String): HomeData {
+    suspend fun fetchHomeData(userId: String): HomeData {
         return assetDataSource.getHomeData(userId)
     }
 
     suspend fun postConnectIot(body: ConnectIotRequest): ConnectIotResponse {
         return assetDataSource.postConnectIot(body)
+    }
+
+    suspend fun fetchDisConnectIot(userId: String): String {
+        return assetDataSource.fetchDisConnectIot(userId)
     }
 
 }

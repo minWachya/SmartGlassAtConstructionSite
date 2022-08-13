@@ -1,10 +1,13 @@
 package com.example.safetymanagement2022.di
 
 import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
+import com.example.safetymanagement2022.data.remote.model.request.CreateBuildingRequest
+import com.example.safetymanagement2022.data.remote.model.request.LoginRequest
+import com.example.safetymanagement2022.data.remote.model.request.RegisterRequest
 import com.example.safetymanagement2022.data.remote.model.response.ConnectIotResponse
-import com.example.safetymanagement2022.model.ConnectBuildingData
-import com.example.safetymanagement2022.model.ConnectGlassData
-import com.example.safetymanagement2022.model.HomeData
+import com.example.safetymanagement2022.data.remote.model.response.LoginResponse
+import com.example.safetymanagement2022.data.remote.model.response.RegisterResponse
+import com.example.safetymanagement2022.model.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -26,6 +29,24 @@ interface ApiClient {
     suspend fun fetchConnectBuilding(@Path("user_id") userId: String): ConnectBuildingData
     @POST("/home/user/connect/iot")
     suspend fun postConnectIot(@Body body: ConnectIotRequest): ConnectIotResponse
+    @GET("/home/disconnect/iot/{user_id}")
+    suspend fun fetchDisConnectIot(@Path("user_id") userId: String): String
+
+    // list
+    @GET("?/{user_id}")
+    suspend fun fetchListBuilding(@Path("user_id") userId: String): ListBuildingData
+    @POST("?")
+    suspend fun postBuilding(@Body body: CreateBuildingRequest): String
+//    @GET("?/{building_id}") + 층수??
+//    suspend fun fetchBuildingDetail(@Path("building_id") buildingId: String): BuildingDetailData
+    @GET("?/{user_id}")
+    suspend fun fetchListGlass(@Path("user_id") userId: String): ListSmartGlassData
+
+    // accounts
+    @POST("?")
+    suspend fun postLogin(@Body body: LoginRequest): LoginResponse
+    @POST("?")
+    suspend fun postRegister(@Body body: RegisterRequest): RegisterResponse
 
     // ApiClient 객체 생성
     companion object {

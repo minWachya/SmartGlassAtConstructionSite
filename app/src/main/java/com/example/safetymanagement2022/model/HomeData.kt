@@ -1,5 +1,6 @@
 package com.example.safetymanagement2022.model
 
+import com.example.safetymanagement2022.common.KEY_ABLE
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -23,6 +24,7 @@ import com.google.gson.annotations.SerializedName
 data class HomeData(
     val admin: Int,
     val title: String,
+    @SerializedName("is_connected") val isConnected: Int? = KEY_ABLE,
     @SerializedName("issue_list") val issueList: List<SafetyIssue>,
     @SerializedName("building_list") val buildingList: List<String>?
 )

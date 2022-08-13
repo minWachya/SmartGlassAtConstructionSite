@@ -7,4 +7,5 @@ import com.example.safetymanagement2022.model.HomeData
 interface HomeDataSource {
     suspend fun getHomeData(userId: String): HomeData?
     suspend fun postConnectIot(body: ConnectIotRequest): ConnectIotResponse?
+    suspend fun fetchDisConnectIot(userId: String): String?
 }
