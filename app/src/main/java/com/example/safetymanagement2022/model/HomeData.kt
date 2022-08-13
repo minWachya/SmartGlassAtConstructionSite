@@ -29,7 +29,8 @@ data class HomeData(
 
 data class SafetyIssue(
     @SerializedName("raw_data_id") val rawDataId: String,
-    @SerializedName("building_name") val name: String,
+    @SerializedName("building_name") val BuildingName: String,
+    val name: String? = "",
     val picture: String,
     val floor: String,
     val room: String,

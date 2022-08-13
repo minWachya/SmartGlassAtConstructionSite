@@ -58,6 +58,7 @@
     <string name="btn_next">다음</string>
     <string name="btn_ok">선택 완료</string>
     <string name="description_building_detail_btn_left">왼쪽 이동 버튼</string>
+    <string name="label_register">회원가입</string>
 
 
 </resources>

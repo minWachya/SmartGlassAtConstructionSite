@@ -5,6 +5,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import com.example.safetymanagement2022.common.KEY_MANAGER
+import com.example.safetymanagement2022.common.KEY_USER
 import com.example.safetymanagement2022.databinding.ActivityRegisterBinding
 
 class RegisterActivity: AppCompatActivity() {
@@ -26,7 +28,7 @@ class RegisterActivity: AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             val policyTermsCheck = binding.cbPolicyTerms.isChecked
             if (passwordCheck && policyTermsCheck) {
-                sendRegisterInfo()
+                postRegisterInfo()
             }
             else if (!passwordCheck)
                 Toast.makeText(applicationContext, "비밀번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -34,12 +36,12 @@ class RegisterActivity: AppCompatActivity() {
         }
     }
 
-    private fun sendRegisterInfo() {
+    private fun postRegisterInfo() {
         val id = binding.editId.text
         val pw = binding.editPw2.text
         val companyName = binding.editCompanyName.text
         val name = binding.editName.text
-        val admin = binding.rdoUser.isChecked
+        val admin = if(binding.rdoUser.isChecked) KEY_USER else KEY_MANAGER
     }
 
     private fun setPasswordCheck(pw1: EditText, pw2: EditText) {
