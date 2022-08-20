@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.databinding.FragmentListBuildingBinding
 import com.example.safetymanagement2022.ui.building_create.BuildingCreateActivity
 import com.example.safetymanagement2022.ui.building_detail.BuildingDetailActivity
+import com.example.safetymanagement2022.ui.common.EventObserver
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 
 class ListBuildingFragment: Fragment() {
@@ -40,9 +41,9 @@ class ListBuildingFragment: Fragment() {
         viewModel.openCreateBuildingEvent.observe(viewLifecycleOwner) {
             openCreateBuilding()
         }
-        viewModel.openBuildingDetailEvent.observe(viewLifecycleOwner) {
+        viewModel.openBuildingDetailEvent.observe(viewLifecycleOwner, EventObserver {
             openBuildingDetail(it)
-        }
+        })
     }
 
     private fun openCreateBuilding() {

@@ -14,8 +14,8 @@ class ListBuildingViewModel(private val listBuildingRepository: ListBuildingRepo
     private val _openCreateBuildingEvent = MutableLiveData<Unit>()
     val openCreateBuildingEvent: LiveData<Unit> get() = _openCreateBuildingEvent
 
-    private val _openBuildingDetailEvent = MutableLiveData<String>()
-    val openBuildingDetailEvent: LiveData<String> get() = _openBuildingDetailEvent
+    private val _openBuildingDetailEvent = MutableLiveData<Event<String>>()
+    val openBuildingDetailEvent: LiveData<Event<String>> get() = _openBuildingDetailEvent
 
     init {
         loadListBuildingData()
@@ -33,6 +33,6 @@ class ListBuildingViewModel(private val listBuildingRepository: ListBuildingRepo
     }
 
     fun openBuildingDetail(buildingId: String) {
-        _openBuildingDetailEvent.value = buildingId
+        _openBuildingDetailEvent.value = Event(buildingId)
     }
 }
