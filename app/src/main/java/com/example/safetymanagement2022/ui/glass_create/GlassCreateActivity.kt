@@ -1,6 +1,7 @@
 package com.example.safetymanagement2022.ui.glass_create
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -16,6 +17,8 @@ class GlassCreateActivity : AppCompatActivity(), BasicDialogReturnValueInterface
         binding = ActivityGlassCreateBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setSupportActionBar(binding.toolBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setBtnEnableListener()
         setFinishBtnListener()
@@ -37,5 +40,12 @@ class GlassCreateActivity : AppCompatActivity(), BasicDialogReturnValueInterface
 
     override fun onClickBtn1() { }
     override fun onClickBtn2() { finish() }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 }
