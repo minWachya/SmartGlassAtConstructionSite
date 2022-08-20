@@ -14,4 +14,9 @@ class BuildingCreateActivity: AppCompatActivity() {
         val view = binding.root
         setContentView(view)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

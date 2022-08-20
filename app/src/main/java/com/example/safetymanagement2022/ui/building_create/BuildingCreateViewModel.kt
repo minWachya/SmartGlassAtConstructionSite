@@ -1,12 +1,9 @@
 package com.example.safetymanagement2022.ui.building_create
 
-import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.safetymanagement2022.model.FloorPlanData
-import com.example.safetymanagement2022.model.ListBuildingData
 
 class BuildingCreateViewModel: ViewModel() {
     // step1: <다음> 버튼 클릭
