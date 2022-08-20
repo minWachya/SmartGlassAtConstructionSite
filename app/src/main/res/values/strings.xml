@@ -59,6 +59,7 @@
     <string name="btn_ok">선택 완료</string>
     <string name="description_building_detail_btn_left">왼쪽 이동 버튼</string>
     <string name="label_register">회원가입</string>
+    <string name="description_btn_back">뒤로가기 버튼</string>
 
 
 </resources>

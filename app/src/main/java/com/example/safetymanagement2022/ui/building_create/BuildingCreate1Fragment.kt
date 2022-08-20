@@ -1,7 +1,6 @@
 package com.example.safetymanagement2022.ui.building_create
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -17,7 +16,6 @@ import com.example.safetymanagement2022.common.KEY_BUILDING_MEMO
 import com.example.safetymanagement2022.common.KEY_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate1Binding
 import com.example.safetymanagement2022.ui.common.MyViewModelFactory
-import com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel
 
 class BuildingCreate1Fragment : Fragment() {
     private lateinit var binding: FragmentBuildingCreate1Binding
@@ -42,6 +40,7 @@ class BuildingCreate1Fragment : Fragment() {
         }
 
         setButtonEnableListener()
+        setBackBtnClickListener()
     }
 
     private fun setButtonEnableListener() {
@@ -53,6 +52,12 @@ class BuildingCreate1Fragment : Fragment() {
         binding.editFloorMax.addTextChangedListener { btnEnableCheck() }
         // 지하
         binding.editFloorMin.addTextChangedListener { btnEnableCheck() }
+    }
+
+    private fun setBackBtnClickListener() {
+        binding.ivBack.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     private fun btnEnableCheck() {

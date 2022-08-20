@@ -52,6 +52,9 @@ class ListBuildingFragment: Fragment() {
     }
     private fun openBuildingDetail(building: String) {
         val intent = Intent(context, BuildingDetailActivity::class.java)
+            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.putExtra("buildingId", building)
         startActivity(intent)
     }

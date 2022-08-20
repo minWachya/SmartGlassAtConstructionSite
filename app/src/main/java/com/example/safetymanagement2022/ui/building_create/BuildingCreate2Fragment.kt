@@ -6,15 +6,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.KEY_BUILDING_FLOOR_MAX
 import com.example.safetymanagement2022.common.KEY_BUILDING_FLOOR_MIN
@@ -35,7 +32,6 @@ class BuildingCreate2Fragment : Fragment(), SelectImageInterface {
     private val viewModel: BuildingCreateViewModel by viewModels { MyViewModelFactory(requireContext()) }
 
     private var arrImage = ArrayList<FloorPlanData>()
-
     private var bitmap: Bitmap? = null
 
 //    // 갤러리에서 사진 선택 후 실행
@@ -71,7 +67,7 @@ class BuildingCreate2Fragment : Fragment(), SelectImageInterface {
 
         setFloorList(floorMax, floorMin)
         viewModel.setListFloorPlan(arrImage)
-        setNavigation()
+        setBackBtnClickListener()
 
         viewModel.listFloorPlan.observe(viewLifecycleOwner) {
             binding.rvFloorPlan.adapter = BuildingCreateAdapter(viewModel, this@BuildingCreate2Fragment).apply {
@@ -88,9 +84,9 @@ class BuildingCreate2Fragment : Fragment(), SelectImageInterface {
         Toast.makeText(context, "끝!!", Toast.LENGTH_LONG).show()
     }
 
-    private fun setNavigation() {
-        binding.toolBar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+    private fun setBackBtnClickListener() {
+        binding.ivBack.setOnClickListener {
+            requireActivity().finish()
         }
     }
 
