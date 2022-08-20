@@ -1,6 +1,5 @@
 package com.example.safetymanagement2022.ui.building_detail
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -43,13 +42,11 @@ class BuildingDetailAdapter(val item: List<SafetyIssue>):  RecyclerView.Adapter<
                 } else {
                     val filteringList = arrayListOf<SafetyIssue>()
                     for (item in unFilteredList)
-                        if (item.name == charString) filteringList.add(item)
+                        if (item.floor == charString) filteringList.add(item)
                     filteringList
                 }
                 val filterResults = FilterResults()
                 filterResults.values = filteredList
-
-                Log.d("mmm list", filteredList.toString())
                 return filterResults
             }
 

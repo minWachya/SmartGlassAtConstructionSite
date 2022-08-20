@@ -1,5 +1,5 @@
 {
-  "building_name": "건물1 test",
+  "building_name": "수연관",
   "max_floor": 3,
   "min_floor": 1,
   "drawing_list": [
@@ -10,27 +10,27 @@
   ],
   "issue_list": [
     {
-      "raw_data_id": "crack_user12_220629_1",
-      "name": "건물1",
+      "raw_data_id": 0,
+      "name": "수연관",
       "picture": "https://user-images.githubusercontent.com/61674991/178135390-87301b37-071e-4c17-8378-0f3690a363ea.png",
-      "floor": "1층",
+      "floor": "지상 1층",
       "room": "101호",
       "details": "4층 입구 오른쪽 위"
     },
     {
-      "raw_data_id": "crack_user12_220629_2",
-      "name": "건물1",
+      "raw_data_id": 1,
+      "name": "수연관",
       "picture": "https://user-images.githubusercontent.com/61674991/178135390-87301b37-071e-4c17-8378-0f3690a363ea.png",
-      "floor": "2층",
-      "room": "101호",
+      "floor": "지상 2층",
+      "room": "102호",
       "details": "4층 입구 오른쪽 위"
     },
     {
-      "raw_data_id": "crack_user30_220630_1",
-      "name": "건물1",
+      "raw_data_id": 2,
+      "name": "수연관",
       "picture": "https://user-images.githubusercontent.com/61674991/178135390-87301b37-071e-4c17-8378-0f3690a363ea.png",
-      "floor": "2층",
-      "room": "101호",
+      "floor": "지상 2층",
+      "room": "103호",
       "details": "4층 입구 오른쪽 위"
     }
   ]
