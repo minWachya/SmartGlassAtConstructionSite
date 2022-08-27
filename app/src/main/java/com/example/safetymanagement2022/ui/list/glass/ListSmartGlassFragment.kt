@@ -18,13 +18,12 @@ class ListSmartGlassFragment: BaseFragment<FragmentListSmartglassBinding>(R.layo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
-        val admin = viewModel.listGlassResponse.value?.admin ?: 0
-        binding.admin = admin
-        binding.viewModel = viewModel
 
         viewModel.getListGlass(USER_ID)
         viewModel.listGlassResponse.observe(viewLifecycleOwner) { data ->
-            binding.rvListSmartglass.adapter = ListSmartGlassAdapter(admin).apply {
+            binding.admin = data.admin
+            binding.viewModel = viewModel
+            binding.rvListSmartglass.adapter = ListSmartGlassAdapter(data.admin).apply {
                 submitList(data.glassList)
             }
         }
