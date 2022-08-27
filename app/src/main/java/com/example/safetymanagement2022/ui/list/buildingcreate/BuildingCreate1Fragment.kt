@@ -1,12 +1,9 @@
-package com.example.safetymanagement2022.ui.building_create
+package com.example.safetymanagement2022.ui.list.buildingcreate
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.core.widget.addTextChangedListener
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
@@ -15,21 +12,12 @@ import com.example.safetymanagement2022.common.KEY_BUILDING_FLOOR_MIN
 import com.example.safetymanagement2022.common.KEY_BUILDING_MEMO
 import com.example.safetymanagement2022.common.KEY_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate1Binding
+import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BuildingCreate1Fragment : Fragment() {
-    private lateinit var binding: FragmentBuildingCreate1Binding
+class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.layout.fragment_building_create_1) {
     private val viewModel: BuildingCreateViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentBuildingCreate1Binding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

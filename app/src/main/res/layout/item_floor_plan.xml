@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.safetymanagement2022.ui.building_create.BuildingCreateViewModel" />
+            type="com.example.safetymanagement2022.ui.list.buildingcreate.BuildingCreateViewModel" />
 
         <variable
             name="floor"

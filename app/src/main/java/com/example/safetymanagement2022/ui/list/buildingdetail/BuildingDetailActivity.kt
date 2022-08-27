@@ -1,13 +1,14 @@
-package com.example.safetymanagement2022.ui.building_detail
+package com.example.safetymanagement2022.ui.list.buildingdetail
 
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.example.safetymanagement2022.GlideApp
+import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.TAG
 import com.example.safetymanagement2022.databinding.ActivityBuildingDetailBinding
+import com.example.safetymanagement2022.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 interface SelectedFloorInterface {
@@ -15,18 +16,14 @@ interface SelectedFloorInterface {
 }
 
 @AndroidEntryPoint
-class BuildingDetailActivity  : AppCompatActivity(), SelectedFloorInterface {
-    private lateinit var binding: ActivityBuildingDetailBinding
+class BuildingDetailActivity  : BaseActivity<ActivityBuildingDetailBinding>(R.layout.activity_building_detail),
+    SelectedFloorInterface {
     private val viewModel: BuildingDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBuildingDetailBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
         setSupportActionBar(binding.toolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         val buildingId = intent.getStringExtra("buildingId").toString().toInt()
         Log.d(TAG, buildingId.toString())

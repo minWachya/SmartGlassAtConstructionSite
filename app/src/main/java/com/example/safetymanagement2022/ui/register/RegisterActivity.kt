@@ -1,30 +1,23 @@
 package com.example.safetymanagement2022.ui.register
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.KEY_MANAGER
 import com.example.safetymanagement2022.common.KEY_USER
 import com.example.safetymanagement2022.data.remote.model.request.RegisterRequest
 import com.example.safetymanagement2022.databinding.ActivityRegisterBinding
+import com.example.safetymanagement2022.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityRegisterBinding
-
+class RegisterActivity: BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
     var passwordCheck = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
         setRegisterButtonClickListener()
         setPasswordCheck(binding.editPw1, binding.editPw2)
 

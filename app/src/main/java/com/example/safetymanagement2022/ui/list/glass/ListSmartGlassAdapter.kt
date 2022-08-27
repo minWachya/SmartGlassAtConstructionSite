@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.list_smartglass
+package com.example.safetymanagement2022.ui.list.glass
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.data.remote.model.response.SmartGlass
 import com.example.safetymanagement2022.databinding.ItemListSmartglassBinding
 
-class ListSmartGlassAdapter(val admin: Int): ListAdapter<SmartGlass, ListSmartGlassAdapter.ListSmartGlassViewHolder>(ListBuildingDiffCallback()) {
+class ListSmartGlassAdapter(val admin: Int): ListAdapter<SmartGlass, ListSmartGlassAdapter.ListSmartGlassViewHolder>(
+    ListBuildingDiffCallback()) {
     private lateinit var binding: ItemListSmartglassBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSmartGlassViewHolder {

@@ -1,24 +1,21 @@
-package com.example.safetymanagement2022.ui.glass_create
+package com.example.safetymanagement2022.ui.list.glasscreate
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.databinding.ActivityGlassCreateBinding
+import com.example.safetymanagement2022.ui.base.BaseActivity
 import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
 import com.example.safetymanagement2022.ui.common.BasicDialogReturnValueInterface
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GlassCreateActivity : AppCompatActivity(), BasicDialogReturnValueInterface {
-    private lateinit var binding: ActivityGlassCreateBinding
+class GlassCreateActivity : BaseActivity<ActivityGlassCreateBinding>(R.layout.activity_glass_create),
+    BasicDialogReturnValueInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGlassCreateBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
         setSupportActionBar(binding.toolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

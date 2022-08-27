@@ -1,30 +1,20 @@
 package com.example.safetymanagement2022.ui.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.databinding.FragmentListBinding
-import com.example.safetymanagement2022.ui.list_building.ListBuildingFragment
-import com.example.safetymanagement2022.ui.list_smartglass.ListSmartGlassFragment
+import com.example.safetymanagement2022.ui.base.BaseFragment
+import com.example.safetymanagement2022.ui.list.building.ListBuildingFragment
+import com.example.safetymanagement2022.ui.list.glass.ListSmartGlassFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListFragment: Fragment() {
-    private lateinit var binding: FragmentListBinding
+class ListFragment: BaseFragment<FragmentListBinding>(R.layout.fragment_list)  {
     private val tabElement = arrayListOf("건물", "스마트글래스")
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

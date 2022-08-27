@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.list_building
+package com.example.safetymanagement2022.ui.list.building
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.data.remote.model.response.Building
 import com.example.safetymanagement2022.databinding.ItemListBuildingBinding
 
-class ListBuildingAdapter(val viewModel: ListBuildingViewModel): ListAdapter<Building, ListBuildingAdapter.ListBuildingViewHolder>(ListBuildingDiffCallback()) {
+class ListBuildingAdapter(val viewModel: ListBuildingViewModel): ListAdapter<Building, ListBuildingAdapter.ListBuildingViewHolder>(
+    ListBuildingDiffCallback()) {
     private lateinit var binding: ItemListBuildingBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListBuildingViewHolder {

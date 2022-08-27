@@ -2,24 +2,20 @@ package com.example.safetymanagement2022.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.safetymanagement2022.MainActivity
+import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.data.remote.model.request.LoginRequest
 import com.example.safetymanagement2022.databinding.ActivityLoginBinding
+import com.example.safetymanagement2022.ui.base.BaseActivity
 import com.example.safetymanagement2022.ui.register.RegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+class LoginActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 //    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
         setNextButtonListener()
         setRegisterButtonListener()
 

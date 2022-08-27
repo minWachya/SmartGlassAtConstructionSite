@@ -1,31 +1,20 @@
-package com.example.safetymanagement2022.ui.list_building
+package com.example.safetymanagement2022.ui.list.building
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.databinding.FragmentListBuildingBinding
-import com.example.safetymanagement2022.ui.building_create.BuildingCreateActivity
-import com.example.safetymanagement2022.ui.building_detail.BuildingDetailActivity
+import com.example.safetymanagement2022.ui.base.BaseFragment
+import com.example.safetymanagement2022.ui.list.buildingcreate.BuildingCreateActivity
+import com.example.safetymanagement2022.ui.list.buildingdetail.BuildingDetailActivity
 import com.example.safetymanagement2022.ui.common.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListBuildingFragment: Fragment() {
-    private lateinit var binding: FragmentListBuildingBinding
+class ListBuildingFragment: BaseFragment<FragmentListBuildingBinding>(R.layout.fragment_list_building)  {
     private val viewModel: ListBuildingViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentListBuildingBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

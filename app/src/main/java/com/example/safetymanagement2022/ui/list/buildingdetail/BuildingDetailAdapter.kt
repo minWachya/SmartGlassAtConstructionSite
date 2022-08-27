@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.building_detail
+package com.example.safetymanagement2022.ui.list.buildingdetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

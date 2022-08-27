@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.list_building
+package com.example.safetymanagement2022.ui.list.building
 
 import android.util.Log
 import androidx.lifecycle.LiveData

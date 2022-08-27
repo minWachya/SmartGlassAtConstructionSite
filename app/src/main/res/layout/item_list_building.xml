@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel" />
+            type="com.example.safetymanagement2022.ui.list.building.ListBuildingViewModel" />
 
         <variable
             name="building"

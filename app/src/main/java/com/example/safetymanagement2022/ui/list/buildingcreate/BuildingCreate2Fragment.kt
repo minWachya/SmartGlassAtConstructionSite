@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.building_create
+package com.example.safetymanagement2022.ui.list.buildingcreate
 
 import android.app.Activity
 import android.content.Intent
@@ -6,11 +6,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.KEY_BUILDING_FLOOR_MAX
@@ -19,6 +16,7 @@ import com.example.safetymanagement2022.common.KEY_BUILDING_MEMO
 import com.example.safetymanagement2022.common.KEY_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate2Binding
 import com.example.safetymanagement2022.model.FloorPlanData
+import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 // 다이얼로그에서 값 받아오기 위한 인터페이스
@@ -27,21 +25,12 @@ interface SelectImageInterface {
 }
 
 @AndroidEntryPoint
-class BuildingCreate2Fragment : Fragment(), SelectImageInterface {
-    private lateinit var binding: FragmentBuildingCreate2Binding
+class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.layout.fragment_building_create_2),
+    SelectImageInterface {
     private val viewModel: BuildingCreateViewModel by viewModels()
 
     private var arrImage = ArrayList<FloorPlanData>()
     private var bitmap: Bitmap? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentBuildingCreate2Binding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

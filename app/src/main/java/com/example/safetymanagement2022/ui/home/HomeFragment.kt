@@ -2,23 +2,21 @@ package com.example.safetymanagement2022.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
 import com.example.safetymanagement2022.databinding.FragmentHomeBinding
+import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
 import com.example.safetymanagement2022.ui.connect_building.SelectBuildingDialog
 import com.example.safetymanagement2022.ui.connect_smart_glass.SelectSmartGlassDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var homeAdapter: HomeAdapter
 
@@ -26,15 +24,6 @@ class HomeFragment : Fragment() {
     private var glassName = ""
     private var buildingId = -1
     private var buildingName = ""
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.building_create
+package com.example.safetymanagement2022.ui.list.buildingcreate
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.databinding.ItemFloorPlanBinding
 import com.example.safetymanagement2022.model.FloorPlanData
 
-class BuildingCreateAdapter(val viewModel: BuildingCreateViewModel, val frag: BuildingCreate2Fragment): ListAdapter<FloorPlanData, BuildingCreateAdapter.BuildingCreateViewHolder>(ListBuildingDiffCallback()) {
+class BuildingCreateAdapter(val viewModel: BuildingCreateViewModel, val frag: BuildingCreate2Fragment): ListAdapter<FloorPlanData, BuildingCreateAdapter.BuildingCreateViewHolder>(
+    ListBuildingDiffCallback()) {
     private lateinit var binding: ItemFloorPlanBinding
     var arrImgView = arrayListOf<ImageView>()
 

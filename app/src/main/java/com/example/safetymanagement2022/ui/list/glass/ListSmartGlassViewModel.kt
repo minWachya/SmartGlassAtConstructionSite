@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.list_smartglass
+package com.example.safetymanagement2022.ui.list.glass
 
 import android.util.Log
 import androidx.lifecycle.LiveData
