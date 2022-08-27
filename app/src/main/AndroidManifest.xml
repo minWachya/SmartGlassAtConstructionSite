@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.SafetyManagement2022">
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.account.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.list.buildingcreate.BuildingCreateActivity" />
-        <activity android:name=".ui.register.RegisterActivity" />
+        <activity android:name=".ui.account.register.RegisterActivity" />
         <activity android:name=".ui.list.buildingdetail.BuildingDetailActivity" />
         <activity android:name=".ui.list.glasscreate.GlassCreateActivity" />
     </application>

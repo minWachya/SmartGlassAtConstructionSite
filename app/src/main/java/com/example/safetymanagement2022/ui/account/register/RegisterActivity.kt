@@ -1,19 +1,22 @@
-package com.example.safetymanagement2022.ui.register
+package com.example.safetymanagement2022.ui.account.register
 
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.KEY_MANAGER
 import com.example.safetymanagement2022.common.KEY_USER
 import com.example.safetymanagement2022.data.remote.model.request.RegisterRequest
 import com.example.safetymanagement2022.databinding.ActivityRegisterBinding
+import com.example.safetymanagement2022.ui.account.AccountViewModel
 import com.example.safetymanagement2022.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterActivity: BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
+    private val viewModel: AccountViewModel by viewModels()
     var passwordCheck = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,16 +24,17 @@ class RegisterActivity: BaseActivity<ActivityRegisterBinding>(R.layout.activity_
         setRegisterButtonClickListener()
         setPasswordCheck(binding.editPw1, binding.editPw2)
 
-//        viewModel.registerResponse.observe(this@RegisterActivity) { response ->
-//            Log.d("mmm register", response.message)
-//        }
+        viewModel.registerResponse.observe(this@RegisterActivity) { response ->
+            Toast.makeText(applicationContext, response.message, Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 
     private fun setRegisterButtonClickListener() {
         binding.btnRegister.setOnClickListener {
             val policyTermsCheck = binding.cbPolicyTerms.isChecked
             if (passwordCheck && policyTermsCheck) {
-//                postRegister()
+                postRegister()
             }
             else if (!passwordCheck)
                 Toast.makeText(applicationContext, "비밀번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -45,7 +49,7 @@ class RegisterActivity: BaseActivity<ActivityRegisterBinding>(R.layout.activity_
         val name = binding.editName.text.toString()
         val admin = if(binding.rdoUser.isChecked) KEY_USER else KEY_MANAGER
         val request = RegisterRequest(id, pw, name, companyName, admin)
-//        viewModel.postRegister(request)
+        viewModel.postRegister(request)
     }
 
     private fun setPasswordCheck(pw1: EditText, pw2: EditText) {

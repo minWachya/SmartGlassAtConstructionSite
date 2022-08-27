@@ -1,9 +1,6 @@
 package com.example.safetymanagement2022.di
 
-import com.example.safetymanagement2022.data.remote.datasource.HomeDataSource
-import com.example.safetymanagement2022.data.remote.datasource.HomeDataSourceImpl
-import com.example.safetymanagement2022.data.remote.datasource.ListDataSource
-import com.example.safetymanagement2022.data.remote.datasource.ListDataSourceImpl
+import com.example.safetymanagement2022.data.remote.datasource.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +18,8 @@ interface DataSourceModule {
     @Binds
     @Singleton
     fun bindsListDataSource(dataSourceImpl: ListDataSourceImpl): ListDataSource
+
+    @Binds
+    @Singleton
+    fun bindsAccountDataSource(dataSourceImpl: AccountDataSourceImpl): AccountDataSource
 }

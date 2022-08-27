@@ -1,9 +1,6 @@
 package com.example.safetymanagement2022.di
 
-import com.example.safetymanagement2022.data.remote.repository.HomeRepository
-import com.example.safetymanagement2022.data.remote.repository.HomeRepositoryImpl
-import com.example.safetymanagement2022.data.remote.repository.ListRepository
-import com.example.safetymanagement2022.data.remote.repository.ListRepositoryImpl
+import com.example.safetymanagement2022.data.remote.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +18,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindsListRepository(repository: ListRepositoryImpl): ListRepository
+
+    @Binds
+    @Singleton
+    fun bindsAccountRepository(repository: AccountRepositoryImpl): AccountRepository
 }
