@@ -11,7 +11,7 @@
 
         <variable
             name="building"
-            type="com.example.safetymanagement2022.model.Building" />
+            type="com.example.safetymanagement2022.data.remote.model.response.Building" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

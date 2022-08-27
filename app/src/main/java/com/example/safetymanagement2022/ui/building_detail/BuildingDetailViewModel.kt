@@ -1,23 +1,31 @@
 package com.example.safetymanagement2022.ui.building_detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.safetymanagement2022.model.BuildingDetailData
-import com.example.safetymanagement2022.repository.building_detail.BuildingDetailRepository
+import androidx.lifecycle.viewModelScope
+import com.example.safetymanagement2022.common.TAG
+import com.example.safetymanagement2022.data.remote.model.response.BuildingDetailResponse
+import com.example.safetymanagement2022.data.remote.repository.ListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BuildingDetailViewModel(private val repository: BuildingDetailRepository): ViewModel() {
-    private val _detailData = MutableLiveData<BuildingDetailData>()
-    val detailData: LiveData<BuildingDetailData> = _detailData
+@HiltViewModel
+class BuildingDetailViewModel @Inject constructor(
+    private val repository: ListRepository
+): ViewModel() {
+    private val _buildingDetail = MutableLiveData<BuildingDetailResponse>()
+    val buildingDetail: LiveData<BuildingDetailResponse> = _buildingDetail
 
-    init {
-        loadBuildingDetailData()
-    }
-
-    private fun loadBuildingDetailData() {
-        val detailData = repository.getBuildingDetailData()
-        detailData?.let { data ->
-            _detailData.value = data
+    fun getBuildingDetail(buildingId: Int) = viewModelScope.launch {
+        kotlin.runCatching {
+            repository.getBuildingDetail(buildingId)
+        }.onSuccess {
+            _buildingDetail.value = it
+        }.onFailure {
+            Log.d(TAG, "get list building detail api fail ${it.message}")
         }
     }
 }

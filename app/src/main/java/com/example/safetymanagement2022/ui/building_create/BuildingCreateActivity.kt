@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.setupWithNavController
 import com.example.safetymanagement2022.databinding.ActivityBuildingCreateBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BuildingCreateActivity: AppCompatActivity() {
     private lateinit var binding: ActivityBuildingCreateBinding
 

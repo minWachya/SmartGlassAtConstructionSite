@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.databinding.FragmentListSmartglassBinding
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 import com.example.safetymanagement2022.ui.glass_create.GlassCreateActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListSmartGlassFragment: Fragment() {
     private lateinit var binding: FragmentListSmartglassBinding
-    private val viewModel: ListSmartGlassViewModel by viewModels { MyViewModelFactory(requireContext()) }
+    private val viewModel: ListSmartGlassViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,11 +28,12 @@ class ListSmartGlassFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
-        val admin = viewModel.listSmartGlassData.value?.admin ?: 0
+        val admin = viewModel.listGlassResponse.value?.admin ?: 0
         binding.admin = admin
         binding.viewModel = viewModel
 
-        viewModel.listSmartGlassData.observe(viewLifecycleOwner) { data ->
+        viewModel.getListGlass("seongmin")
+        viewModel.listGlassResponse.observe(viewLifecycleOwner) { data ->
             binding.rvListSmartglass.adapter = ListSmartGlassAdapter(admin).apply {
                 submitList(data.glassList)
             }

@@ -6,19 +6,18 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safetymanagement2022.GlideApp
-import com.example.safetymanagement2022.R
+import com.example.safetymanagement2022.common.TAG
 import com.example.safetymanagement2022.databinding.ActivityBuildingDetailBinding
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
-import java.lang.Integer.max
-import kotlin.math.min
+import dagger.hilt.android.AndroidEntryPoint
 
 interface SelectedFloorInterface {
     fun onSelectedFloor(floorText: String, minMax: Int, floor: Int)
 }
 
+@AndroidEntryPoint
 class BuildingDetailActivity  : AppCompatActivity(), SelectedFloorInterface {
     private lateinit var binding: ActivityBuildingDetailBinding
-    private val viewModel: BuildingDetailViewModel by viewModels { MyViewModelFactory(applicationContext) }
+    private val viewModel: BuildingDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +28,10 @@ class BuildingDetailActivity  : AppCompatActivity(), SelectedFloorInterface {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        viewModel.detailData.observe(this@BuildingDetailActivity) { data ->
+        val buildingId = intent.getStringExtra("buildingId").toString().toInt()
+        Log.d(TAG, buildingId.toString())
+        viewModel.getBuildingDetail(buildingId)
+        viewModel.buildingDetail.observe(this@BuildingDetailActivity) { data ->
             binding.detail = data
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
             setShowSelectFloorDialog(data.minFloor, data.maxFloor)
@@ -44,7 +46,7 @@ class BuildingDetailActivity  : AppCompatActivity(), SelectedFloorInterface {
         // min 1 Max 3에서 [3 2 1 1]
         // 지상 1층의 drawingList 위치 = drawingList[2] = max - floor = 3 - 1 = 2
         // 지하 1층의 drawingList 위치 = drawingList[3] = min + max - floor = 1 + 3 - 1 = 3
-        val data = viewModel.detailData.value
+        val data = viewModel.buildingDetail.value
         if (data != null) {
             val imgUrlIndex: Int = if(minMax == 1) data.maxFloor - (floor + 1)
                                     else data.maxFloor + data.minFloor - (floor + 1)

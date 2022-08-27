@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safetymanagement2022.data.remote.model.response.SmartGlass
 import com.example.safetymanagement2022.databinding.ItemListSmartglassBinding
-import com.example.safetymanagement2022.model.SmartGlass
 
 class ListSmartGlassAdapter(val admin: Int): ListAdapter<SmartGlass, ListSmartGlassAdapter.ListSmartGlassViewHolder>(ListBuildingDiffCallback()) {
     private lateinit var binding: ItemListSmartglassBinding

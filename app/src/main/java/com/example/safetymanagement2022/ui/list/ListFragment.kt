@@ -10,7 +10,9 @@ import com.example.safetymanagement2022.databinding.FragmentListBinding
 import com.example.safetymanagement2022.ui.list_building.ListBuildingFragment
 import com.example.safetymanagement2022.ui.list_smartglass.ListSmartGlassFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFragment: Fragment() {
     private lateinit var binding: FragmentListBinding
     private val tabElement = arrayListOf("건물", "스마트글래스")

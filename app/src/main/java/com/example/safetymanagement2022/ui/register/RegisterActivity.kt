@@ -11,11 +11,11 @@ import com.example.safetymanagement2022.common.KEY_MANAGER
 import com.example.safetymanagement2022.common.KEY_USER
 import com.example.safetymanagement2022.data.remote.model.request.RegisterRequest
 import com.example.safetymanagement2022.databinding.ActivityRegisterBinding
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterActivity: AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private val viewModel: RegisterViewModel by viewModels { MyViewModelFactory(applicationContext) }
 
     var passwordCheck = false
 
@@ -28,9 +28,9 @@ class RegisterActivity: AppCompatActivity() {
         setRegisterButtonClickListener()
         setPasswordCheck(binding.editPw1, binding.editPw2)
 
-        viewModel.registerResponse.observe(this@RegisterActivity) { response ->
-            Log.d("mmm register", response.message)
-        }
+//        viewModel.registerResponse.observe(this@RegisterActivity) { response ->
+//            Log.d("mmm register", response.message)
+//        }
     }
 
     private fun setRegisterButtonClickListener() {
@@ -52,7 +52,7 @@ class RegisterActivity: AppCompatActivity() {
         val name = binding.editName.text.toString()
         val admin = if(binding.rdoUser.isChecked) KEY_USER else KEY_MANAGER
         val request = RegisterRequest(id, pw, name, companyName, admin)
-        viewModel.postRegister(request)
+//        viewModel.postRegister(request)
     }
 
     private fun setPasswordCheck(pw1: EditText, pw2: EditText) {

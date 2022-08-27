@@ -12,15 +12,15 @@
         android:layout_height="match_parent"
         tools:context=".ui.login.LoginActivity">
 
-        <ImageView
-            android:layout_width="650dp"
-            android:layout_height="0dp"
-            android:background="@drawable/background_gradient_circle"
-            android:contentDescription="@string/description_gradient_background"
-            app:layout_constraintBottom_toTopOf="@id/guideline1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <ImageView-->
+<!--            android:layout_width="650dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="@drawable/background_gradient_circle"-->
+<!--            android:contentDescription="@string/description_gradient_background"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/guideline1"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <TextView
             android:id="@+id/tv_login"

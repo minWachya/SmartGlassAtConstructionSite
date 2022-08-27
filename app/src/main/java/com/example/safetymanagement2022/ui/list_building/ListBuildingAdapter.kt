@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safetymanagement2022.data.remote.model.response.Building
 import com.example.safetymanagement2022.databinding.ItemListBuildingBinding
-import com.example.safetymanagement2022.model.Building
 
 class ListBuildingAdapter(val viewModel: ListBuildingViewModel): ListAdapter<Building, ListBuildingAdapter.ListBuildingViewHolder>(ListBuildingDiffCallback()) {
     private lateinit var binding: ItemListBuildingBinding

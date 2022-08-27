@@ -1,6 +1,5 @@
 package com.example.safetymanagement2022.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,13 +12,14 @@ import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
 import com.example.safetymanagement2022.databinding.FragmentHomeBinding
 import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
 import com.example.safetymanagement2022.ui.connect_building.SelectBuildingDialog
 import com.example.safetymanagement2022.ui.connect_smart_glass.SelectSmartGlassDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeViewModel by viewModels { MyViewModelFactory(requireContext()) }
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var homeAdapter: HomeAdapter
 
     private var glassId = -1
@@ -44,16 +44,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun setLayout(userId: String) {
-        viewModel.loadHomeData(userId)
-        viewModel.homeData.observe(viewLifecycleOwner) { homeData ->
-            binding.home = homeData
-            homeAdapter = HomeAdapter(homeData.issueList)
+        viewModel.getHomeResponse(userId)
+        viewModel.homeResponse.observe(viewLifecycleOwner) { homeResponse ->
+            binding.home = homeResponse
+            homeAdapter = HomeAdapter(homeResponse.issueList)
             binding.rvSafetyIssue.adapter = homeAdapter
 
             // 관리자 모드
-            if (homeData.admin == KEY_MANAGER) setSpinner(homeData.buildingList ?: listOf())
+            if (homeResponse.admin == KEY_MANAGER) setSpinner(homeResponse.buildingList ?: listOf())
             // 사용자 모드
-            else setConnectGlassBtnListener(userId, viewModel.homeData.value?.isConnected!!.toInt())
+            else setConnectGlassBtnListener(userId, viewModel.homeResponse.value?.isConnected!!.toInt())
         }
     }
 
@@ -118,17 +118,12 @@ class HomeFragment : Fragment() {
         viewModel.postConnectIot(body)
         viewModel.connectIotResponse.observe(viewLifecycleOwner) { response ->
             Log.d("mmm home-connect", "${response.connectMessage}")
-            saveGlassInfo()
             setLayout(body.userId)
         }
     }
 
     private fun disConnectIot(userId: String) {
         // 연결 종료 확인 Dialog
-        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
-//        val glassName = sharedPref.getString(LOCAL_GLASS_NAME, "")
-//        val buildingName = sharedPref.getString(LOCAL_BUILDING_NAME, "")
-
         val confirmDialog = BasicDialog("연결 종료",
             """
                스마트 글래스: ‘${glassName}’
@@ -139,29 +134,11 @@ class HomeFragment : Fragment() {
         confirmDialog.show(parentFragmentManager, "BasicDialog")
         parentFragmentManager.setFragmentResultListener(KEY_DIALOG_BASIC_BTN2_CLICK,
             viewLifecycleOwner) { _, _ ->
-            viewModel.fetchDisConnectIot(userId)
+            viewModel.getDisConnectIot(userId)
             viewModel.disConnectIotResponse.observe(viewLifecycleOwner) { response ->
                 Log.d("mmm home-disconnect", "${response.message}")
-                removeGlassInfo()
                 setLayout(userId)
             }
-        }
-    }
-
-    private fun saveGlassInfo() {
-        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
-        with (sharedPref.edit()) {
-            putInt(LOCAL_GLASS_NAME, glassId)
-            putInt(LOCAL_BUILDING_NAME, buildingId)
-            apply()
-        }
-    }
-    private fun removeGlassInfo() {
-        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
-        with (sharedPref.edit()) {
-            remove(LOCAL_GLASS_NAME)
-            remove(LOCAL_BUILDING_NAME)
-            apply()
         }
     }
 }

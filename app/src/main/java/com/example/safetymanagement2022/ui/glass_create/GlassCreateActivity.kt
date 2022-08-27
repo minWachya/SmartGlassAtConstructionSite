@@ -8,7 +8,9 @@ import androidx.core.widget.addTextChangedListener
 import com.example.safetymanagement2022.databinding.ActivityGlassCreateBinding
 import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
 import com.example.safetymanagement2022.ui.common.BasicDialogReturnValueInterface
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GlassCreateActivity : AppCompatActivity(), BasicDialogReturnValueInterface {
     private lateinit var binding: ActivityGlassCreateBinding
 

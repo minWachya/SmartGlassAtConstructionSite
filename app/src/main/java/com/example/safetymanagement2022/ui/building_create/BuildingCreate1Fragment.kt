@@ -15,11 +15,12 @@ import com.example.safetymanagement2022.common.KEY_BUILDING_FLOOR_MIN
 import com.example.safetymanagement2022.common.KEY_BUILDING_MEMO
 import com.example.safetymanagement2022.common.KEY_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate1Binding
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BuildingCreate1Fragment : Fragment() {
     private lateinit var binding: FragmentBuildingCreate1Binding
-    private val viewModel: BuildingCreateViewModel by viewModels { MyViewModelFactory(requireContext()) }
+    private val viewModel: BuildingCreateViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

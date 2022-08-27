@@ -19,16 +19,17 @@ import com.example.safetymanagement2022.common.KEY_BUILDING_MEMO
 import com.example.safetymanagement2022.common.KEY_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate2Binding
 import com.example.safetymanagement2022.model.FloorPlanData
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
 // 다이얼로그에서 값 받아오기 위한 인터페이스
 interface SelectImageInterface {
     fun onSelectedImage(countIndex: Int)
 }
 
+@AndroidEntryPoint
 class BuildingCreate2Fragment : Fragment(), SelectImageInterface {
     private lateinit var binding: FragmentBuildingCreate2Binding
-    private val viewModel: BuildingCreateViewModel by viewModels { MyViewModelFactory(requireContext()) }
+    private val viewModel: BuildingCreateViewModel by viewModels()
 
     private var arrImage = ArrayList<FloorPlanData>()
     private var bitmap: Bitmap? = null

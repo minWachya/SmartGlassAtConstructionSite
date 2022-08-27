@@ -1,26 +1,34 @@
 package com.example.safetymanagement2022.ui.list_smartglass
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.safetymanagement2022.model.ListSmartGlassData
-import com.example.safetymanagement2022.repository.list_smartglass.ListSmartGlassRepository
+import androidx.lifecycle.viewModelScope
+import com.example.safetymanagement2022.common.TAG
+import com.example.safetymanagement2022.data.remote.model.response.ListSmartGlassResponse
+import com.example.safetymanagement2022.data.remote.repository.ListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ListSmartGlassViewModel(private val listSmartGlassRepository: ListSmartGlassRepository): ViewModel() {
-    private val _listSmartGlassData = MutableLiveData<ListSmartGlassData>()
-    val listSmartGlassData: LiveData<ListSmartGlassData> = _listSmartGlassData
+@HiltViewModel
+class ListSmartGlassViewModel@Inject constructor(
+    private val repository: ListRepository
+): ViewModel() {
+    private val _listGlassResponse = MutableLiveData<ListSmartGlassResponse>()
+    val listGlassResponse: LiveData<ListSmartGlassResponse> = _listGlassResponse
 
     private val _openCreateGlassEvent = MutableLiveData<Unit>()
     val openCreateGlassEvent: LiveData<Unit> get() = _openCreateGlassEvent
 
-    init {
-        loadListBuildingData()
-    }
-
-    private fun loadListBuildingData() {
-        val listSmartGlassData = listSmartGlassRepository.getListSmartGlassData()
-        listSmartGlassData?.let { data ->
-            _listSmartGlassData.value = data
+    fun getListGlass(userId: String) = viewModelScope.launch {
+        kotlin.runCatching {
+            repository.getListGlass(userId)
+        }.onSuccess {
+            _listGlassResponse.value = it
+        }.onFailure {
+            Log.d(TAG, "get list glass api fail ${it.message}")
         }
     }
 

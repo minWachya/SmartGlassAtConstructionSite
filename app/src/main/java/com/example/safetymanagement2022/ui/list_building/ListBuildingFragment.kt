@@ -11,11 +11,12 @@ import com.example.safetymanagement2022.databinding.FragmentListBuildingBinding
 import com.example.safetymanagement2022.ui.building_create.BuildingCreateActivity
 import com.example.safetymanagement2022.ui.building_detail.BuildingDetailActivity
 import com.example.safetymanagement2022.ui.common.EventObserver
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListBuildingFragment: Fragment() {
     private lateinit var binding: FragmentListBuildingBinding
-    private val viewModel: ListBuildingViewModel by viewModels { MyViewModelFactory(requireContext()) }
+    private val viewModel: ListBuildingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,14 +31,14 @@ class ListBuildingFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        binding.admin = viewModel.listBuildingData.value?.admin ?: 0
+        binding.admin = viewModel.listBuildingResponse.value?.admin ?: 0
 
-        viewModel.listBuildingData.observe(viewLifecycleOwner) { data ->
+        viewModel.getListBuilding("seongmin")
+        viewModel.listBuildingResponse.observe(viewLifecycleOwner) { data ->
             binding.rvListBuilding.adapter = ListBuildingAdapter(viewModel).apply {
                 submitList(data.buildingList)
             }
         }
-
         viewModel.openCreateBuildingEvent.observe(viewLifecycleOwner) {
             openCreateBuilding()
         }
@@ -50,12 +51,12 @@ class ListBuildingFragment: Fragment() {
         val intent = Intent(context, BuildingCreateActivity::class.java)
         startActivity(intent)
     }
-    private fun openBuildingDetail(building: String) {
+    private fun openBuildingDetail(buildingId: String) {
         val intent = Intent(context, BuildingDetailActivity::class.java)
             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("buildingId", building)
+        intent.putExtra("buildingId", buildingId)
         startActivity(intent)
     }
 }

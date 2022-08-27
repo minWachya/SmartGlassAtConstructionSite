@@ -7,7 +7,7 @@
 
         <variable
             name="safetyIssue"
-            type="com.example.safetymanagement2022.model.SafetyIssue" />
+            type="com.example.safetymanagement2022.data.remote.model.response.SafetyIssue" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

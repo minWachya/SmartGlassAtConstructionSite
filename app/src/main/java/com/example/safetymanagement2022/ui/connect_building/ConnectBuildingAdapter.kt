@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.safetymanagement2022.data.remote.model.response.ConnectBuilding
 import com.example.safetymanagement2022.databinding.ItemDialogBuildingBinding
-import com.example.safetymanagement2022.model.ConnectBuilding
 
 class ConnectBuildingAdapter: ListAdapter<ConnectBuilding, ConnectBuildingAdapter.ConnectBuildingViewHolder>(
     ListBuildingDiffCallback()) {
