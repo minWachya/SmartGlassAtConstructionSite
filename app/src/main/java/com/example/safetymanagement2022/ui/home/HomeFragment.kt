@@ -29,7 +29,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        setLayout("seongmin")
+        setLayout(USER_ID)
     }
 
     private fun setLayout(userId: String) {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.R
+import com.example.safetymanagement2022.common.USER_ID
 import com.example.safetymanagement2022.databinding.FragmentListSmartglassBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.list.glasscreate.GlassCreateActivity
@@ -21,7 +22,7 @@ class ListSmartGlassFragment: BaseFragment<FragmentListSmartglassBinding>(R.layo
         binding.admin = admin
         binding.viewModel = viewModel
 
-        viewModel.getListGlass("seongmin")
+        viewModel.getListGlass(USER_ID)
         viewModel.listGlassResponse.observe(viewLifecycleOwner) { data ->
             binding.rvListSmartglass.adapter = ListSmartGlassAdapter(admin).apply {
                 submitList(data.glassList)

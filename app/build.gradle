@@ -72,6 +72,11 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp"
     implementation "com.squareup.okhttp3:logging-interceptor"
 
+    // S3
+    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.13.5'
+    implementation 'com.amazonaws:aws-android-sdk-cognito:2.13.5'
+    implementation 'com.amazonaws:aws-android-sdk-s3:2.13.5'
+
     // Externals
     // Glide
     implementation ("com.github.bumptech.glide:glide:$glideVersion")
