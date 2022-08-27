@@ -7,7 +7,7 @@
 
         <variable
             name="glass"
-            type="com.example.safetymanagement2022.model.ConnectSmartGlass" />
+            type="com.example.safetymanagement2022.data.remote.model.response.ConnectSmartGlass" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="home"
-            type="com.example.safetymanagement2022.model.HomeData" />
+            type="com.example.safetymanagement2022.data.remote.model.response.HomeResponse" />
     </data>
 
     <androidx.core.widget.NestedScrollView

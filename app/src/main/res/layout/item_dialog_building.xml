@@ -7,7 +7,7 @@
 
         <variable
             name="building"
-            type="com.example.safetymanagement2022.model.ConnectBuilding" />
+            type="com.example.safetymanagement2022.data.remote.model.response.ConnectBuilding" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

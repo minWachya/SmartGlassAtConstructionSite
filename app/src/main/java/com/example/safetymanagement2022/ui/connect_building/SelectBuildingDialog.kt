@@ -15,12 +15,13 @@ import com.example.safetymanagement2022.common.KEY_DIALOG_BUILDING
 import com.example.safetymanagement2022.common.KEY_DIALOG_BUILDING_ID
 import com.example.safetymanagement2022.common.KEY_DIALOG_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.DialogSelectBuildingBinding
-import com.example.safetymanagement2022.ui.common.MyViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SelectBuildingDialog(context: Context, val userId: String) : DialogFragment() {
     private var _binding: DialogSelectBuildingBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ConnectBuildingViewModel by viewModels { MyViewModelFactory(context) }
+    private val viewModel: ConnectBuildingViewModel by viewModels()
 
     private val adapter = ConnectBuildingAdapter()
 
@@ -31,7 +32,7 @@ class SelectBuildingDialog(context: Context, val userId: String) : DialogFragmen
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         // 빌딩 목록 연결
-        viewModel.loadConnectBuildingData(userId)
+        viewModel.getConnectBuilding(userId)
         viewModel.buildingList.observe(viewLifecycleOwner) { data ->
             binding.rvBuilding.adapter = adapter.apply {
                 submitList(data.list)

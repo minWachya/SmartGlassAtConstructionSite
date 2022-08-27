@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.safetymanagement2022.ui.list_building.ListBuildingViewModel" />
+            type="com.example.safetymanagement2022.ui.list.building.ListBuildingViewModel" />
 
         <variable
             name="building"
-            type="com.example.safetymanagement2022.model.Building" />
+            type="com.example.safetymanagement2022.data.remote.model.response.Building" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,20 +1,17 @@
 package com.example.safetymanagement2022
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.safetymanagement2022.databinding.ActivityMainBinding
+import com.example.safetymanagement2022.ui.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+@AndroidEntryPoint
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
 
         binding.navigationMain.itemIconTintList = null    // Theme 의 color 로 아이콘 색 표시 X, drawable 그대로 사용
 

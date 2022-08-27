@@ -11,7 +11,7 @@
 
         <variable
             name="smartglass"
-            type="com.example.safetymanagement2022.model.SmartGlass" />
+            type="com.example.safetymanagement2022.data.remote.model.response.SmartGlass" />
     </data>
 
     <androidx.cardview.widget.CardView

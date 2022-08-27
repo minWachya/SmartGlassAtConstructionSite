@@ -7,10 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safetymanagement2022.R
+import com.example.safetymanagement2022.data.remote.model.response.ConnectSmartGlass
 import com.example.safetymanagement2022.databinding.ItemDialogSmartGlassBinding
-import com.example.safetymanagement2022.model.ConnectSmartGlass
-import com.google.android.material.color.MaterialColors.getColor
 
 class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.ConnectGlassViewHolder>(
     GlassDiffCallback()) {

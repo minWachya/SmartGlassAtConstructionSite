@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.safetymanagement2022.ui.list_smartglass.ListSmartGlassViewModel" />
+            type="com.example.safetymanagement2022.ui.list.glass.ListSmartGlassViewModel" />
         <variable
             name="admin"
             type="Integer" />
