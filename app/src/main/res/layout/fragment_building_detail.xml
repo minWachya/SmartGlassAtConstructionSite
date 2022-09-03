@@ -24,17 +24,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/description_btn_back"
+                android:padding="20dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/tool_bar"
+                style="@style/TextMedium.20"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@{detail.buildingName}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_back"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_back"
-                app:title="@{detail.buildingName}"
-                app:titleTextAppearance="@style/TextMedium.20"
-                tools:title="건물1" />
+                app:layout_constraintStart_toEndOf="@id/iv_back"
+                app:layout_constraintTop_toTopOf="@id/iv_back"
+                tools:text="건물1" />
 
             <ImageView
                 android:id="@+id/iv_left"

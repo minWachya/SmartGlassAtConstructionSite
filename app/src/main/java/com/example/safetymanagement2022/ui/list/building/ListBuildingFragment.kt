@@ -1,17 +1,14 @@
 package com.example.safetymanagement2022.ui.list.building
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.FragmentListBuildingBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
-import com.example.safetymanagement2022.ui.list.buildingdetail.BuildingDetailActivity
 import com.example.safetymanagement2022.ui.common.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,11 +41,8 @@ class ListBuildingFragment: BaseFragment<FragmentListBuildingBinding>(R.layout.f
     }
 
     private fun openBuildingDetail(buildingId: String) {
-        val intent = Intent(context, BuildingDetailActivity::class.java)
-            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("buildingId", buildingId)
-        startActivity(intent)
+        findNavController().navigate(R.id.action_navigation_list_to_frag_building_detail, bundleOf(
+            KEY_BUILDING_DETAIL_ID to buildingId
+        ))
     }
 }

@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_navigation_list_to_frag_glass_create"
             app:destination="@id/frag_glass_create" />
+        <action
+            android:id="@+id/action_navigation_list_to_frag_building_detail"
+            app:destination="@id/frag_building_detail" />
     </fragment>
     <fragment
         android:id="@+id/navigation_setting"
@@ -56,11 +59,18 @@
             app:destination="@id/frag_register" />
         <action
             android:id="@+id/action_frag_login_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/frag_login"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/frag_register"
         android:name="com.example.safetymanagement2022.ui.account.register.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register"/>
+    <fragment
+        android:id="@+id/frag_building_detail"
+        android:name="com.example.safetymanagement2022.ui.list.buildingdetail.BuildingDetailFragment"
+        android:label="BuildingDetailFragment"
+        tools:layout="@layout/fragment_building_detail"/>
 </navigation>

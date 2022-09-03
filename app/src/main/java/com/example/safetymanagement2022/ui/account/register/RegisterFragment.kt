@@ -23,6 +23,7 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
         setRegisterButtonClickListener()
         setPasswordCheck(binding.editPw1, binding.editPw2)
 

@@ -24,5 +24,4 @@ const val KEY_DIALOG_BUILDING = "building"
 const val KEY_DIALOG_BUILDING_ID = "buildingId"
 const val KEY_DIALOG_BUILDING_NAME = "buildingName"
 
-const val LOCAL_GLASS_NAME = "glass name"
-const val LOCAL_BUILDING_NAME = "building name"
+const val KEY_BUILDING_DETAIL_ID = "building detail id"
