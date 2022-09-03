@@ -1,35 +1,34 @@
 package com.example.safetymanagement2022.ui.list.glasscreate
 
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.activity.viewModels
+import android.view.View
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.USER_ID
 import com.example.safetymanagement2022.data.remote.model.request.GlassCreateRequest
-import com.example.safetymanagement2022.databinding.ActivityGlassCreateBinding
-import com.example.safetymanagement2022.ui.base.BaseActivity
+import com.example.safetymanagement2022.databinding.FragmentGlassCreateBinding
+import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.custom.dialog_basic.BasicDialog
 import com.example.safetymanagement2022.ui.common.BasicDialogReturnValueInterface
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GlassCreateActivity : BaseActivity<ActivityGlassCreateBinding>(R.layout.activity_glass_create),
+class GlassCreateFragment : BaseFragment<FragmentGlassCreateBinding>(R.layout.fragment_glass_create),
     BasicDialogReturnValueInterface {
     private val viewModel: GlassCreateViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setSupportActionBar(binding.toolBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setBtnEnableListener()
         setFinishBtnListener()
+        setBackBtnClickListener()
 
-        viewModel.glassCreateResponse.observe(this@GlassCreateActivity) { data ->
+        viewModel.glassCreateResponse.observe(viewLifecycleOwner) { data ->
             val glassName = binding.editGlassName.text.toString()
             BasicDialog("스마트 글래스 추가 완료", "‘$glassName’가 정상적으로  추가되었습니다.",
-                "", "확인").show(supportFragmentManager, "CustomDialog")
+                "", "확인").show(parentFragmentManager, "CustomDialog")
         }
     }
 
@@ -50,14 +49,13 @@ class GlassCreateActivity : BaseActivity<ActivityGlassCreateBinding>(R.layout.ac
         viewModel.postGlassCreate(userId, body)
     }
 
-    override fun onClickBtn1() { }
-    override fun onClickBtn2() { finish() }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            android.R.id.home -> finish()
+    private fun setBackBtnClickListener() {
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
         }
-        return super.onOptionsItemSelected(item)
     }
+
+    override fun onClickBtn1() { }
+    override fun onClickBtn2() { findNavController().popBackStack() }
 
 }

@@ -28,7 +28,6 @@
             style="@style/TextMedium.20"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:text="@string/toolbar_title_building_create"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintEnd_toEndOf="parent"

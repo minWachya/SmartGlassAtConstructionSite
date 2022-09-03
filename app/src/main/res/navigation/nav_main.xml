@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_navigation_list_to_frag_building_create1"
             app:destination="@id/frag_building_create1" />
+        <action
+            android:id="@+id/action_navigation_list_to_frag_glass_create"
+            app:destination="@id/frag_glass_create" />
     </fragment>
     <fragment
         android:id="@+id/navigation_setting"
@@ -38,4 +41,9 @@
         android:name="com.example.safetymanagement2022.ui.list.buildingcreate.BuildingCreate2Fragment"
         android:label="BuildingCreate2Fragment"
         tools:layout="@layout/fragment_building_create_2"/>
+    <fragment
+        android:id="@+id/frag_glass_create"
+        android:name="com.example.safetymanagement2022.ui.list.glasscreate.GlassCreateFragment"
+        android:label="GlassCreateFragment"
+        tools:layout="@layout/fragment_glass_create"/>
 </navigation>
