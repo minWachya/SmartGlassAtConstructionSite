@@ -1,32 +1,34 @@
 package com.example.safetymanagement2022.ui.account.register
 
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.KEY_MANAGER
 import com.example.safetymanagement2022.common.KEY_USER
 import com.example.safetymanagement2022.data.remote.model.request.RegisterRequest
-import com.example.safetymanagement2022.databinding.ActivityRegisterBinding
+import com.example.safetymanagement2022.databinding.FragmentRegisterBinding
 import com.example.safetymanagement2022.ui.account.AccountViewModel
-import com.example.safetymanagement2022.ui.base.BaseActivity
+import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity: BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
+class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
     private val viewModel: AccountViewModel by viewModels()
     var passwordCheck = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setRegisterButtonClickListener()
         setPasswordCheck(binding.editPw1, binding.editPw2)
 
-        viewModel.registerResponse.observe(this@RegisterActivity) { response ->
-            Toast.makeText(applicationContext, response.message, Toast.LENGTH_SHORT).show()
-            finish()
+        viewModel.registerResponse.observe(viewLifecycleOwner) { response ->
+            Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack()
         }
     }
 
@@ -37,8 +39,8 @@ class RegisterActivity: BaseActivity<ActivityRegisterBinding>(R.layout.activity_
                 postRegister()
             }
             else if (!passwordCheck)
-                Toast.makeText(applicationContext, "비밀번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
-            else Toast.makeText(applicationContext, "약관 동의에 체크해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "비밀번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(context, "약관 동의에 체크해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 

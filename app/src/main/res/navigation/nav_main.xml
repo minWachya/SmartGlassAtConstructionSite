@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/frag_login">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -46,4 +46,21 @@
         android:name="com.example.safetymanagement2022.ui.list.glasscreate.GlassCreateFragment"
         android:label="GlassCreateFragment"
         tools:layout="@layout/fragment_glass_create"/>
+    <fragment
+        android:id="@+id/frag_login"
+        android:name="com.example.safetymanagement2022.ui.account.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_frag_login_to_frag_register"
+            app:destination="@id/frag_register" />
+        <action
+            android:id="@+id/action_frag_login_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/frag_register"
+        android:name="com.example.safetymanagement2022.ui.account.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register"/>
 </navigation>
