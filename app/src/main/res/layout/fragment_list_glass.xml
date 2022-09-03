@@ -5,11 +5,11 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.example.safetymanagement2022.ui.list.glass.ListSmartGlassViewModel" />
-        <variable
             name="admin"
             type="Integer" />
+        <variable
+            name="viewModel"
+            type="com.example.safetymanagement2022.ui.list.glass.ListGlassViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="2"
-            tools:listitem="@layout/item_list_smartglass" />
+            tools:listitem="@layout/item_list_glass" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_create_smartglass"

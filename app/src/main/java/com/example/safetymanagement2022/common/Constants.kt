@@ -2,6 +2,8 @@ package com.example.safetymanagement2022.common
 
 const val TAG = "mmm"
 
+const val USER_ID = "minyoung"
+
 const val KEY_BUILDING_NAME = "building_name"
 const val KEY_BUILDING_MEMO = "building_memo"
 const val KEY_BUILDING_FLOOR_MAX = "building_floor_max"
@@ -22,5 +24,4 @@ const val KEY_DIALOG_BUILDING = "building"
 const val KEY_DIALOG_BUILDING_ID = "buildingId"
 const val KEY_DIALOG_BUILDING_NAME = "buildingName"
 
-const val LOCAL_GLASS_NAME = "glass name"
-const val LOCAL_BUILDING_NAME = "building name"
+const val KEY_BUILDING_DETAIL_ID = "building detail id"

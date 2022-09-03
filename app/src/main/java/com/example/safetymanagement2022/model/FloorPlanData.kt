@@ -1,8 +1,9 @@
 package com.example.safetymanagement2022.model
 
-import android.graphics.Bitmap
+import android.net.Uri
 
 data class FloorPlanData(
     val label: String,
-    var image: Bitmap?,
+    var imageUri: Uri?,
+    var imageUrl: String?
 )

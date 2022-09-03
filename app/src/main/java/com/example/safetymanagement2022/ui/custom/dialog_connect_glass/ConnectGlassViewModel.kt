@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.connect_smart_glass
+package com.example.safetymanagement2022.ui.custom.dialog_connect_glass
 
 import android.util.Log
 import androidx.lifecycle.LiveData

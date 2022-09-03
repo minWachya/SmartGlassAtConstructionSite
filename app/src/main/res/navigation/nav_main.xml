@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/frag_login">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -14,10 +14,63 @@
         android:id="@+id/navigation_list"
         android:name="com.example.safetymanagement2022.ui.list.ListFragment"
         android:label="ListFragment"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_navigation_list_to_frag_building_create1"
+            app:destination="@id/frag_building_create1" />
+        <action
+            android:id="@+id/action_navigation_list_to_frag_glass_create"
+            app:destination="@id/frag_glass_create" />
+        <action
+            android:id="@+id/action_navigation_list_to_frag_building_detail"
+            app:destination="@id/frag_building_detail" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_setting"
         android:name="com.example.safetymanagement2022.ui.setting.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/frag_building_create1"
+        android:name="com.example.safetymanagement2022.ui.list.buildingcreate.BuildingCreate1Fragment"
+        android:label="BuildingCreate1Fragment"
+        tools:layout="@layout/fragment_building_create_1">
+        <action
+            android:id="@+id/action_frag_building_create1_to_frag_building_create2"
+            app:destination="@id/frag_building_create2" />
+    </fragment>
+    <fragment
+        android:id="@+id/frag_building_create2"
+        android:name="com.example.safetymanagement2022.ui.list.buildingcreate.BuildingCreate2Fragment"
+        android:label="BuildingCreate2Fragment"
+        tools:layout="@layout/fragment_building_create_2"/>
+    <fragment
+        android:id="@+id/frag_glass_create"
+        android:name="com.example.safetymanagement2022.ui.list.glasscreate.GlassCreateFragment"
+        android:label="GlassCreateFragment"
+        tools:layout="@layout/fragment_glass_create"/>
+    <fragment
+        android:id="@+id/frag_login"
+        android:name="com.example.safetymanagement2022.ui.account.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_frag_login_to_frag_register"
+            app:destination="@id/frag_register" />
+        <action
+            android:id="@+id/action_frag_login_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/frag_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/frag_register"
+        android:name="com.example.safetymanagement2022.ui.account.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register"/>
+    <fragment
+        android:id="@+id/frag_building_detail"
+        android:name="com.example.safetymanagement2022.ui.list.buildingdetail.BuildingDetailFragment"
+        android:label="BuildingDetailFragment"
+        tools:layout="@layout/fragment_building_detail"/>
 </navigation>

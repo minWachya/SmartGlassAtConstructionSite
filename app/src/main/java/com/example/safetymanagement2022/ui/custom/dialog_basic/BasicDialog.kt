@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.basic_dialog
+package com.example.safetymanagement2022.ui.custom.dialog_basic
 
 import android.content.Context
 import android.graphics.Color
@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult

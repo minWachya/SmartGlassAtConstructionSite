@@ -1,10 +1,8 @@
 package com.example.safetymanagement2022.data.remote.service
 
 import com.example.safetymanagement2022.data.remote.model.request.CreateBuildingRequest
-import com.example.safetymanagement2022.data.remote.model.response.BuildingCreateResponse
-import com.example.safetymanagement2022.data.remote.model.response.BuildingDetailResponse
-import com.example.safetymanagement2022.data.remote.model.response.ListBuildingResponse
-import com.example.safetymanagement2022.data.remote.model.response.ListSmartGlassResponse
+import com.example.safetymanagement2022.data.remote.model.request.GlassCreateRequest
+import com.example.safetymanagement2022.data.remote.model.response.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -17,6 +15,8 @@ interface ListService {
     suspend fun getListGlass(@Path("user_id") userId: String): ListSmartGlassResponse
     @POST("list/building/create/{user_id}")
     suspend fun postBuildingCreate(@Path("user_id") userId: String, @Body body: CreateBuildingRequest): BuildingCreateResponse
+    @POST("list/glass/create/{user_id}")
+    suspend fun postGlassCreate(@Path("user_id") userId: String, @Body body: GlassCreateRequest): GlassCreateResponse
     @GET("list/building/detail/{building_id}")
     suspend fun getBuildingDetail(@Path("building_id") buildingId: Int): BuildingDetailResponse
 }

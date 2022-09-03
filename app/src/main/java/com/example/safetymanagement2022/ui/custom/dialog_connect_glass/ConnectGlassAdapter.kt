@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.connect_smart_glass
+package com.example.safetymanagement2022.ui.custom.dialog_connect_glass
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.data.remote.model.response.ConnectSmartGlass
-import com.example.safetymanagement2022.databinding.ItemDialogSmartGlassBinding
+import com.example.safetymanagement2022.databinding.ItemDialogGlassBinding
 
 class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.ConnectGlassViewHolder>(
     GlassDiffCallback()) {
-    private lateinit var binding: ItemDialogSmartGlassBinding
+    private lateinit var binding: ItemDialogGlassBinding
     private var selectedSmartGlassId: String = ""
     private var selectedSmartGlassName: String = ""
 
@@ -20,7 +20,7 @@ class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.Co
     private var currView: TextView? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConnectGlassViewHolder {
-        binding = ItemDialogSmartGlassBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemDialogGlassBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ConnectGlassViewHolder(binding)
     }
 
@@ -28,7 +28,7 @@ class ConnectGlassAdapter: ListAdapter<ConnectSmartGlass, ConnectGlassAdapter.Co
         holder.bind(getItem(position))
     }
 
-    inner class ConnectGlassViewHolder(private val binding: ItemDialogSmartGlassBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ConnectGlassViewHolder(private val binding: ItemDialogGlassBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(glass: ConnectSmartGlass) {
             binding.glass = glass
             binding.executePendingBindings()

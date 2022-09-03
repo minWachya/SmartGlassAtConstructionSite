@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safetymanagement2022.data.remote.model.response.SmartGlass
-import com.example.safetymanagement2022.databinding.ItemListSmartglassBinding
+import com.example.safetymanagement2022.databinding.ItemListGlassBinding
 
 class ListSmartGlassAdapter(val admin: Int): ListAdapter<SmartGlass, ListSmartGlassAdapter.ListSmartGlassViewHolder>(
     ListBuildingDiffCallback()) {
-    private lateinit var binding: ItemListSmartglassBinding
+    private lateinit var binding: ItemListGlassBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSmartGlassViewHolder {
-        binding = ItemListSmartglassBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemListGlassBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListSmartGlassViewHolder(binding)
     }
 
@@ -21,7 +21,7 @@ class ListSmartGlassAdapter(val admin: Int): ListAdapter<SmartGlass, ListSmartGl
         holder.bind(getItem(position))
     }
 
-    inner class ListSmartGlassViewHolder(private val binding: ItemListSmartglassBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ListSmartGlassViewHolder(private val binding: ItemListGlassBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(smartGlass: SmartGlass) {
             binding.smartglass = smartGlass
             binding.admin = admin

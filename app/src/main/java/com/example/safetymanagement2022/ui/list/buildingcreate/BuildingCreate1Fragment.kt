@@ -13,6 +13,7 @@ import com.example.safetymanagement2022.common.KEY_BUILDING_MEMO
 import com.example.safetymanagement2022.common.KEY_BUILDING_NAME
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate1Binding
 import com.example.safetymanagement2022.ui.base.BaseFragment
+import com.example.safetymanagement2022.ui.common.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,12 +25,12 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        viewModel.openButton1Event.observe(viewLifecycleOwner) {
+        viewModel.openButton1Event.observe(viewLifecycleOwner, EventObserver {
             openBuildingCreateStep2()
-        }
+        })
 
-        setButtonEnableListener()
         setBackBtnClickListener()
+        setButtonEnableListener()
     }
 
     private fun setButtonEnableListener() {
@@ -45,7 +46,7 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
 
     private fun setBackBtnClickListener() {
         binding.ivBack.setOnClickListener {
-            requireActivity().finish()
+            findNavController().popBackStack()
         }
     }
 
@@ -63,7 +64,7 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
         val floorMax = binding.editFloorMax.text.trim().toString()
         val floorMin = binding.editFloorMin.text.trim().toString()
 
-        findNavController().navigate(R.id.action_building_create_1_to_building_create_2,
+        findNavController().navigate(R.id.action_frag_building_create1_to_frag_building_create2,
             bundleOf(
                 KEY_BUILDING_NAME to buildingName,
                 KEY_BUILDING_MEMO to memo,

@@ -1,6 +1,5 @@
 package com.example.safetymanagement2022.ui.common
 
-import android.content.Context
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -9,8 +8,6 @@ import androidx.databinding.BindingAdapter
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.KEY_ABLE
 import com.example.safetymanagement2022.common.KEY_ENABLE
-import com.example.safetymanagement2022.common.LOCAL_BUILDING_NAME
-import com.example.safetymanagement2022.common.LOCAL_GLASS_NAME
 
 @BindingAdapter("setEnable")
 fun setEnable(view: TextView, enable: Int) {

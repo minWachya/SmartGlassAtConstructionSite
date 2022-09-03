@@ -3,12 +3,14 @@ package com.example.safetymanagement2022.ui.list.buildingdetail
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import androidx.activity.viewModels
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.GlideApp
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.TAG
-import com.example.safetymanagement2022.databinding.ActivityBuildingDetailBinding
-import com.example.safetymanagement2022.ui.base.BaseActivity
+import com.example.safetymanagement2022.databinding.FragmentBuildingDetailBinding
+import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 interface SelectedFloorInterface {
@@ -16,23 +18,26 @@ interface SelectedFloorInterface {
 }
 
 @AndroidEntryPoint
-class BuildingDetailActivity  : BaseActivity<ActivityBuildingDetailBinding>(R.layout.activity_building_detail),
+class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layout.fragment_building_detail),
     SelectedFloorInterface {
     private val viewModel: BuildingDetailViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setSupportActionBar(binding.toolBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        setBackBtnClickListener()
 
-        val buildingId = intent.getStringExtra("buildingId").toString().toInt()
-        Log.d(TAG, buildingId.toString())
-        viewModel.getBuildingDetail(buildingId)
-        viewModel.buildingDetail.observe(this@BuildingDetailActivity) { data ->
+        viewModel.buildingDetail.observe(viewLifecycleOwner) { data ->
             binding.detail = data
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
             setShowSelectFloorDialog(data.minFloor, data.maxFloor)
             setDrawing(1, 1)
+        }
+    }
+
+    private fun setBackBtnClickListener() {
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -47,7 +52,7 @@ class BuildingDetailActivity  : BaseActivity<ActivityBuildingDetailBinding>(R.la
         if (data != null) {
             val imgUrlIndex: Int = if(minMax == 1) data.maxFloor - (floor + 1)
                                     else data.maxFloor + data.minFloor - (floor + 1)
-            GlideApp.with(applicationContext)
+            GlideApp.with(requireActivity())
                 .load(data.drawingList[imgUrlIndex])
                 .into(binding.ivDrawing)
         }
@@ -55,7 +60,7 @@ class BuildingDetailActivity  : BaseActivity<ActivityBuildingDetailBinding>(R.la
 
     private fun setShowSelectFloorDialog(minFloor: Int, maxFloor: Int) {
         binding.tvFloor.setOnClickListener {
-            SelectFloorDialog(minFloor, maxFloor).show(supportFragmentManager, "SelectFloorDialog")
+            SelectFloorDialog(minFloor, maxFloor).show(parentFragmentManager, "SelectFloorDialog")
         }
         ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter("지상 1층")
     }
@@ -65,13 +70,5 @@ class BuildingDetailActivity  : BaseActivity<ActivityBuildingDetailBinding>(R.la
         ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(floorText)
         setDrawing(minMax, floor)
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            android.R.id.home -> finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 
 }

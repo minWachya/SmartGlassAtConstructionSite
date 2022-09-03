@@ -2,33 +2,34 @@ package com.example.safetymanagement2022.ui.account.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.MainActivity
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.data.remote.model.request.LoginRequest
-import com.example.safetymanagement2022.databinding.ActivityLoginBinding
+import com.example.safetymanagement2022.databinding.FragmentLoginBinding
 import com.example.safetymanagement2022.ui.account.AccountViewModel
-import com.example.safetymanagement2022.ui.base.BaseActivity
-import com.example.safetymanagement2022.ui.account.register.RegisterActivity
+import com.example.safetymanagement2022.ui.account.register.RegisterFragment
+import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     private val viewModel: AccountViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
         setNextButtonListener()
         setRegisterButtonListener()
 
-        viewModel.loginResponse.observe(this@LoginActivity) { response ->
-            Toast.makeText(applicationContext, response.message, Toast.LENGTH_SHORT).show()
+        viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
+            Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
             if (response.message.contains("성공")) {
                 // 메인 화면으로 이동
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                findNavController().navigate(R.id.action_frag_login_to_navigation_home)
             }
         }
     }
@@ -49,8 +50,7 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(R.layout.activity_login)
     private fun setRegisterButtonListener() {
         binding.tvRegister.setOnClickListener {
             // 회원가입 화면으로 이동
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_frag_login_to_frag_register)
         }
     }
 }
