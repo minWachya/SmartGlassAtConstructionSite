@@ -9,9 +9,8 @@ import com.example.safetymanagement2022.common.USER_ID
 import com.example.safetymanagement2022.data.remote.model.request.GlassCreateRequest
 import com.example.safetymanagement2022.databinding.ActivityGlassCreateBinding
 import com.example.safetymanagement2022.ui.base.BaseActivity
-import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
+import com.example.safetymanagement2022.ui.custom.dialog_basic.BasicDialog
 import com.example.safetymanagement2022.ui.common.BasicDialogReturnValueInterface
-import com.example.safetymanagement2022.ui.list.building.ListBuildingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

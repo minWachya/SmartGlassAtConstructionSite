@@ -47,7 +47,7 @@ class BuildingCreateAdapter(val viewModel: BuildingCreateViewModel, val frag: Bu
 
 class ListBuildingDiffCallback: DiffUtil.ItemCallback<FloorPlanData>() {
     override fun areItemsTheSame(oldItem: FloorPlanData, newItem: FloorPlanData): Boolean {
-        return oldItem.image == newItem.image
+        return oldItem.imageUri == newItem.imageUri
     }
     override fun areContentsTheSame(oldItem: FloorPlanData, newItem: FloorPlanData): Boolean {
         return oldItem == newItem

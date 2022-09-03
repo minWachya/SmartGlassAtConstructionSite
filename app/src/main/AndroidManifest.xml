@@ -27,7 +27,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.list.buildingcreate.BuildingCreateActivity" />
         <activity android:name=".ui.account.register.RegisterActivity" />
         <activity android:name=".ui.list.buildingdetail.BuildingDetailActivity" />
         <activity android:name=".ui.list.glasscreate.GlassCreateActivity" />

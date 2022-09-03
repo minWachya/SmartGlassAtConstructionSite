@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.ui.connect_building
+package com.example.safetymanagement2022.ui.custom.dialog_connect_building
 
 import android.graphics.Color
 import android.view.LayoutInflater

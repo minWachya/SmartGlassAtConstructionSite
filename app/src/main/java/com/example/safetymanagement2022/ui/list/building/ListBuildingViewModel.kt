@@ -20,8 +20,8 @@ class ListBuildingViewModel @Inject constructor(
     private val _listBuildingResponse = MutableLiveData<ListBuildingResponse>()
     val listBuildingResponse: LiveData<ListBuildingResponse> = _listBuildingResponse
 
-    private val _openCreateBuildingEvent = MutableLiveData<Unit>()
-    val openCreateBuildingEvent: LiveData<Unit> get() = _openCreateBuildingEvent
+    private val _openCreateBuildingEvent = MutableLiveData<Event<Unit>>()
+    val openCreateBuildingEvent: LiveData<Event<Unit>> get() = _openCreateBuildingEvent
 
     private val _openBuildingDetailEvent = MutableLiveData<Event<String>>()
     val openBuildingDetailEvent: LiveData<Event<String>> get() = _openBuildingDetailEvent
@@ -38,7 +38,7 @@ class ListBuildingViewModel @Inject constructor(
     }
 
     fun openCreateBuilding() {
-        _openCreateBuildingEvent.value = Unit
+        _openCreateBuildingEvent.value = Event(Unit)
     }
 
     fun openBuildingDetail(buildingId: String) {

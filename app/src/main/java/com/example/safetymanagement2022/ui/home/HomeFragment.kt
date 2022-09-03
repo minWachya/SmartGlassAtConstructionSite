@@ -10,9 +10,9 @@ import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
 import com.example.safetymanagement2022.databinding.FragmentHomeBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
-import com.example.safetymanagement2022.ui.basic_dialog.BasicDialog
-import com.example.safetymanagement2022.ui.connect_building.SelectBuildingDialog
-import com.example.safetymanagement2022.ui.connect_smart_glass.SelectSmartGlassDialog
+import com.example.safetymanagement2022.ui.custom.dialog_basic.BasicDialog
+import com.example.safetymanagement2022.ui.custom.dialog_connect_building.SelectBuildingDialog
+import com.example.safetymanagement2022.ui.custom.dialog_connect_glass.SelectSmartGlassDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
