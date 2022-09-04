@@ -8,7 +8,6 @@
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_btn_gradient.xml" value="0.1655" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_btn_gray.xml" value="0.1655" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_btn_mid.xml" value="0.1845" />
-        <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_btn_orange.xml" value="0.1485" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_btn_top.xml" value="0.1845" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_dialog_r15.xml" value="0.1635" />
         <entry key="..\:/Study/Android/SafetyManagement2022/app/src/main/res/drawable/background_edit.xml" value="0.259" />
@@ -60,6 +59,7 @@
         <entry key="app/src/main/res/layout/fragment_building_create_1.xml" value="0.21422101449275363" />
         <entry key="app/src/main/res/layout/fragment_list_building.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/fragment_list_smartglass.xml" value="0.23233695652173914" />
+        <entry key="app/src/main/res/layout/item_safety_issue.xml" value="0.22010869565217392" />
       </map>
     </option>
   </component>
