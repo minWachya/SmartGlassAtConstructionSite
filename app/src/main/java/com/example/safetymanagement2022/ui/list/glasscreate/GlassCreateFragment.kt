@@ -1,6 +1,7 @@
 package com.example.safetymanagement2022.ui.list.glasscreate
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels

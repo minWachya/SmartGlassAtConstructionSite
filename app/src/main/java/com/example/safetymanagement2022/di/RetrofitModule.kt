@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-    private const val BASE_URL = "http://ec2-15-164-166-79.ap-northeast-2.compute.amazonaws.com"
+    private const val BASE_URL = "http://ec2-15-164-166-79.ap-northeast-2.compute.amazonaws.com:8080"
 
     @Singleton
     @Provides

@@ -8,7 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface HomeService {
-    @GET("/home/user/{user_id}")
+    @GET("/home/showlist/{user_id}")
     suspend fun getHome(@Path("user_id") userId: String): HomeResponse
     @GET("/home/user/list/connect/1/{user_id}")
     suspend fun getConnectGlass(@Path("user_id") userId: String): ConnectGlassResponse
@@ -18,5 +18,4 @@ interface HomeService {
     suspend fun postConnectIot(@Body body: ConnectIotRequest): ConnectIotResponse
     @GET("/home/user/disconnect/iot/{user_id}")
     suspend fun getDisConnectIot(@Path("user_id") userId: String): DisConnectResponse
-
 }
