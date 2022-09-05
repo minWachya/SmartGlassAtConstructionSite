@@ -1,16 +1,15 @@
 package com.example.safetymanagement2022.ui.list.buildingcreate
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
-import com.example.safetymanagement2022.common.KEY_BUILDING_FLOOR_MAX
-import com.example.safetymanagement2022.common.KEY_BUILDING_FLOOR_MIN
-import com.example.safetymanagement2022.common.KEY_BUILDING_MEMO
-import com.example.safetymanagement2022.common.KEY_BUILDING_NAME
+import com.example.safetymanagement2022.common.*
+import com.example.safetymanagement2022.data.remote.model.request.BuildingCreate1Request
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate1Binding
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.common.EventObserver
@@ -26,11 +25,23 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
         binding.viewModel = viewModel
 
         viewModel.openButton1Event.observe(viewLifecycleOwner, EventObserver {
-            openBuildingCreateStep2()
+            postBuildingCreate1()
         })
+        viewModel.buildingCreate1Response.observe(viewLifecycleOwner) {
+            openBuildingCreateStep2()
+        }
 
         setBackBtnClickListener()
         setButtonEnableListener()
+    }
+
+    private fun postBuildingCreate1() {
+        val buildingName = binding.editBuildingName.text.trim().toString()
+        val memo = binding.editMemo.text.trim().toString()
+        val floorMax = binding.editFloorMax.text.trim().toString().toInt()
+        val floorMin = binding.editFloorMin.text.trim().toString().toInt()
+        val body = BuildingCreate1Request(buildingName, memo, floorMax, floorMin)
+        viewModel.postBuildingCreate1(USER_ID, body)
     }
 
     private fun setButtonEnableListener() {
@@ -59,15 +70,13 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
     }
 
     private fun openBuildingCreateStep2() {
-        val buildingName = binding.editBuildingName.text.trim().toString()
-        val memo = binding.editMemo.text.trim().toString()
+        val buildingId = viewModel.buildingCreate1Response.value?.buildingId
         val floorMax = binding.editFloorMax.text.trim().toString()
         val floorMin = binding.editFloorMin.text.trim().toString()
 
         findNavController().navigate(R.id.action_frag_building_create1_to_frag_building_create2,
             bundleOf(
-                KEY_BUILDING_NAME to buildingName,
-                KEY_BUILDING_MEMO to memo,
+                KEY_BUILDING_ID to buildingId,
                 KEY_BUILDING_FLOOR_MAX to floorMax,
                 KEY_BUILDING_FLOOR_MIN to floorMin
             ))

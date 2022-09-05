@@ -43,12 +43,8 @@ class GlassCreateFragment : BaseFragment<FragmentGlassCreateBinding>(R.layout.fr
     private fun setFinishBtnListener() {
         binding.btnFinish.setOnClickListener {
             val glassName = binding.editGlassName.text.toString()
-            postGlassCreate(USER_ID, GlassCreateRequest(glassName))
+            viewModel.postGlassCreate(USER_ID, GlassCreateRequest(glassName))
         }
-    }
-
-    private fun postGlassCreate(userId: String, body: GlassCreateRequest) {
-        viewModel.postGlassCreate(userId, body)
     }
 
     private fun setBackBtnClickListener() {

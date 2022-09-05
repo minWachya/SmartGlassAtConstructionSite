@@ -1,7 +1,10 @@
 package com.example.safetymanagement2022.ui.list.buildingcreate
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
@@ -27,6 +30,7 @@ import com.example.safetymanagement2022.model.FloorPlanData
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.common.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.net.URL
 
@@ -48,8 +52,7 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        val buildingName = requireArguments().getString(KEY_BUILDING_NAME)
-        val memo = requireArguments().getString(KEY_BUILDING_MEMO)
+        val buildingId = requireArguments().getString(KEY_BUILDING_ID)
         val floorMax = requireArguments().getString(KEY_BUILDING_FLOOR_MAX)?.toIntOrNull() ?: 0
         val floorMin = requireArguments().getString(KEY_BUILDING_FLOOR_MIN)?.toIntOrNull() ?: 0
 
@@ -86,12 +89,14 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
     }
 
     private fun openBuildingCreateFinish() {
+        val multiUploadHashMap = mutableMapOf<String,File>()
         for(i in 0 until arrImage.size) {
             val path = getRealPathFromURI(arrImage[i].imageUri!!).toString()
             val file = File(path)
-            uploadImageToS3(file.name, file, i)
+            multiUploadHashMap[file.name] = file
+            //uploadImageToS3(file.name, file, i)
         }
-        Log.d(TAG, "arr result $arrImage")
+        uploadImageToS3(multiUploadHashMap)
     }
 
     private fun setFloorList(floorMax: Int, floorMin: Int) {
@@ -106,34 +111,28 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         startActivityForResult(intent, countIndex)
     }
 
-    private fun uploadImageToS3(fileName: String, file: File, index: Int) {
-        // TODO: ak, sak 숨기기
-        val ak = ""
-        val sak = ""
+    @SuppressLint("CheckResult")
+    private fun uploadImageToS3(map: Map<String, File>) {
+        val ai: ApplicationInfo = requireContext().packageManager
+            .getApplicationInfo(requireContext().packageName, PackageManager.GET_META_DATA)
+        val ak = ai.metaData["accessKey"].toString()
+        val sak = ai.metaData["secretAccessKey"].toString()
+
+        val buildingId = requireArguments().getString(KEY_BUILDING_ID)
+
         val wsCredentials = BasicAWSCredentials(ak, sak)
         val s3Client = AmazonS3Client(wsCredentials, Region.getRegion(Regions.AP_NORTHEAST_2))
         val transferUtility = TransferUtility.builder()
             .s3Client(s3Client)
             .context(requireContext())
             .build()
-        TransferNetworkLossHandler.getInstance(requireContext())
-        val uploadObserver = transferUtility.upload ("detectus/$USER_ID/photo", fileName, file) // (bucket api, file이름, file객체)
 
-        uploadObserver.setTransferListener(object: TransferListener {
-            override fun onStateChanged(id: Int, state: TransferState?) {
-                if (state == TransferState.COMPLETED) {
-                    val s3Url: URL = s3Client.getUrl("detectus/$USER_ID/photo", fileName)
-                    arrImage[index].imageUrl = s3Url.toString()
-                }
+        MultiUploaderS3Client("detectus/$USER_ID/$buildingId/photo").uploadMultiple(map as MutableMap<String, File>, transferUtility)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(Schedulers.io())
+            ?.subscribe {
+                Runnable { Log.d("mmm result1", "Ddd") }
             }
-            override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
-                val done = bytesCurrent / bytesTotal * 100.0
-                Log.d(TAG, "UPLOAD - - ID: $id, percent done = $done")
-            }
-            override fun onError(id: Int, ex: Exception?) {
-                Log.d(TAG, "UPLOAD ERROR - - ID: $id - - EX:" + ex.toString());
-            }
-        })
     }
 
     private fun getRealPathFromURI(contentUri: Uri): String? {
