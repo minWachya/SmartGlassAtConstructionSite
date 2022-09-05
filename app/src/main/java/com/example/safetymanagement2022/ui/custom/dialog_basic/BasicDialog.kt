@@ -52,10 +52,10 @@ class BasicDialog (val title: String, val content: String, val btn1: String, val
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mCallback = try {
-            Log.d("mmm", "0")
+            Log.d("mmm BasicDialog", "0")
             activity as BasicDialogReturnValueInterface
         } catch (e: ClassCastException) {
-            Log.d("mmm", "null^^")
+            Log.d("mmm BasicDialog", "null^^")
             null
         }
     }
