@@ -27,5 +27,9 @@ interface DataSourceModule {
 
     @Binds
     @Singleton
+    fun bindsSettingDataSource(dataSourceImpl: SettingDataSourceImpl): SettingDataSource
+
+    @Binds
+    @Singleton
     fun bindsLocalPreferencesDataSource(localPreferencesDataSource: LocalPreferencesDataSourceImpl): LocalPreferencesDataSource
 }

@@ -28,9 +28,6 @@ class AccountViewModel @Inject constructor(
     private val _loginResponse = MutableLiveData<LoginResponse>()
     val loginResponse: LiveData<LoginResponse> = _loginResponse
 
-    private val _logoutResponse = MutableLiveData<LogoutResponse>()
-    val logoutResponse: LiveData<LogoutResponse> = _logoutResponse
-
     fun postRegister(body: RegisterRequest) = viewModelScope.launch {
         kotlin.runCatching {
             repository.postAccountRegister(body)
@@ -52,16 +49,6 @@ class AccountViewModel @Inject constructor(
             loginRepository.setUserPw(body.pw)
         }.onFailure {
             Log.d(TAG, "get account login api fail ${it.message}")
-        }
-    }
-
-    fun getLogout(userId: String) = viewModelScope.launch {
-        kotlin.runCatching {
-            repository.getAccountLogout(userId)
-        }.onSuccess {
-            _logoutResponse.value = it
-        }.onFailure {
-            Log.d(TAG, "get account logout fail ${it.message}")
         }
     }
 

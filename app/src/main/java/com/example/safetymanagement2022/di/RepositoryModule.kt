@@ -27,5 +27,9 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
+    fun bindsSettingRepository(repository: SettingRepositoryImpl): SettingRepository
+
+    @Binds
+    @Singleton
     fun bindsLocalPreferencesRepository(repository: LocalPreferencesRepositoryImpl): LocalPreferencesRepository
 }

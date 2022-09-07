@@ -13,6 +13,4 @@ class AccountRepositoryImpl @Inject constructor(
         dataSource.postAccountRegister(body)
     override suspend fun postAccountLogin(body: LoginRequest): LoginResponse =
         dataSource.postAccountLogin(body)
-    override suspend fun getAccountLogout(userId: String): LogoutResponse =
-        dataSource.getAccountLogout(userId)
 }
