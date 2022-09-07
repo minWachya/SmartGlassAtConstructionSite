@@ -16,9 +16,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.amazonaws.auth.BasicAWSCredentials
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferNetworkLossHandler
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
@@ -30,9 +27,7 @@ import com.example.safetymanagement2022.model.FloorPlanData
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.common.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.schedulers.Schedulers
 import java.io.File
-import java.net.URL
 
 // 다이얼로그에서 값 받아오기 위한 인터페이스
 interface SelectImageInterface {
@@ -117,6 +112,7 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
             .getApplicationInfo(requireContext().packageName, PackageManager.GET_META_DATA)
         val ak = ai.metaData["accessKey"].toString()
         val sak = ai.metaData["secretAccessKey"].toString()
+        Log.d("mmm ak", ak)
 
         val buildingId = requireArguments().getString(KEY_BUILDING_ID)
 
@@ -127,12 +123,13 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
             .context(requireContext())
             .build()
 
-        MultiUploaderS3Client("detectus/$USER_ID/$buildingId/photo").uploadMultiple(map as MutableMap<String, File>, transferUtility)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(Schedulers.io())
-            ?.subscribe {
-                Runnable { Log.d("mmm result1", "Ddd") }
-            }
+//        MultiUploaderS3Client("detectus/$USER_ID/$buildingId/photo").uploadMultiple(map as MutableMap<String, File>, transferUtility)
+//            ?.subscribeOn(Schedulers.io())
+//            ?.observeOn(Schedulers.io())
+//            ?.subscribe {
+//                Runnable { callback.onComplete(_Result.Success<String>("uploaded successfully")) }
+//                handler.post(returnCallback)
+//            }
     }
 
     private fun getRealPathFromURI(contentUri: Uri): String? {

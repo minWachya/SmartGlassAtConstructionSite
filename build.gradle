@@ -5,6 +5,7 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 
     id 'com.google.dagger.hilt.android' version '2.42' apply false
+    id 'com.google.secrets_gradle_plugin' version '0.4'
 }
 ext {
     navVersion = '2.4.2'
