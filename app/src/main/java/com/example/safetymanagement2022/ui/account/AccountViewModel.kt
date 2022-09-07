@@ -57,8 +57,4 @@ class AccountViewModel @Inject constructor(
 
     fun getUserPw(): String =
         loginRepository.getUserPw()
-
-    fun deleteUserInfo() {
-        loginRepository.deleteUserInfo()
-    }
 }

@@ -11,6 +11,7 @@ import com.example.safetymanagement2022.data.remote.model.request.BuildingCreate
 import com.example.safetymanagement2022.data.remote.model.response.BuildingCreate1Response
 import com.example.safetymanagement2022.data.remote.model.response.BuildingCreate2Response
 import com.example.safetymanagement2022.data.remote.repository.ListRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
 import com.example.safetymanagement2022.model.FloorPlanData
 import com.example.safetymanagement2022.ui.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BuildingCreateViewModel@Inject constructor(
-    private val repository: ListRepository
+    private val repository: ListRepository,
+    private val loginRepository: LocalPreferencesRepository
 ): ViewModel() {
     // 1단계 건물 생성
     private val _buildingCreate1Response = MutableLiveData<BuildingCreate1Response>()
@@ -66,4 +68,6 @@ class BuildingCreateViewModel@Inject constructor(
     fun setListFloorPlan(list: List<FloorPlanData>) {
         _listFloorPlan.value = list
     }
+
+    fun getUserId(): String = loginRepository.getUserId()
 }

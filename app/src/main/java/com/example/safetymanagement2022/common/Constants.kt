@@ -2,8 +2,6 @@ package com.example.safetymanagement2022.common
 
 const val TAG = "mmm"
 
-const val USER_ID = "minyoung"
-
 const val KEY_BUILDING_ID = "id"
 const val KEY_BUILDING_FLOOR_MAX = "floor_max"
 const val KEY_BUILDING_FLOOR_MIN = "floor_min"

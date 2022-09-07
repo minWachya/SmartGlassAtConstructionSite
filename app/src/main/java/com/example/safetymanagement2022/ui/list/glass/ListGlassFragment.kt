@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
-import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.FragmentListGlassBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.common.EventObserver
@@ -19,7 +18,7 @@ class ListGlassFragment: BaseFragment<FragmentListGlassBinding>(R.layout.fragmen
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.getListGlass(USER_ID)
+        viewModel.getListGlass(viewModel.getUserId())
         viewModel.listGlassResponse.observe(viewLifecycleOwner) { data ->
             binding.rvListSmartglass.adapter = ListSmartGlassAdapter(data.admin).apply {
                 submitList(data.glassList)

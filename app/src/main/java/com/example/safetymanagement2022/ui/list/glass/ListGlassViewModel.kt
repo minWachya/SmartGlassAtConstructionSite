@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.safetymanagement2022.common.TAG
 import com.example.safetymanagement2022.data.remote.model.response.ListSmartGlassResponse
 import com.example.safetymanagement2022.data.remote.repository.ListRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
 import com.example.safetymanagement2022.ui.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListGlassViewModel@Inject constructor(
-    private val repository: ListRepository
+    private val repository: ListRepository,
+    private val loginRepository: LocalPreferencesRepository
 ): ViewModel() {
     private val _listGlassResponse = MutableLiveData<ListSmartGlassResponse>()
     val listGlassResponse: LiveData<ListSmartGlassResponse> = _listGlassResponse
@@ -36,4 +38,6 @@ class ListGlassViewModel@Inject constructor(
     fun openCreateGlass() {
         _openCreateGlassEvent.value = Event(Unit)
     }
+
+    fun getUserId(): String = loginRepository.getUserId()
 }

@@ -9,13 +9,15 @@ import com.example.safetymanagement2022.common.TAG
 import com.example.safetymanagement2022.data.remote.model.request.GlassCreateRequest
 import com.example.safetymanagement2022.data.remote.model.response.GlassCreateResponse
 import com.example.safetymanagement2022.data.remote.repository.ListRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class GlassCreateViewModel @Inject constructor(
-    private val repository: ListRepository
+    private val repository: ListRepository,
+    private val loginRepository: LocalPreferencesRepository
 ): ViewModel() {
     private val _glassCreateResponse = MutableLiveData<GlassCreateResponse>()
     val glassCreateResponse: LiveData<GlassCreateResponse> = _glassCreateResponse
@@ -29,5 +31,7 @@ class GlassCreateViewModel @Inject constructor(
             Log.d(TAG, "get list create glass api fail ${it.message}")
         }
     }
+
+    fun getUserId(): String = loginRepository.getUserId()
 
 }

@@ -41,7 +41,7 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
         val floorMax = binding.editFloorMax.text.trim().toString().toInt()
         val floorMin = binding.editFloorMin.text.trim().toString().toInt()
         val body = BuildingCreate1Request(buildingName, memo, floorMax, floorMin)
-        viewModel.postBuildingCreate1(USER_ID, body)
+        viewModel.postBuildingCreate1(viewModel.getUserId(), body)
     }
 
     private fun setButtonEnableListener() {
