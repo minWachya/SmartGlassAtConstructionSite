@@ -12,39 +12,33 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.s3.AmazonS3Client
+import com.example.safetymanagement2022.ui.list.buildingcreate.BuildingCreateViewModel
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import java.io.File
 import java.net.URL
+import kotlin.math.max
 
-class MultiUploaderS3Client(private val bucketName:String) {
+class MultiUploaderS3Client(private val bucketName: String, context: Context, val vm: BuildingCreateViewModel) {
+    var arrImageUrl: ArrayList<String> = arrayListOf<String>()
+    var maxSize = 0
 
-    val arrImage = mutableMapOf<String, String>()
+    private val ai: ApplicationInfo = context.packageManager
+        .getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
+    private val ak: String = ai.metaData["accessKey"].toString()
+    private val sak: String = ai.metaData["secretAccessKey"].toString()
+    private val wsCredentials: BasicAWSCredentials = BasicAWSCredentials(ak, sak)
+    private val s3Client: AmazonS3Client =
+        AmazonS3Client(wsCredentials, Region.getRegion(Regions.AP_NORTHEAST_2))
+    private val transferUtility: TransferUtility = TransferUtility.builder()
+        .s3Client(s3Client)
+        .context(context)
+        .build()
 
-    fun uploadMultiple(fileToKeyUploads: MutableMap<String,File>, transferUtility: TransferUtility): Completable {
-        return transferUtility(transferUtility)
-            .flatMapCompletable { transferUtility ->
-                Observable.fromIterable(fileToKeyUploads.entries)
-                    .flatMapCompletable { entry ->
-                        uploadSingle(
-                            transferUtility,
-                            entry.value,
-                            entry.key
-                        )
-                    }
-            }
+    init {
+        TransferNetworkLossHandler.getInstance(context)
     }
-//    fun downloadMultiple(fileToKeyUploads: MutableMap<String, File>, transferUtility: TransferUtility): Completable {
-//        return transferUtility(transferUtility)
-//            .flatMapCompletable {
-//                Observable.fromIterable(fileToKeyUploads.entries)
-//                    .flatMapCompletable { entry ->
-//                        Log.d("mmm multi", entry.key.toString())
-//                        downloadSingle(entry.key)
-//                    }
-//            }
-//    }
 
     private fun transferUtility(transferUtility: TransferUtility): Single<TransferUtility?> {
         return Single.create { emitter ->
@@ -54,41 +48,46 @@ class MultiUploaderS3Client(private val bucketName:String) {
         }
     }
 
+    fun uploadMultiple(fileToKeyUploads: MutableMap<String, File>): Completable {
+        maxSize = fileToKeyUploads.size
+        return transferUtility(transferUtility)
+            .flatMapCompletable {
+                Observable.fromIterable(fileToKeyUploads.entries)
+                    .flatMapCompletable { entry ->
+                        uploadSingle(
+                            it,
+                            entry.value,
+                            entry.key
+                        )
+                    }
+            }
+    }
 
     private fun uploadSingle(
         transferUtility: TransferUtility?,
         aLocalFile: File?,
         toRemoteKey: String?
-    ): Completable? {
-        return Completable.create { emitter ->
-            transferUtility?.upload(bucketName,toRemoteKey, aLocalFile)
+    ): Completable {
+        return Completable.create {
+            transferUtility?.upload(bucketName, toRemoteKey, aLocalFile)
                 ?.setTransferListener(object : TransferListener {
                     override fun onStateChanged(id: Int, state: TransferState?) {
                         if (state == TransferState.COMPLETED) {
-//                            val s3Url: URL = s3Client.getUrl("detectus/$USER_ID/photo", fileName)
-//                            arrImage[index].imageUrl = s3Url.toString()]
+                            val s3Url: URL = s3Client.getUrl(bucketName, toRemoteKey)
+                            arrImageUrl.add(s3Url.toString())
+                            if(arrImageUrl.size == maxSize) vm.setArrS3Url(arrImageUrl)
                         }
                     }
+
                     override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
                         val done = bytesCurrent / bytesTotal * 100.0
                         Log.d(TAG, "UPLOAD - - ID: $id, percent done = $done")
                     }
+
                     override fun onError(id: Int, ex: Exception?) {
-                        Log.d(TAG, "UPLOAD ERROR - - ID: $id - - EX:" + ex.toString());
+                        Log.d(TAG, "UPLOAD ERROR - - ID: $id - - EX:" + ex.toString())
                     }
                 })
         }
     }
-
-//    private fun downloadSingle(
-//        toRemoteKey: String?
-//    ): Completable {
-//        Log.d("mmm single url", toRemoteKey.toString())
-//        return Completable.create { emitter ->
-//            val s3Url: URL = s3Client.getUrl(bucketName, toRemoteKey)
-//            arrImage[toRemoteKey.toString()] = s3Url.toString()
-//            Log.d("mmm single url", s3Url.toString())
-//            emitter.onComplete()
-//        }
-//    }
 }

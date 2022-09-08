@@ -1,27 +1,16 @@
 package com.example.safetymanagement2022.ui.list.buildingcreate
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.amazonaws.auth.BasicAWSCredentials
-import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferNetworkLossHandler
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
-import com.amazonaws.regions.Region
-import com.amazonaws.regions.Regions
-import com.amazonaws.services.s3.AmazonS3Client
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate2Binding
@@ -67,6 +56,10 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
             openBuildingCreateFinish()
         })
 
+        viewModel.arrS3Url.observe(viewLifecycleOwner) {
+            Log.d("mmm s3 frag", it.toString())
+        }
+
         setBackBtnClickListener()
     }
 
@@ -95,6 +88,18 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         uploadImageToS3(multiUploadHashMap)
     }
 
+    private fun uploadImageToS3(map: Map<String, File>) {
+        val buildingId = requireArguments().getInt(KEY_BUILDING_ID)
+        MultiUploaderS3Client(
+            "detectus/building-image/${viewModel.getUserId()}/$buildingId",
+            requireContext(),
+            viewModel
+        ).uploadMultiple(map as MutableMap<String, File>)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe()
+    }
+
     private fun setFloorList(floorMax: Int, floorMin: Int) {
         for (i in floorMax downTo 1) arrImage.add(FloorPlanData("지상 " + i + "층", null, null))
         for (i in 1..floorMin) arrImage.add(FloorPlanData("지하 " + i + "층", null,  null))
@@ -107,39 +112,17 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         startActivityForResult(intent, countIndex)
     }
 
-    @SuppressLint("CheckResult")
-    private fun uploadImageToS3(map: Map<String, File>) {
-        val buildingId: Int = requireArguments().getInt(KEY_BUILDING_ID)
-        Log.d("mmm building id", buildingId.toString())
-        val ai = requireContext().packageManager
-            .getApplicationInfo(requireContext().packageName, PackageManager.GET_META_DATA)
-        val ak = ai.metaData["accessKey"].toString()
-        val sak = ai.metaData["secretAccessKey"].toString()
-
-        val wsCredentials = BasicAWSCredentials(ak, sak)
-        val s3Client = AmazonS3Client(wsCredentials, Region.getRegion(Regions.AP_NORTHEAST_2))
-        val transferUtility = TransferUtility.builder()
-            .s3Client(s3Client)
-            .context(requireContext())
-            .build()
-
-        TransferNetworkLossHandler.getInstance(requireContext())
-
-        MultiUploaderS3Client("detectus/${viewModel.getUserId()}/$buildingId")
-            .uploadMultiple(map as MutableMap<String, File>, transferUtility)
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .subscribe {
-                runOnUiThread {
-                    Toast.makeText(context, "Uploading completed", Toast.LENGTH_LONG).show()
-                }
-            }
-
-//        MultiUploaderS3Client("detectus/${viewModel.getUserId()}/$buildingId", requireContext())
-//            .downloadMultiple(map)
+//    @SuppressLint("CheckResult")
+//    private fun uploadImageToS3(map: Map<String, File>) {
+//        val buildingId: Int = requireArguments().getInt(KEY_BUILDING_ID)
+//        MultiUploaderS3Client(
+//            "detectus/building-image/${viewModel.getUserId()}/$buildingId",
+//            requireContext()
+//        ).uploadMultiple(map as MutableMap<String, File>)
 //            .subscribeOn(Schedulers.io())
 //            .observeOn(Schedulers.io())
-    }
+//            .subscribe()
+//    }
 
     private fun getRealPathFromURI(contentUri: Uri): String? {
         if (contentUri.path!!.startsWith("/storage"))
@@ -150,13 +133,10 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         val selection = MediaStore.Files.FileColumns._ID + " = " + id
         val cursor = requireActivity().contentResolver.query(MediaStore.Files
             .getContentUri("external"), columns, selection, null, null)
-        try {
-            val columnIndex = cursor?.getColumnIndex(columns[0])
-            if (cursor?.moveToFirst() == true) {
-                return cursor.getString(columnIndex!!)
-            }
-        } finally {
-            cursor?.close()
+        cursor.use {
+            val columnIndex = it?.getColumnIndex(columns[0])
+            if (it?.moveToFirst() == true)
+                return it.getString(columnIndex!!)
         }
         return null
     }
