@@ -1,6 +1,5 @@
 package com.example.safetymanagement2022.ui.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -49,7 +48,6 @@ class HomeAdapter(val item: List<SafetyIssue>):  RecyclerView.Adapter<HomeAdapte
                 val filterResults = FilterResults()
                 filterResults.values = filteredList
 
-                Log.d("mmm list", filteredList.toString())
                 return filterResults
             }
 

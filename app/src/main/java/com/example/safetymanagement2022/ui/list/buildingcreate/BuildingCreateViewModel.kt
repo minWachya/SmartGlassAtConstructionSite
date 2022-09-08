@@ -62,7 +62,7 @@ class BuildingCreateViewModel @Inject constructor(
         }.onSuccess {
             _buildingCreate2Response.value = it
         }.onFailure {
-            Log.d(TAG, "get list create glass api fail ${it.message}")
+            Log.d(TAG, "get list create buildinf 2 api fail ${it.message}")
         }
     }
 

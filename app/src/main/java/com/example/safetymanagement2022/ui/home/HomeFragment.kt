@@ -1,9 +1,9 @@
 package com.example.safetymanagement2022.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
@@ -105,9 +105,9 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun postConnectIot(body: ConnectIotRequest) {
         viewModel.postConnectIot(body)
-        viewModel.connectIotResponse.observe(viewLifecycleOwner) { response ->
-            Log.d("mmm home-connect", "${response.connectMessage}")
+        viewModel.connectIotResponse.observe(viewLifecycleOwner) {
             setLayout(body.userId)
+            Toast.makeText(context, "연결을 종료했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -125,8 +125,8 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             viewLifecycleOwner) { _, _ ->
             viewModel.getDisConnectIot(userId)
             viewModel.disConnectIotResponse.observe(viewLifecycleOwner) { response ->
-                Log.d("mmm home-disconnect", "${response.message}")
                 setLayout(userId)
+                Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

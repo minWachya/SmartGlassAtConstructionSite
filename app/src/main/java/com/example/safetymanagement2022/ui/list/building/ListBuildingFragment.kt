@@ -40,7 +40,7 @@ class ListBuildingFragment: BaseFragment<FragmentListBuildingBinding>(R.layout.f
         findNavController().navigate(R.id.action_navigation_list_to_frag_building_create1)
     }
 
-    private fun openBuildingDetail(buildingId: String) {
+    private fun openBuildingDetail(buildingId: Int) {
         findNavController().navigate(R.id.action_navigation_list_to_frag_building_detail, bundleOf(
             KEY_BUILDING_DETAIL_ID to buildingId
         ))

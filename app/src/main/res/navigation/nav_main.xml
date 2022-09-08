@@ -43,7 +43,8 @@
         tools:layout="@layout/fragment_building_create_1">
         <action
             android:id="@+id/action_frag_building_create1_to_frag_building_create2"
-            app:destination="@id/frag_building_create2" />
+            app:destination="@id/frag_building_create2"
+            app:popUpTo="@id/navigation_list" />
     </fragment>
     <fragment
         android:id="@+id/frag_building_create2"
