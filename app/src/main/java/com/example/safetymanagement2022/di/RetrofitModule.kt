@@ -1,9 +1,11 @@
 package com.example.safetymanagement2022.di
 
+import com.example.safetymanagement2022.data.local.LocalPreferencesDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,6 +16,19 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
     private const val BASE_URL = "http://ec2-15-164-166-79.ap-northeast-2.compute.amazonaws.com:8080"
+
+    @Provides
+    @Singleton
+    fun provideInterceptor(localPreferencesDataSourceImpl: LocalPreferencesDataSourceImpl) =
+        Interceptor { chain ->
+            with(chain) {
+                proceed(
+                    request()
+                        .newBuilder()
+                        .build()
+                )
+            }
+        }
 
     @Singleton
     @Provides

@@ -1,6 +1,8 @@
 package com.example.safetymanagement2022.di
 
 import com.example.safetymanagement2022.data.remote.repository.*
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,4 +24,12 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindsAccountRepository(repository: AccountRepositoryImpl): AccountRepository
+
+    @Binds
+    @Singleton
+    fun bindsSettingRepository(repository: SettingRepositoryImpl): SettingRepository
+
+    @Binds
+    @Singleton
+    fun bindsLocalPreferencesRepository(repository: LocalPreferencesRepositoryImpl): LocalPreferencesRepository
 }

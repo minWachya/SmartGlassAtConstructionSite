@@ -1,17 +1,14 @@
 package com.example.safetymanagement2022.ui.account.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.safetymanagement2022.MainActivity
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.data.remote.model.request.LoginRequest
 import com.example.safetymanagement2022.databinding.FragmentLoginBinding
 import com.example.safetymanagement2022.ui.account.AccountViewModel
-import com.example.safetymanagement2022.ui.account.register.RegisterFragment
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +19,9 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+
+        setLogin()
+
         setNextButtonListener()
         setRegisterButtonListener()
 
@@ -34,15 +34,21 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
         }
     }
 
+    private fun setLogin() {
+        val id = viewModel.getUserId()
+        val pw = viewModel.getUserPw()
+        if(id != "" && pw != "") postLogin(id, pw)
+    }
+
     private fun setNextButtonListener() {
         binding.btnNext.setOnClickListener {
-            postLogin()
+            val id = binding.editId.text.toString()
+            val pw = binding.editPw.text.toString()
+            postLogin(id, pw)
         }
     }
 
-    private fun postLogin() {
-        val id = binding.editId.text.toString()
-        val pw = binding.editPw.text.toString()
+    private fun postLogin(id: String, pw: String) {
         val request = LoginRequest(id, pw)
         viewModel.postLogin(request)
     }

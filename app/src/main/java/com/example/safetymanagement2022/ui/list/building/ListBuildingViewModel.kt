@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.safetymanagement2022.common.TAG
 import com.example.safetymanagement2022.data.remote.model.response.ListBuildingResponse
 import com.example.safetymanagement2022.data.remote.repository.ListRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
 import com.example.safetymanagement2022.ui.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListBuildingViewModel @Inject constructor(
-    private val repository: ListRepository
+    private val repository: ListRepository,
+    private val loginRepository: LocalPreferencesRepository
 ) : ViewModel() {
     private val _listBuildingResponse = MutableLiveData<ListBuildingResponse>()
     val listBuildingResponse: LiveData<ListBuildingResponse> = _listBuildingResponse
@@ -44,4 +46,6 @@ class ListBuildingViewModel @Inject constructor(
     fun openBuildingDetail(buildingId: String) {
         _openBuildingDetailEvent.value = Event(buildingId)
     }
+
+    fun getUserId(): String = loginRepository.getUserId()
 }

@@ -30,10 +30,11 @@
         <!--s3 key-->
         <meta-data
             android:name = "accessKey"
-            android:value = "${ACCESS_KEY}"/>
+            android:value = "@string/access_key"/>
         <meta-data
             android:name = "secretAccessKey"
-            android:value = "${SECRET_ACCESS_KEY}"/>
+            android:value = "@string/secret_access_key"/>
+
         <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true"/>
     </application>
 

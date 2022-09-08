@@ -1,13 +1,11 @@
 package com.example.safetymanagement2022.ui.list.glasscreate
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
-import com.example.safetymanagement2022.common.USER_ID
 import com.example.safetymanagement2022.data.remote.model.request.GlassCreateRequest
 import com.example.safetymanagement2022.databinding.FragmentGlassCreateBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
@@ -43,7 +41,7 @@ class GlassCreateFragment : BaseFragment<FragmentGlassCreateBinding>(R.layout.fr
     private fun setFinishBtnListener() {
         binding.btnFinish.setOnClickListener {
             val glassName = binding.editGlassName.text.toString()
-            viewModel.postGlassCreate(USER_ID, GlassCreateRequest(glassName))
+            viewModel.postGlassCreate(viewModel.getUserId(), GlassCreateRequest(glassName))
         }
     }
 

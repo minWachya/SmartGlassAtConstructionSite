@@ -20,7 +20,7 @@ class ListBuildingFragment: BaseFragment<FragmentListBuildingBinding>(R.layout.f
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.getListBuilding(USER_ID)
+        viewModel.getListBuilding(viewModel.getUserId())
         viewModel.listBuildingResponse.observe(viewLifecycleOwner) { data ->
             binding.rvListBuilding.adapter = ListBuildingAdapter(viewModel).apply {
                 submitList(data.buildingList)

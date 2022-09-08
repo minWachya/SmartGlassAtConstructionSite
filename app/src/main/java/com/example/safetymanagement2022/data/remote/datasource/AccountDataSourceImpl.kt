@@ -9,5 +9,4 @@ import javax.inject.Inject
 class AccountDataSourceImpl @Inject constructor(private val service: AccountService) : AccountDataSource  {
     override suspend fun postAccountRegister(body: RegisterRequest): RegisterResponse = service.postAccountRegister(body)
     override suspend fun postAccountLogin(body: LoginRequest): LoginResponse = service.postAccountLogin(body)
-    override suspend fun getAccountLogout(userId: String): LogoutResponse = service.getAccountLogout(userId)
 }

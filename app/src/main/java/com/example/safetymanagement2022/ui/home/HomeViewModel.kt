@@ -11,13 +11,15 @@ import com.example.safetymanagement2022.data.remote.model.response.ConnectIotRes
 import com.example.safetymanagement2022.data.remote.model.response.DisConnectResponse
 import com.example.safetymanagement2022.data.remote.model.response.HomeResponse
 import com.example.safetymanagement2022.data.remote.repository.HomeRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: HomeRepository
+    private val repository: HomeRepository,
+    private val loginRepository: LocalPreferencesRepository
 ): ViewModel() {
     private val _homeResponse = MutableLiveData<HomeResponse>()
     val homeResponse: LiveData<HomeResponse> = _homeResponse
@@ -56,4 +58,6 @@ class HomeViewModel @Inject constructor(
             Log.d(TAG, "get home disconnect iot fail ${it.message}")
         }
     }
+
+    fun getUserId(): String = loginRepository.getUserId()
 }

@@ -11,6 +11,7 @@ import com.example.safetymanagement2022.data.remote.model.request.BuildingCreate
 import com.example.safetymanagement2022.data.remote.model.response.BuildingCreate1Response
 import com.example.safetymanagement2022.data.remote.model.response.BuildingCreate2Response
 import com.example.safetymanagement2022.data.remote.repository.ListRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
 import com.example.safetymanagement2022.model.FloorPlanData
 import com.example.safetymanagement2022.ui.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +19,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BuildingCreateViewModel@Inject constructor(
-    private val repository: ListRepository
+class BuildingCreateViewModel @Inject constructor(
+    private val repository: ListRepository,
+    private val loginRepository: LocalPreferencesRepository
 ): ViewModel() {
     // 1단계 건물 생성
     private val _buildingCreate1Response = MutableLiveData<BuildingCreate1Response>()
@@ -27,6 +29,9 @@ class BuildingCreateViewModel@Inject constructor(
     // 2단계 건물 생성
     private val _buildingCreate2Response = MutableLiveData<BuildingCreate2Response>()
     val buildingCreate2Response: LiveData<BuildingCreate2Response> = _buildingCreate2Response
+    // s3에서 받아온 url 배열
+    private val _arrS3Url = MutableLiveData<ArrayList<String>>()
+    val arrS3Url: LiveData<ArrayList<String>> = _arrS3Url
     // step1: <다음> 버튼 클릭
     private val _openButton1Event = MutableLiveData<Event<Unit>>()
     val openButton1Event: LiveData<Event<Unit>> get() = _openButton1Event
@@ -36,6 +41,10 @@ class BuildingCreateViewModel@Inject constructor(
     // step2: 건물 층, 건물 도면 배열
     private val _listFloorPlan = MutableLiveData<List<FloorPlanData>>()
     val listFloorPlan: LiveData<List<FloorPlanData>> get() = _listFloorPlan
+
+    fun setArrS3Url(list: ArrayList<String>) {
+        _arrS3Url.value = list
+    }
 
     fun postBuildingCreate1(userId: String, body: BuildingCreate1Request) = viewModelScope.launch {
         kotlin.runCatching {
@@ -66,4 +75,6 @@ class BuildingCreateViewModel@Inject constructor(
     fun setListFloorPlan(list: List<FloorPlanData>) {
         _listFloorPlan.value = list
     }
+
+    fun getUserId(): String = loginRepository.getUserId()
 }

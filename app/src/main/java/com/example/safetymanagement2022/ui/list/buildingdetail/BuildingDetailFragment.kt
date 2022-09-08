@@ -1,14 +1,11 @@
 package com.example.safetymanagement2022.ui.list.buildingdetail
 
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.GlideApp
 import com.example.safetymanagement2022.R
-import com.example.safetymanagement2022.common.TAG
 import com.example.safetymanagement2022.databinding.FragmentBuildingDetailBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint

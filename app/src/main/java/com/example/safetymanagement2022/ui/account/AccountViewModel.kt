@@ -12,22 +12,21 @@ import com.example.safetymanagement2022.data.remote.model.response.LoginResponse
 import com.example.safetymanagement2022.data.remote.model.response.LogoutResponse
 import com.example.safetymanagement2022.data.remote.model.response.RegisterResponse
 import com.example.safetymanagement2022.data.remote.repository.AccountRepository
+import com.example.safetymanagement2022.domain.repository.LocalPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
-    private val repository: AccountRepository
+    private val repository: AccountRepository,
+    private val loginRepository: LocalPreferencesRepository
 ): ViewModel() {
     private val _registerResponse = MutableLiveData<RegisterResponse>()
     val registerResponse: LiveData<RegisterResponse> = _registerResponse
 
     private val _loginResponse = MutableLiveData<LoginResponse>()
     val loginResponse: LiveData<LoginResponse> = _loginResponse
-
-    private val _logoutResponse = MutableLiveData<LogoutResponse>()
-    val logoutResponse: LiveData<LogoutResponse> = _logoutResponse
 
     fun postRegister(body: RegisterRequest) = viewModelScope.launch {
         kotlin.runCatching {
@@ -44,18 +43,18 @@ class AccountViewModel @Inject constructor(
             repository.postAccountLogin(body)
         }.onSuccess {
             _loginResponse.value = it
+
+            // 로그인 정보 저장
+            loginRepository.setUserId(body.id)
+            loginRepository.setUserPw(body.pw)
         }.onFailure {
             Log.d(TAG, "get account login api fail ${it.message}")
         }
     }
 
-    fun getLogout(userId: String) = viewModelScope.launch {
-        kotlin.runCatching {
-            repository.getAccountLogout(userId)
-        }.onSuccess {
-            _logoutResponse.value = it
-        }.onFailure {
-            Log.d(TAG, "get account logout fail ${it.message}")
-        }
-    }
+    fun getUserId(): String =
+        loginRepository.getUserId()
+
+    fun getUserPw(): String =
+        loginRepository.getUserPw()
 }

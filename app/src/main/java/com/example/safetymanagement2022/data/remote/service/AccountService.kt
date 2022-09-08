@@ -13,6 +13,4 @@ interface AccountService {
     suspend fun postAccountRegister(@Body body: RegisterRequest): RegisterResponse
     @POST("accounts/login/")
     suspend fun postAccountLogin(@Body body: LoginRequest): LoginResponse
-    @GET("accounts/logout/{user_id}")
-    suspend fun getAccountLogout(@Path("user_id") userId: String): LogoutResponse
 }
