@@ -18,10 +18,9 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import java.io.File
 import java.net.URL
-import kotlin.math.max
 
 class MultiUploaderS3Client(private val bucketName: String, context: Context, val vm: BuildingCreateViewModel) {
-    var arrImageUrl: ArrayList<String> = arrayListOf<String>()
+    var arrImageUrl: ArrayList<String> = arrayListOf()
     var maxSize = 0
 
     private val ai: ApplicationInfo = context.packageManager

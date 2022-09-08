@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
+import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.DialogSelectFloorBinding
 import java.lang.Integer.max
 
@@ -18,8 +21,6 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
 
     private val floorArr = ArrayList<String>()
     private val minMaxArr = arrayListOf("지하", "지상")
-
-    private lateinit var mCallback: SelectedFloorInterface
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +44,11 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
             val minMax = binding.minMaxPicker.value
             val floor = binding.floorPicker.value
             val floorText = minMaxArr[minMax] + " " + floorArr[floor]
-            mCallback.onSelectedFloor(floorText, minMax, floor)
+            setFragmentResult(KEY_DIALOG_DETAIL, bundleOf(
+                KEY_DIALOG_DETAIL_TEXT to floorText,
+                KEY_DIALOG_DETAIL_MIN_MAX to minMax,
+                KEY_DIALOG_DETAIL_FLOOR to floor
+            ))
             dismiss()
         }
 
@@ -76,11 +81,6 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
             it.maxValue = floorSize
             it.wrapSelectorWheel = true
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mCallback = activity as SelectedFloorInterface
     }
 
     override fun onDestroyView() {

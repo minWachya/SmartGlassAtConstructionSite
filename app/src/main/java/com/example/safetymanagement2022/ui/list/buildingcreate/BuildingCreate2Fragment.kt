@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
+import com.example.safetymanagement2022.data.remote.model.request.BuildingCreate2Request
 import com.example.safetymanagement2022.databinding.FragmentBuildingCreate2Binding
 import com.example.safetymanagement2022.model.FloorPlanData
 import com.example.safetymanagement2022.ui.base.BaseFragment
@@ -53,13 +54,22 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
                 }
         }
         viewModel.openButton2Event.observe(viewLifecycleOwner, EventObserver {
-            openBuildingCreateFinish()
+            val multiUploadHashMap = mutableMapOf<String,File>()
+            for(i in 0 until arrImage.size) {
+                val path = getRealPathFromURI(arrImage[i].imageUri!!).toString()
+                val file = File(path)
+                multiUploadHashMap[file.name] = file
+            }
+            uploadImageToS3(multiUploadHashMap)
         })
 
         viewModel.arrS3Url.observe(viewLifecycleOwner) {
-            Log.d("mmm s3 frag", it.toString())
+            postBuildingCreate2()
         }
 
+        viewModel.buildingCreate2Response.observe(viewLifecycleOwner) {
+            Log.d("mmm resoinse2", it.message)
+        }
         setBackBtnClickListener()
     }
 
@@ -78,16 +88,6 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         binding.btnNext.isEnabled = true
     }
 
-    private fun openBuildingCreateFinish() {
-        val multiUploadHashMap = mutableMapOf<String,File>()
-        for(i in 0 until arrImage.size) {
-            val path = getRealPathFromURI(arrImage[i].imageUri!!).toString()
-            val file = File(path)
-            multiUploadHashMap[file.name] = file
-        }
-        uploadImageToS3(multiUploadHashMap)
-    }
-
     private fun uploadImageToS3(map: Map<String, File>) {
         val buildingId = requireArguments().getInt(KEY_BUILDING_ID)
         MultiUploaderS3Client(
@@ -98,6 +98,12 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .subscribe()
+    }
+
+    private fun postBuildingCreate2() {
+        val buildingId = requireArguments().getInt(KEY_BUILDING_ID)
+        val body = BuildingCreate2Request(buildingId, viewModel.arrS3Url.value?: arrayListOf())
+        viewModel.postBuildingCreate2(viewModel.getUserId(), body)
     }
 
     private fun setFloorList(floorMax: Int, floorMin: Int) {
@@ -111,18 +117,6 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         intent.type = "image/*"     // 모든 이미지
         startActivityForResult(intent, countIndex)
     }
-
-//    @SuppressLint("CheckResult")
-//    private fun uploadImageToS3(map: Map<String, File>) {
-//        val buildingId: Int = requireArguments().getInt(KEY_BUILDING_ID)
-//        MultiUploaderS3Client(
-//            "detectus/building-image/${viewModel.getUserId()}/$buildingId",
-//            requireContext()
-//        ).uploadMultiple(map as MutableMap<String, File>)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(Schedulers.io())
-//            .subscribe()
-//    }
 
     private fun getRealPathFromURI(contentUri: Uri): String? {
         if (contentUri.path!!.startsWith("/storage"))

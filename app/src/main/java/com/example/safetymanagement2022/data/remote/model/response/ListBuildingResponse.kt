@@ -8,7 +8,7 @@ data class ListBuildingResponse(
 )
 
 data class Building(
-    @SerializedName("building_id") val buildingId: String,
+    @SerializedName("building_id") val buildingId: Int,
     val name: String,
     val context: String
 )
