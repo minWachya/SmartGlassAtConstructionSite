@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +17,7 @@ import com.example.safetymanagement2022.databinding.FragmentBuildingCreate2Bindi
 import com.example.safetymanagement2022.model.FloorPlanData
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.common.EventObserver
+import com.example.safetymanagement2022.ui.common.MultiUploaderS3Client
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.schedulers.Schedulers
 import java.io.File
@@ -54,7 +54,7 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
                 }
         }
         viewModel.openButton2Event.observe(viewLifecycleOwner, EventObserver {
-            val multiUploadHashMap = mutableMapOf<String,File>()
+            val multiUploadHashMap = linkedMapOf<String,File>()
             for(i in 0 until arrImage.size) {
                 val path = getRealPathFromURI(arrImage[i].imageUri!!).toString()
                 val file = File(path)
@@ -68,7 +68,7 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         }
 
         viewModel.buildingCreate2Response.observe(viewLifecycleOwner) {
-            Log.d("mmm resoinse2", it.message)
+            findNavController().popBackStack()
         }
         setBackBtnClickListener()
     }
@@ -88,21 +88,21 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         binding.btnNext.isEnabled = true
     }
 
-    private fun uploadImageToS3(map: Map<String, File>) {
+    private fun uploadImageToS3(map: LinkedHashMap<String, File>) {
         val buildingId = requireArguments().getInt(KEY_BUILDING_ID)
         MultiUploaderS3Client(
             "detectus/building-image/${viewModel.getUserId()}/$buildingId",
             requireContext(),
             viewModel
-        ).uploadMultiple(map as MutableMap<String, File>)
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .subscribe()
+        ).uploadMultiple(map)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(Schedulers.io())
+            ?.subscribe()
     }
 
     private fun postBuildingCreate2() {
         val buildingId = requireArguments().getInt(KEY_BUILDING_ID)
-        val body = BuildingCreate2Request(buildingId, viewModel.arrS3Url.value?: arrayListOf())
+        val body = BuildingCreate2Request(buildingId, viewModel.arrS3Url.value ?: arrayOf())
         viewModel.postBuildingCreate2(viewModel.getUserId(), body)
     }
 

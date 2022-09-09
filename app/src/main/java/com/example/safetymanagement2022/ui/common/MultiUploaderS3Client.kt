@@ -1,4 +1,4 @@
-package com.example.safetymanagement2022.common
+package com.example.safetymanagement2022.ui.common
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -12,16 +12,17 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.s3.AmazonS3Client
+import com.example.safetymanagement2022.common.TAG
 import com.example.safetymanagement2022.ui.list.buildingcreate.BuildingCreateViewModel
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import java.io.File
 import java.net.URL
 
 class MultiUploaderS3Client(private val bucketName: String, context: Context, val vm: BuildingCreateViewModel) {
-    var arrImageUrl: ArrayList<String> = arrayListOf()
-    var maxSize = 0
+    private var maxSize = 0
+    lateinit var listImageUrl: Array<String>
+    private var count = 0
 
     private val ai: ApplicationInfo = context.packageManager
         .getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
@@ -39,42 +40,37 @@ class MultiUploaderS3Client(private val bucketName: String, context: Context, va
         TransferNetworkLossHandler.getInstance(context)
     }
 
-    private fun transferUtility(transferUtility: TransferUtility): Single<TransferUtility?> {
-        return Single.create { emitter ->
-            emitter.onSuccess(
-                transferUtility
-            )
-        }
-    }
-
-    fun uploadMultiple(fileToKeyUploads: MutableMap<String, File>): Completable {
+    fun uploadMultiple(fileToKeyUploads: LinkedHashMap<String, File>): Single<MutableList<Unit>>? {
         maxSize = fileToKeyUploads.size
-        return transferUtility(transferUtility)
-            .flatMapCompletable {
-                Observable.fromIterable(fileToKeyUploads.entries)
-                    .flatMapCompletable { entry ->
-                        uploadSingle(
-                            it,
-                            entry.value,
-                            entry.key
-                        )
-                    }
-            }
+        listImageUrl = Array(maxSize) { "" }
+        return Observable.fromIterable(fileToKeyUploads.entries)
+            .concatMapEager {
+                Log.d("mmm mul key", it.key)
+                uploadSingle(
+                    transferUtility,
+                    it.value,
+                    it.key,
+                    count++
+                ).toObservable()
+            }.toList()
     }
 
     private fun uploadSingle(
         transferUtility: TransferUtility?,
         aLocalFile: File?,
-        toRemoteKey: String?
-    ): Completable {
-        return Completable.create {
+        toRemoteKey: String?,
+        index: Int
+    ): Single<Unit> {
+        return Single.create {
             transferUtility?.upload(bucketName, toRemoteKey, aLocalFile)
                 ?.setTransferListener(object : TransferListener {
                     override fun onStateChanged(id: Int, state: TransferState?) {
                         if (state == TransferState.COMPLETED) {
                             val s3Url: URL = s3Client.getUrl(bucketName, toRemoteKey)
-                            arrImageUrl.add(s3Url.toString())
-                            if(arrImageUrl.size == maxSize) vm.setArrS3Url(arrImageUrl)
+                            listImageUrl[index] = s3Url.toString()
+                            if(listImageUrl.size == maxSize) {
+                                vm.setArrS3Url(listImageUrl)
+                            }
                         }
                     }
 

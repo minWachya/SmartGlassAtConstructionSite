@@ -1,6 +1,5 @@
 package com.example.safetymanagement2022.ui.list.buildingdetail
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -17,20 +16,17 @@ class BuildingDetailAdapter(val item: List<SafetyIssue>):  RecyclerView.Adapter<
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         binding = ItemSafetyIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        Log.d("mmm adapter", "1")
         return DetailViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         val item = filteredList[position]
-        Log.d("mmm adatper", "2")
         holder.bind(item)
     }
 
     inner class DetailViewHolder(private val binding: ItemSafetyIssueBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(issue: SafetyIssue) {
             binding.safetyIssue = issue
-            Log.d("mmm adapter", issue.toString())
             binding.executePendingBindings()
         }
     }
