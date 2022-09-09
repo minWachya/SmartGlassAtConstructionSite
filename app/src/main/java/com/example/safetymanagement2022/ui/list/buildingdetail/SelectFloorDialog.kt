@@ -12,6 +12,7 @@ import androidx.fragment.app.setFragmentResult
 import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.DialogSelectFloorBinding
 import java.lang.Integer.max
+import java.lang.Integer.min
 
 class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : DialogFragment() {
     private var _binding: DialogSelectFloorBinding? = null
@@ -76,7 +77,9 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
                 it.maxValue = 0
             }
             it.wrapSelectorWheel = true
-            it.displayedValues = minMaxArr.toTypedArray()
+            it.displayedValues = if(minFloor == 0) arrayOf("지상")
+                else if(maxFloor == 0) arrayOf("지하")
+                else minMaxArr.toTypedArray()
             it.setOnValueChangedListener { picker, oldVal, newVal ->
                 if (newVal == 0) setFloorPicker(minFloor-1)
                 else setFloorPicker(maxFloor-1)

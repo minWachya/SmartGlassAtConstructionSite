@@ -3,7 +3,6 @@ package com.example.safetymanagement2022.ui.home
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
@@ -107,7 +106,6 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.postConnectIot(body)
         viewModel.connectIotResponse.observe(viewLifecycleOwner) {
             setLayout(body.userId)
-            Toast.makeText(context, "연결을 종료했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -115,8 +113,6 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         // 연결 종료 확인 Dialog
         val confirmDialog = BasicDialog("연결 종료",
             """
-               스마트 글래스: ‘${glassName}’
-               건물명: ‘${buildingName}’
                연결을 종료하시겠습니까?
                """.trimIndent(),
             "", "연결 종료하기")
@@ -126,7 +122,6 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             viewModel.getDisConnectIot(userId)
             viewModel.disConnectIotResponse.observe(viewLifecycleOwner) { response ->
                 setLayout(userId)
-                Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

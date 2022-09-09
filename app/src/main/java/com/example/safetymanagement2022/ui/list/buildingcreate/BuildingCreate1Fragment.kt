@@ -71,12 +71,14 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
 
     private fun openBuildingCreateStep2() {
         val buildingId = viewModel.buildingCreate1Response.value?.buildingId
+        val buildingName = binding.editBuildingName.text.trim().toString()
         val floorMax = binding.editFloorMax.text.trim().toString()
         val floorMin = binding.editFloorMin.text.trim().toString()
 
         findNavController().navigate(R.id.action_frag_building_create1_to_frag_building_create2,
             bundleOf(
                 KEY_BUILDING_ID to buildingId,
+                KEY_BUILDING_NAME to buildingName,
                 KEY_BUILDING_FLOOR_MAX to floorMax,
                 KEY_BUILDING_FLOOR_MIN to floorMin
             ))

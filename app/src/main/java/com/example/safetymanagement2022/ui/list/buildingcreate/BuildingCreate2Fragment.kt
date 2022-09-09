@@ -18,6 +18,7 @@ import com.example.safetymanagement2022.model.FloorPlanData
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import com.example.safetymanagement2022.ui.common.EventObserver
 import com.example.safetymanagement2022.ui.common.MultiUploaderS3Client
+import com.example.safetymanagement2022.ui.custom.dialog_basic.BasicDialog
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.schedulers.Schedulers
 import java.io.File
@@ -65,6 +66,9 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
 
         viewModel.arrS3Url.observe(viewLifecycleOwner) {
             postBuildingCreate2()
+            val buildingName =  requireArguments().getString(KEY_BUILDING_NAME)
+            BasicDialog("건물 추가 완료", "‘$buildingName’이(가) 정상적으로  추가되었습니다.",
+                "", "확인").show(parentFragmentManager, "CustomDialog")
         }
 
         viewModel.buildingCreate2Response.observe(viewLifecycleOwner) {

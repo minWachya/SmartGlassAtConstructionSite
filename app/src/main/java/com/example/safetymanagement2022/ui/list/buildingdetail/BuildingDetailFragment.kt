@@ -27,7 +27,8 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             binding.detail = data
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
             setShowSelectFloorDialog(data.minFloor, data.maxFloor)
-            setDrawing(1, 1)
+            setDrawing(if(data.minFloor == 0) 1 else if(data.maxFloor == 0) 0 else 1, 1)
+            binding.tvFloor.text = if(data.minFloor == 0) "지상 1층" else if(data.maxFloor == 0) "지하 1층" else "지상 1층"
         }
     }
 
