@@ -1,6 +1,5 @@
 package com.example.safetymanagement2022.ui.list.buildingdetail
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,7 +12,6 @@ import androidx.fragment.app.setFragmentResult
 import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.DialogSelectFloorBinding
 import java.lang.Integer.max
-
 
 class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : DialogFragment() {
     private var _binding: DialogSelectFloorBinding? = null
@@ -37,9 +35,9 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
         // 지상/지하 피커 설정
         setMinMaxPicker()
         // 층수 피커 설정
-        setFloorPicker(0)
+        setFloorPicker(max(minFloor, maxFloor)-1)
 
-        // '선택완료' 버튼 누르면 층수 정보 Activity로 전달
+        // '선택완료' 버튼 누르면 층수 정보 Fragment 로 전달
         binding.btnOk.setOnClickListener {
             val minMax = binding.minMaxPicker.value
             val floor = binding.floorPicker.value
@@ -61,9 +59,22 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
     }
 
     private fun setMinMaxPicker() {
+        // 지상 3 지하 0
         binding.minMaxPicker.let {
-            it.minValue = 0
-            it.maxValue = 1
+            if(minFloor > 0 && maxFloor > 0) {
+                it.minValue = 0
+                it.maxValue = 1
+            }
+            // 지하 없고 지상만 있을 때
+            else if(minFloor == 0 && maxFloor > 0) {
+                it.minValue = 1
+                it.maxValue = 1
+            }
+            // 지상 없고 지하만 있을 때
+            else {
+                it.minValue = 0
+                it.maxValue = 0
+            }
             it.wrapSelectorWheel = true
             it.displayedValues = minMaxArr.toTypedArray()
             it.setOnValueChangedListener { picker, oldVal, newVal ->

@@ -24,7 +24,6 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
         setLayout()
 
         viewModel.buildingDetail.observe(viewLifecycleOwner) { data ->
-            Log.d("mmm detail", data.toString())
             binding.detail = data
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
             setShowSelectFloorDialog(data.minFloor, data.maxFloor)
@@ -77,7 +76,6 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(floorText)
             setDrawing(minMax, floor)
         }
-        ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter("지상 1층")
     }
 
 }
