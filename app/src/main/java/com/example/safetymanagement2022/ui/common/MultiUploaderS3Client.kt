@@ -45,7 +45,6 @@ class MultiUploaderS3Client(private val bucketName: String, context: Context, va
         listImageUrl = Array(maxSize) { "" }
         return Observable.fromIterable(fileToKeyUploads.entries)
             .concatMapEager {
-                Log.d("mmm mul key", it.key)
                 uploadSingle(
                     transferUtility,
                     it.value,
