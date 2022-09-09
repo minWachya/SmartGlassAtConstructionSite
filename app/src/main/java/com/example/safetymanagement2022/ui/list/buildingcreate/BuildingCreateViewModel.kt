@@ -30,8 +30,8 @@ class BuildingCreateViewModel @Inject constructor(
     private val _buildingCreate2Response = MutableLiveData<BuildingCreate2Response>()
     val buildingCreate2Response: LiveData<BuildingCreate2Response> = _buildingCreate2Response
     // s3에서 받아온 url 배열
-    private val _arrS3Url = MutableLiveData<ArrayList<String>>()
-    val arrS3Url: LiveData<ArrayList<String>> = _arrS3Url
+    private val _arrS3Url = MutableLiveData<Array<String>>()
+    val arrS3Url: LiveData<Array<String>> = _arrS3Url
     // step1: <다음> 버튼 클릭
     private val _openButton1Event = MutableLiveData<Event<Unit>>()
     val openButton1Event: LiveData<Event<Unit>> get() = _openButton1Event
@@ -42,7 +42,7 @@ class BuildingCreateViewModel @Inject constructor(
     private val _listFloorPlan = MutableLiveData<List<FloorPlanData>>()
     val listFloorPlan: LiveData<List<FloorPlanData>> get() = _listFloorPlan
 
-    fun setArrS3Url(list: ArrayList<String>) {
+    fun setArrS3Url(list: Array<String>) {
         _arrS3Url.value = list
     }
 
