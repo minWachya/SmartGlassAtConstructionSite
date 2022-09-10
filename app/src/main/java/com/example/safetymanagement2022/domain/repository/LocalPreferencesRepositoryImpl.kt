@@ -7,8 +7,6 @@ class LocalPreferencesRepositoryImpl @Inject constructor(
     private val loginDataSource: LocalPreferencesDataSource
 ): LocalPreferencesRepository {
     override fun getUserId(): String = loginDataSource.getUserId()
-    override fun getUserPw(): String = loginDataSource.getUserPw()
     override fun setUserId(id: String) = loginDataSource.setUserId(id)
-    override fun setUserPw(pw: String) = loginDataSource.setUserPw(pw)
-    override fun deleteUserInfo() = loginDataSource.deleteUserInfo()
+    override fun deleteUserId() = loginDataSource.deleteUserId()
 }

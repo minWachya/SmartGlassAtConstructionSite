@@ -27,7 +27,7 @@ class SettingViewModel @Inject constructor(
         }.onSuccess {
             _logoutResponse.value = it
             // 사용자 정보 해제(자동 로그인 해제)
-            loginRepository.deleteUserInfo()
+            loginRepository.deleteUserId()
         }.onFailure {
             Log.d(TAG, "get account logout fail ${it.message}")
         }

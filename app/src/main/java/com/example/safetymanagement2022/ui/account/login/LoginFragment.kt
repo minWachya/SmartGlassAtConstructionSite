@@ -20,8 +20,6 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        setLogin()
-
         setNextButtonListener()
         setRegisterButtonListener()
 
@@ -32,12 +30,6 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
                 findNavController().navigate(R.id.action_frag_login_to_navigation_home)
             }
         }
-    }
-
-    private fun setLogin() {
-        val id = viewModel.getUserId()
-        val pw = viewModel.getUserPw()
-        if(id != "" && pw != "") postLogin(id, pw)
     }
 
     private fun setNextButtonListener() {
