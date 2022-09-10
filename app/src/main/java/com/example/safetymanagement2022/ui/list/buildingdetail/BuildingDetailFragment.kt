@@ -46,13 +46,15 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
 
     private fun setFloorList(minFloor: Int, maxFloor: Int): ArrayList<String> {
         val arrTemp = arrayListOf<String>()
-        for (i in minFloor downTo 1) arrTemp.add("지하 ${i}층")
-        for(i in 1..maxFloor) arrTemp.add("지상 ${i}층")
+        for (i in maxFloor downTo 1) arrTemp.add("지상 ${i}층")
+        for(i in 1..minFloor) arrTemp.add("지하 ${i}층")
         return arrTemp
     }
 
     private fun setSpinnerBtn(arrFloor: ArrayList<String>) {
-        binding.ivLeft.setOnClickListener {
+        // 더 지상으로
+        // arrFloor = [지상 2층, 지상 1층, 지하 1층...]
+        binding.ivRight.setOnClickListener {
             val curIndex = arrFloor.indexOf(binding.tvFloor.text.toString())
             if(curIndex > 0){
                 binding.tvFloor.text = arrFloor[curIndex-1]
@@ -60,7 +62,8 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
                 ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(arrFloor[curIndex-1])
             }
         }
-        binding.ivRight.setOnClickListener {
+        // 더 지하로
+        binding.ivLeft.setOnClickListener {
             val curIndex = arrFloor.indexOf(binding.tvFloor.text.toString())
             if(curIndex != arrFloor.size-1){
                 binding.tvFloor.text = arrFloor[curIndex+1]
