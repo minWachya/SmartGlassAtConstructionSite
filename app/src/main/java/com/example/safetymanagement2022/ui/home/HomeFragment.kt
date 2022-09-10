@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.data.remote.model.request.ConnectIotRequest
@@ -36,6 +37,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.homeResponse.observe(viewLifecycleOwner) { homeResponse ->
             binding.home = homeResponse
             homeAdapter = HomeAdapter(homeResponse.issueList)
+            binding.rvSafetyIssue.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             binding.rvSafetyIssue.adapter = homeAdapter
 
             // 관리자 모드

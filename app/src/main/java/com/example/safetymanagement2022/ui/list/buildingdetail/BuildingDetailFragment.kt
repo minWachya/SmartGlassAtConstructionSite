@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.safetymanagement2022.GlideApp
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
@@ -25,6 +26,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
         viewModel.buildingDetail.observe(viewLifecycleOwner) { data ->
             binding.detail = data
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
+            binding.rvIssueDetail.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             binding.tvFloor.text = if(data.minFloor == 0) "지상 1층" else if(data.maxFloor == 0) "지하 1층" else "지상 1층"
             setShowSelectFloorDialog(data.minFloor, data.maxFloor)
             setDrawing(if(data.minFloor == 0) 1 else if(data.maxFloor == 0) 0 else 1, 1)
