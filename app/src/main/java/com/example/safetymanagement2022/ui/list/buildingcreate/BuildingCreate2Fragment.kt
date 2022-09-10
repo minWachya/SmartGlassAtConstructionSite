@@ -66,12 +66,12 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
 
         viewModel.arrS3Url.observe(viewLifecycleOwner) {
             postBuildingCreate2()
-            val buildingName =  requireArguments().getString(KEY_BUILDING_NAME)
-            BasicDialog("건물 추가 완료", "‘$buildingName’이(가) 정상적으로  추가되었습니다.",
-                "", "확인").show(parentFragmentManager, "CustomDialog")
         }
 
         viewModel.buildingCreate2Response.observe(viewLifecycleOwner) {
+            val buildingName =  requireArguments().getString(KEY_BUILDING_NAME)
+            BasicDialog("건물 추가 완료", "‘$buildingName’이(가) 정상적으로  추가되었습니다.",
+                "", "확인").show(parentFragmentManager, "CustomDialog")
             findNavController().popBackStack()
         }
         setBackBtnClickListener()

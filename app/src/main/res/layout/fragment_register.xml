@@ -12,15 +12,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.account.register.RegisterFragment">
 
-<!--        <ImageView-->
-<!--            android:layout_width="650dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:background="@drawable/background_gradient_circle"-->
-<!--            android:contentDescription="@string/description_gradient_background"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/guideline1"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <ImageView
+            android:layout_width="650dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_gradient_round"
+            android:layout_marginTop="-100dp"
+            android:contentDescription="@string/description_gradient_background"
+            app:layout_constraintBottom_toTopOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_login"
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="@string/label_register"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,9 +38,9 @@
             android:id="@+id/edit_id"
             style="@style/TextMedium"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="45dp"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/background_edit"
             android:hint="@string/hint_id"
             android:importantForAutofill="no"
@@ -52,7 +53,7 @@
             android:id="@+id/edit_pw1"
             style="@style/TextMedium"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="45dp"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/background_edit"
@@ -67,7 +68,7 @@
             android:id="@+id/edit_pw2"
             style="@style/TextMedium"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="45dp"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/background_edit"
@@ -82,7 +83,7 @@
             android:id="@+id/edit_company_name"
             style="@style/TextMedium"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="45dp"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/background_edit"
@@ -97,7 +98,7 @@
             android:id="@+id/edit_name"
             style="@style/TextMedium"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="45dp"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/background_edit"
@@ -123,7 +124,7 @@
                 android:id="@+id/rdoUser"
                 style="@style/TextMedium"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="45dp"
                 android:layout_gravity="start"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
@@ -137,7 +138,7 @@
                 android:id="@+id/rdManager"
                 style="@style/TextMedium"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="45dp"
                 android:layout_gravity="start"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"

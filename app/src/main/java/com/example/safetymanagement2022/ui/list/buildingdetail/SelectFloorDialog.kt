@@ -36,7 +36,9 @@ class SelectFloorDialog(private val minFloor: Int, private val maxFloor: Int) : 
         // 지상/지하 피커 설정
         setMinMaxPicker()
         // 층수 피커 설정
-        setFloorPicker(max(minFloor, maxFloor)-1)
+        setFloorPicker(if(minFloor == 0) maxFloor-1
+        else if(maxFloor == 0) minFloor-1
+        else minFloor-1)
 
         // '선택완료' 버튼 누르면 층수 정보 Fragment 로 전달
         binding.btnOk.setOnClickListener {

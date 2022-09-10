@@ -17,10 +17,12 @@
         android:gravity="bottom"
         app:umanoDragView="@id/drawer"
         app:umanoPanelHeight="150dp"
+        app:umanoFadeColor="@android:color/transparent"
         app:umanoShadowHeight="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/back_layout"
+            android:layout_marginTop="100dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -106,7 +108,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/drawer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="500dp">
 
             <View
                 android:id="@+id/view1"
