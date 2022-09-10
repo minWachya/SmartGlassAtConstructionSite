@@ -1,6 +1,7 @@
 package com.example.safetymanagement2022.data.remote.repository
 
 import com.example.safetymanagement2022.data.remote.datasource.SettingDataSource
+import com.example.safetymanagement2022.data.remote.model.request.LoginRequest
 import com.example.safetymanagement2022.data.remote.model.request.RegisterRequest
 import com.example.safetymanagement2022.data.remote.model.response.LoginResponse
 import com.example.safetymanagement2022.data.remote.model.response.LogoutResponse
@@ -13,12 +14,12 @@ class SettingRepositoryImpl  @Inject constructor(
     override suspend fun getAccountLogout(userId: String): LogoutResponse =
         dataSource.getAccountLogout(userId)
 
-    override suspend fun getSettingChangePw(userId: String, body: LoginResponse): LogoutResponse =
-        dataSource.getSettingChangePw(userId, body)
+    override suspend fun putSettingChangePw(userId: String, body: LoginRequest): LoginResponse =
+        dataSource.putSettingChangePw(userId, body)
 
-    override suspend fun getSettingChangeUserInfo(
+    override suspend fun putSettingChangeUserInfo(
         userId: String,
         body: RegisterRequest,
     ): RegisterResponse =
-        dataSource.getSettingChangeUserInfo(userId, body)
+        dataSource.putSettingChangeUserInfo(userId, body)
 }

@@ -29,6 +29,7 @@
             android:drawablePadding="20dp"
             android:paddingVertical="30dp"
             android:text="@string/btn_connect_smartglass"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

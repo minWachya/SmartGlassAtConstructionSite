@@ -125,7 +125,7 @@
                 android:layout_marginHorizontal="26dp"
                 android:background="@drawable/background_btn_bottom"
                 android:padding="20dp"
-                android:text="개인 정보 벙책"
+                android:text="개인 정보 정책"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_service" />
