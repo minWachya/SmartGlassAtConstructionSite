@@ -56,6 +56,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             val curIndex = arrFloor.indexOf(binding.tvFloor.text.toString())
             if(curIndex > 0){
                 binding.tvFloor.text = arrFloor[curIndex-1]
+                setDrawingFromBtn(curIndex-1)
                 ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(arrFloor[curIndex-1])
             }
         }
@@ -63,6 +64,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             val curIndex = arrFloor.indexOf(binding.tvFloor.text.toString())
             if(curIndex != arrFloor.size-1){
                 binding.tvFloor.text = arrFloor[curIndex+1]
+                setDrawingFromBtn(curIndex+1)
                 ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(arrFloor[curIndex+1])
             }
         }
@@ -86,6 +88,18 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             } catch(e: IndexOutOfBoundsException){
                Log.d("mmm detail frag", "index error")
              }
+        }
+    }
+    private fun setDrawingFromBtn(floor: Int) {
+        val data = viewModel.buildingDetail.value
+        if (data != null) {
+            try{
+                GlideApp.with(requireActivity())
+                    .load(data.drawingList[floor])
+                    .into(binding.ivDrawing)
+            } catch(e: IndexOutOfBoundsException){
+                Log.d("mmm detail frag", "index error")
+            }
         }
     }
 
