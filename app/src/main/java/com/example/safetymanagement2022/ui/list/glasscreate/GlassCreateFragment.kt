@@ -29,6 +29,7 @@ class GlassCreateFragment : BaseFragment<FragmentGlassCreateBinding>(R.layout.fr
             val glassName = binding.editGlassName.text.toString()
             BasicDialog("스마트 글래스 추가 완료", "‘$glassName’가 정상적으로  추가되었습니다.",
                 "", "확인").show(parentFragmentManager, "CustomDialog")
+            findNavController().popBackStack()
         }
     }
 

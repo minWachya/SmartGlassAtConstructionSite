@@ -3,9 +3,11 @@ package com.example.safetymanagement2022.ui.setting
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
+import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.databinding.FragmentSettingBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,12 @@ class SettingFragment: BaseFragment<FragmentSettingBinding>(R.layout.fragment_se
             val id = viewModel.getUserId()
             viewModel.getLogout(id)
         }
+//        binding.tvChangePw.setOnClickListener {
+//            findNavController().navigate(R.id.action_navigation_setting_to_frag_login,
+//                bundleOf(
+//                    KEY_TYPE to KEY_TYPE_SETTING,
+//                ))
+//        }
     }
 
     private fun setLogOutResponse() {

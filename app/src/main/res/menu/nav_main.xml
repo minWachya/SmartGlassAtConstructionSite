@@ -3,15 +3,18 @@
     <item
         android:id="@+id/navigation_list"
         android:icon="@drawable/selector_list_icon"
+        android:menuCategory="secondary"
         android:title="@string/label_nav_list" />
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/selector_home_icon"
+        android:menuCategory="secondary"
         android:title="@string/label_nav_home" />
 
     <item
         android:id="@+id/navigation_setting"
         android:icon="@drawable/selector_setting_icon"
+        android:menuCategory="secondary"
         android:title="@string/label_nav_setting" />
 </menu>

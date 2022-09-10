@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">SafetyManagement2022</string>
 
+    <!-- string formatting -->
+    <string name="unit_home_issue">%s - %s</string>
+
     <!--Login, Register-->
+    <string name="label_register">회원가입</string>
+    <string name="label_login">로그인</string>
     <string name="hint_id">아이디</string>
     <string name="hint_pw">비밀번호</string>
     <string name="hint_pw2">비밀번호 확인</string>
@@ -47,19 +52,18 @@
     <string name="description_btn_add_samrtglass">스마트 글래스 추가하기 버튼</string>
     <string name="description_use_smart_glass">스마트 글래스 사용 여부 이미지</string>
     <string name="description_btn_menu">상세 메뉴 버튼</string>
-    <string name="label_login">로그인</string>
     <string name="description_floor_plan_image">도면 이미지</string>
+    <string name="description_building_detail_btn_left">왼쪽 이동 버튼</string>
+    <string name="description_btn_back">뒤로가기 버튼</string>
+    <string name="description_floor_plan">도면</string>
+
     <string name="label_user">사용자</string>
     <string name="label_manager">관리자</string>
-    <string name="description_floor_plan">도면</string>
     <string name="dialog_select_glass_title">연결할 스마트 글래스명을 선택해주세요.</string>
     <string name="dialog_select_building_title">연결할 건물명을 선택해주세요.</string>
     <string name="btn_negative">취소</string>
     <string name="btn_next">다음</string>
     <string name="btn_ok">선택 완료</string>
-    <string name="description_building_detail_btn_left">왼쪽 이동 버튼</string>
-    <string name="label_register">회원가입</string>
-    <string name="description_btn_back">뒤로가기 버튼</string>
 
 
 </resources>

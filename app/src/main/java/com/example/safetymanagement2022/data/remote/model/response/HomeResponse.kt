@@ -8,7 +8,7 @@ data class HomeResponse (
     val title: String,
     @SerializedName("is_connected") val isConnected: Int? = KEY_ABLE,
     @SerializedName("issue_list") val issueList: List<SafetyIssue>,
-    @SerializedName("building_list") val buildingList: List<String>?
+    @SerializedName("building list") val buildingList: List<String>?
 )
 
 data class SafetyIssue(

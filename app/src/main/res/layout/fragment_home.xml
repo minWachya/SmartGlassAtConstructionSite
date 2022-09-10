@@ -53,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:paddingEnd="20dp"
             android:background="@drawable/background_spinner_line"
             android:entries="@{home.buildingList}"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"

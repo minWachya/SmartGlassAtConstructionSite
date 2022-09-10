@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.safetymanagement2022.GlideApp
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
@@ -20,15 +21,17 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         setBackBtnClickListener()
-
         setLayout()
 
         viewModel.buildingDetail.observe(viewLifecycleOwner) { data ->
             binding.detail = data
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
+            binding.rvIssueDetail.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            binding.tvFloor.text = if(data.minFloor == 0) "지상 1층" else if(data.maxFloor == 0) "지하 1층" else "지상 1층"
             setShowSelectFloorDialog(data.minFloor, data.maxFloor)
             setDrawing(if(data.minFloor == 0) 1 else if(data.maxFloor == 0) 0 else 1, 1)
-            binding.tvFloor.text = if(data.minFloor == 0) "지상 1층" else if(data.maxFloor == 0) "지하 1층" else "지상 1층"
+            val arrFloor = setFloorList(data.minFloor, data.maxFloor)
+            setSpinnerBtn(arrFloor)
         }
     }
 
@@ -40,6 +43,35 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
     private fun setBackBtnClickListener() {
         binding.ivBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    private fun setFloorList(minFloor: Int, maxFloor: Int): ArrayList<String> {
+        val arrTemp = arrayListOf<String>()
+        for (i in maxFloor downTo 1) arrTemp.add("지상 ${i}층")
+        for(i in 1..minFloor) arrTemp.add("지하 ${i}층")
+        return arrTemp
+    }
+
+    private fun setSpinnerBtn(arrFloor: ArrayList<String>) {
+        // 더 지상으로
+        // arrFloor = [지상 2층, 지상 1층, 지하 1층...]
+        binding.ivRight.setOnClickListener {
+            val curIndex = arrFloor.indexOf(binding.tvFloor.text.toString())
+            if(curIndex > 0){
+                binding.tvFloor.text = arrFloor[curIndex-1]
+                setDrawingFromBtn(curIndex-1)
+                ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(arrFloor[curIndex-1])
+            }
+        }
+        // 더 지하로
+        binding.ivLeft.setOnClickListener {
+            val curIndex = arrFloor.indexOf(binding.tvFloor.text.toString())
+            if(curIndex != arrFloor.size-1){
+                binding.tvFloor.text = arrFloor[curIndex+1]
+                setDrawingFromBtn(curIndex+1)
+                ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(arrFloor[curIndex+1])
+            }
         }
     }
 
@@ -63,6 +95,18 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
              }
         }
     }
+    private fun setDrawingFromBtn(floor: Int) {
+        val data = viewModel.buildingDetail.value
+        if (data != null) {
+            try{
+                GlideApp.with(requireActivity())
+                    .load(data.drawingList[floor])
+                    .into(binding.ivDrawing)
+            } catch(e: IndexOutOfBoundsException){
+                Log.d("mmm detail frag", "index error")
+            }
+        }
+    }
 
     private fun setShowSelectFloorDialog(minFloor: Int, maxFloor: Int) {
         binding.tvFloor.setOnClickListener {
@@ -77,6 +121,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(floorText)
             setDrawing(minMax, floor)
         }
+        ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(binding.tvFloor.text)
     }
 
 }

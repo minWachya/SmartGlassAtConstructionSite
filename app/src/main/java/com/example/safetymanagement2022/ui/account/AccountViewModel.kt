@@ -46,7 +46,6 @@ class AccountViewModel @Inject constructor(
 
             // 로그인 정보 저장
             loginRepository.setUserId(body.id)
-            loginRepository.setUserPw(body.pw)
         }.onFailure {
             Log.d(TAG, "get account login api fail ${it.message}")
         }
@@ -54,7 +53,4 @@ class AccountViewModel @Inject constructor(
 
     fun getUserId(): String =
         loginRepository.getUserId()
-
-    fun getUserPw(): String =
-        loginRepository.getUserPw()
 }
