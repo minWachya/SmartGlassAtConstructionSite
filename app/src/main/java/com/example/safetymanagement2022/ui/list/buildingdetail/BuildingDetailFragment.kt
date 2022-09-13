@@ -1,21 +1,46 @@
 package com.example.safetymanagement2022.ui.list.buildingdetail
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Environment
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.safetymanagement2022.GlideApp
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
+import com.example.safetymanagement2022.data.remote.model.response.SafetyIssue
 import com.example.safetymanagement2022.databinding.FragmentBuildingDetailBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.apache.poi.util.Units
+import org.apache.poi.xwpf.usermodel.Document
+import org.apache.poi.xwpf.usermodel.XWPFDocument
+import org.apache.poi.xwpf.usermodel.XWPFParagraph
+import org.apache.poi.xwpf.usermodel.XWPFRun
+import java.io.*
+import java.net.URL
+
 
 @AndroidEntryPoint
 class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layout.fragment_building_detail) {
     private val viewModel: BuildingDetailViewModel by viewModels()
+    lateinit var issueList: List<SafetyIssue>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,6 +50,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
 
         viewModel.buildingDetail.observe(viewLifecycleOwner) { data ->
             binding.detail = data
+            issueList = data.issueList
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
             binding.rvIssueDetail.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             binding.tvFloor.text = if(data.minFloor == 0) "지상 1층" else if(data.maxFloor == 0) "지하 1층" else "지상 1층"
@@ -33,6 +59,85 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             val arrFloor = setFloorList(data.minFloor, data.maxFloor)
             setSpinnerBtn(arrFloor)
         }
+
+        setDownload()
+    }
+
+    private fun setDownload() {
+        binding.tvDownload.setOnClickListener {
+            lifecycleScope.launch(IO) {
+                // 폴더 생성(해당 경로의 폴더가 존재하지 않으면 해당 경로에 폴더 생성)
+                val folderPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/DetectUs/"
+                val folder = File(folderPath)
+                if (!folder.isDirectory) folder.mkdir()
+
+
+                val xwpfDocument = XWPFDocument()
+                val xwpfParagraphTitle: XWPFParagraph = xwpfDocument.createParagraph()
+                val xwpfRunTitle: XWPFRun = xwpfParagraphTitle.createRun()
+
+                // title 추가
+                xwpfRunTitle.fontSize = 14
+                xwpfRunTitle.setText(viewModel.buildingDetail.value?.buildingName)
+
+                // issue 추가
+                issueList.forEach {
+                    val xwpfParagraphContext: XWPFParagraph = xwpfDocument.createParagraph()
+                    val xwpfRunContext: XWPFRun = xwpfParagraphContext.createRun()
+
+                    // text 추가
+                    xwpfRunContext.fontSize = 10
+                    xwpfRunContext.setText(it.floor + ": " + it.details)
+
+                    val xwpfParagraphImage: XWPFParagraph = xwpfDocument.createParagraph()
+                    val xwpfRunImage: XWPFRun = xwpfParagraphImage.createRun()
+                    // image file 생성
+                    val bitmap = convertUrlToBitmap(it.picture)
+                    val imageFile = convertBitmapToFile(bitmap, it.rawDataId)
+                    val imageData = FileInputStream(imageFile)
+
+                    // image 추가
+                    xwpfRunImage.addPicture(
+                        imageData,
+                        Document.PICTURE_TYPE_PNG,
+                        imageFile.name,
+                        Units.toEMU(400.0),
+                        Units.toEMU(200.0)
+                    ) // 400x200 pixels
+                }
+
+                val buildingName = viewModel.buildingDetail.value?.buildingName
+                val fileOutputStream = FileOutputStream(folderPath + "/${buildingName}.docx")
+                xwpfDocument.write(fileOutputStream)
+
+                fileOutputStream.flush()
+                fileOutputStream.close()
+                xwpfDocument.close()
+
+                withContext(Main) {
+                    Toast.makeText(context, "파일을 성공적으로 저장했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+    }
+
+    private fun convertUrlToBitmap(str: String): Bitmap {
+        val imageTask = URLtoBitmapTask().apply {
+            url = URL(str)
+        }
+        val bitmap: Bitmap = imageTask.execute().get()
+        return bitmap
+    }
+
+    private fun convertBitmapToFile(bitmap: Bitmap, fileName: String): File {
+        val cache = requireContext().externalCacheDir
+        val shareFile = File(cache, "${fileName}.png")
+        val out = FileOutputStream(shareFile)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+        out.flush()
+        out.close()
+        return shareFile
     }
 
     private fun setLayout() {
@@ -124,4 +229,20 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
         ((binding.rvIssueDetail.adapter) as BuildingDetailAdapter).filter.filter(binding.tvFloor.text)
     }
 
+}
+
+class URLtoBitmapTask() : AsyncTask<Void, Void, Bitmap>() {
+    //액티비티에서 설정해줌
+    lateinit var url:URL
+    override fun doInBackground(vararg params: Void?): Bitmap {
+        val bitmap = BitmapFactory.decodeStream(url.openStream())
+        return bitmap
+    }
+    override fun onPreExecute() {
+        super.onPreExecute()
+
+    }
+    override fun onPostExecute(result: Bitmap) {
+        super.onPostExecute(result)
+    }
 }

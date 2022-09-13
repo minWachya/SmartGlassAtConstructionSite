@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -146,6 +147,7 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
             val uri = data?.data    // 선택한 이미지의 주소
             if (uri != null) {
                 arrImage[requestCode].imageUri = uri
+                Log.d("mmm uri", uri.toString())
                 // '완료' 버튼 활성화 체크
                 checkBtnEnable()
                 // 이미지 색 변경

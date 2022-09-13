@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.safetymanagement2022"
-        minSdk 21
+        minSdk 26 // 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -105,6 +105,10 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
     implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
     implementation 'com.uniquext.android:rxlifecycle:2.0.0'
+
+    // word
+    implementation 'org.apache.poi:poi-ooxml:4.1.2'
+    implementation 'javax.xml.stream:stax-api:1.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
