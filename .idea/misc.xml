@@ -61,6 +61,7 @@
         <entry key="app/src/main/res/layout/activity_glass_create.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_basic.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/fragment_building_create_1.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/fragment_building_detail.xml" value="0.18214416503906256" />
         <entry key="app/src/main/res/layout/fragment_list_building.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/fragment_list_smartglass.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/item_safety_issue.xml" value="0.22010869565217392" />
