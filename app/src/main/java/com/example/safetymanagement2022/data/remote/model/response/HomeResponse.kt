@@ -12,7 +12,6 @@ data class HomeResponse (
 )
 
 data class SafetyIssue(
-    @SerializedName("raw_data_id") val rawDataId: String,
     @SerializedName("building_name") val BuildingName: String,
     val name: String? = "",
     val picture: String,
