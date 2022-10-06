@@ -2,20 +2,19 @@ package com.example.safetymanagement2022.ui.list.buildingdetail
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Environment
-import android.provider.DocumentsContract
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.bumptech.glide.load.resource.bitmap.BitmapResource
 import com.example.safetymanagement2022.GlideApp
 import com.example.safetymanagement2022.R
 import com.example.safetymanagement2022.common.*
@@ -23,7 +22,6 @@ import com.example.safetymanagement2022.data.remote.model.response.SafetyIssue
 import com.example.safetymanagement2022.databinding.FragmentBuildingDetailBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -33,7 +31,10 @@ import org.apache.poi.xwpf.usermodel.Document
 import org.apache.poi.xwpf.usermodel.XWPFDocument
 import org.apache.poi.xwpf.usermodel.XWPFParagraph
 import org.apache.poi.xwpf.usermodel.XWPFRun
-import java.io.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
 import java.net.URL
 
 
@@ -81,6 +82,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
                 xwpfRunTitle.setText(viewModel.buildingDetail.value?.buildingName)
 
                 // issue 추가
+                var index = 0
                 issueList.forEach {
                     val xwpfParagraphContext: XWPFParagraph = xwpfDocument.createParagraph()
                     val xwpfRunContext: XWPFRun = xwpfParagraphContext.createRun()
@@ -93,7 +95,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
                     val xwpfRunImage: XWPFRun = xwpfParagraphImage.createRun()
                     // image file 생성
                     val bitmap = convertUrlToBitmap(it.picture)
-                    val imageFile = convertBitmapToFile(bitmap, it.rawDataId)
+                    val imageFile = convertBitmapToFile(bitmap, index++)
                     val imageData = FileInputStream(imageFile)
 
                     // image 추가
@@ -123,14 +125,20 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
     }
 
     private fun convertUrlToBitmap(str: String): Bitmap {
-        val imageTask = URLtoBitmapTask().apply {
-            url = URL(str)
+        val bitmap = try {
+            val imageTask = URLtoBitmapTask(resources.getDrawable(R.drawable.ic_image_off)).apply {
+                url = URL(str)
+            }
+            imageTask.execute().get()
         }
-        val bitmap: Bitmap = imageTask.execute().get()
+        catch (e: FileNotFoundException) {
+            val drawable: Drawable = resources.getDrawable(R.drawable.ic_image_off)
+            (drawable as BitmapDrawable).bitmap
+        }
         return bitmap
     }
 
-    private fun convertBitmapToFile(bitmap: Bitmap, fileName: String): File {
+    private fun convertBitmapToFile(bitmap: Bitmap, fileName: Int): File {
         val cache = requireContext().externalCacheDir
         val shareFile = File(cache, "${fileName}.png")
         val out = FileOutputStream(shareFile)
@@ -231,16 +239,16 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
 
 }
 
-class URLtoBitmapTask() : AsyncTask<Void, Void, Bitmap>() {
+class URLtoBitmapTask(val drawable: Drawable) : AsyncTask<Void, Void, Bitmap>() {
     //액티비티에서 설정해줌
     lateinit var url:URL
     override fun doInBackground(vararg params: Void?): Bitmap {
-        val bitmap = BitmapFactory.decodeStream(url.openStream())
+        val bitmap = try {
+            BitmapFactory.decodeStream(url.openStream())
+        } catch (e: FileNotFoundException) {
+            (drawable as BitmapDrawable).bitmap
+        }
         return bitmap
-    }
-    override fun onPreExecute() {
-        super.onPreExecute()
-
     }
     override fun onPostExecute(result: Bitmap) {
         super.onPostExecute(result)
