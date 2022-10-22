@@ -19,6 +19,11 @@ class ListGlassFragment: BaseFragment<FragmentListGlassBinding>(R.layout.fragmen
         binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.getListGlass(viewModel.getUserId())
+        setOberverListGlassResponse()
+        setObserverOpenCreateGlassEvent()
+    }
+
+    private fun setOberverListGlassResponse() {
         viewModel.listGlassResponse.observe(viewLifecycleOwner) { data ->
             binding.rvListSmartglass.adapter = ListSmartGlassAdapter(data.admin).apply {
                 submitList(data.glassList)
@@ -26,6 +31,9 @@ class ListGlassFragment: BaseFragment<FragmentListGlassBinding>(R.layout.fragmen
             binding.admin = data.admin
             binding.viewModel = viewModel
         }
+    }
+
+    private fun setObserverOpenCreateGlassEvent() {
         viewModel.openCreateGlassEvent.observe(viewLifecycleOwner, EventObserver {
             openCreateGlass()
         })
