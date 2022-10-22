@@ -1,6 +1,7 @@
 package com.example.safetymanagement2022.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.viewModels
@@ -30,6 +31,13 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.lifecycleOwner = viewLifecycleOwner
 
         setLayout(viewModel.getUserId())
+        setRefreshLayout()
+    }
+
+    private fun setRefreshLayout() {
+        binding.refreshLayout.setOnRefreshListener {
+            setLayout(viewModel.getUserId())
+        }
     }
 
     private fun setLayout(userId: String) {
@@ -44,6 +52,10 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             if (homeResponse.admin == KEY_MANAGER) setSpinner(homeResponse.buildingList ?: listOf())
             // 사용자 모드
             else setConnectGlassBtnListener(userId, viewModel.homeResponse.value?.isConnected!!.toInt())
+
+            // 새로고침 완료시, 새로고침 아이콘이 사라지게
+            binding.refreshLayout.isRefreshing = false
+            Log.d("mmm", "d")
         }
     }
 
