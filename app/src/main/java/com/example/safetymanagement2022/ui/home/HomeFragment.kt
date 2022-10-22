@@ -34,12 +34,6 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         setRefreshLayout()
     }
 
-    private fun setRefreshLayout() {
-        binding.refreshLayout.setOnRefreshListener {
-            setLayout(viewModel.getUserId())
-        }
-    }
-
     private fun setLayout(userId: String) {
         viewModel.getHomeResponse(userId)
         viewModel.homeResponse.observe(viewLifecycleOwner) { homeResponse ->
@@ -55,7 +49,12 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             // 새로고침 완료시, 새로고침 아이콘이 사라지게
             binding.refreshLayout.isRefreshing = false
-            Log.d("mmm", "d")
+        }
+    }
+
+    private fun setRefreshLayout() {
+        binding.refreshLayout.setOnRefreshListener {
+            setLayout(viewModel.getUserId())
         }
     }
 

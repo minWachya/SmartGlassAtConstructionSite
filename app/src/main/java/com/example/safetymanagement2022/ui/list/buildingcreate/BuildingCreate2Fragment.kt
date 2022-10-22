@@ -42,19 +42,31 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        // 도면 배열 recycler view 설정
         val floorMax = requireArguments().getString(KEY_BUILDING_FLOOR_MAX)?.toIntOrNull() ?: 0
         val floorMin = requireArguments().getString(KEY_BUILDING_FLOOR_MIN)?.toIntOrNull() ?: 0
-
         setFloorList(floorMax, floorMin)
         viewModel.setListFloorPlan(arrImage)
         checkBtnEnable()
 
+        setObserverListFloorPlan()
+        serObserverOpenBtn2()
+        setObserverArrS3Url()
+        setObserverCreateBuilding2Response()
+
+        setBackBtnClickListener()
+    }
+
+    private fun setObserverListFloorPlan() {
         viewModel.listFloorPlan.observe(viewLifecycleOwner) {
             binding.rvFloorPlan.adapter =
                 BuildingCreateAdapter(viewModel, this@BuildingCreate2Fragment).apply {
                     submitList(arrImage)
                 }
         }
+    }
+
+    private fun serObserverOpenBtn2() {
         viewModel.openButton2Event.observe(viewLifecycleOwner, EventObserver {
             val multiUploadHashMap = linkedMapOf<String,File>()
             for(i in 0 until arrImage.size) {
@@ -64,18 +76,21 @@ class BuildingCreate2Fragment : BaseFragment<FragmentBuildingCreate2Binding>(R.l
             }
             uploadImageToS3(multiUploadHashMap)
         })
+    }
 
+    private fun setObserverArrS3Url() {
         viewModel.arrS3Url.observe(viewLifecycleOwner) {
             postBuildingCreate2()
         }
+    }
 
+    private fun setObserverCreateBuilding2Response() {
         viewModel.buildingCreate2Response.observe(viewLifecycleOwner) {
             val buildingName =  requireArguments().getString(KEY_BUILDING_NAME)
             BasicDialog("건물 추가 완료", "‘$buildingName’이(가) 정상적으로  추가되었습니다.",
                 "", "확인").show(parentFragmentManager, "CustomDialog")
             findNavController().popBackStack()
         }
-        setBackBtnClickListener()
     }
 
     private fun setBackBtnClickListener() {

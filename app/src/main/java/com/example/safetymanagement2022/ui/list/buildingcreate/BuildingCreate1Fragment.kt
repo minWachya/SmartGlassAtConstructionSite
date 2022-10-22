@@ -1,7 +1,6 @@
 package com.example.safetymanagement2022.ui.list.buildingcreate
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.core.os.bundleOf
@@ -24,15 +23,22 @@ class BuildingCreate1Fragment: BaseFragment<FragmentBuildingCreate1Binding>(R.la
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        setObserverOpenBtn1()
+        setObserverCreateBuilding1Response()
+        setBackBtnClickListener()
+        setButtonEnableListener()
+    }
+
+    private fun setObserverOpenBtn1() {
         viewModel.openButton1Event.observe(viewLifecycleOwner, EventObserver {
             postBuildingCreate1()
         })
+    }
+
+    private fun setObserverCreateBuilding1Response() {
         viewModel.buildingCreate1Response.observe(viewLifecycleOwner) {
             openBuildingCreateStep2()
         }
-
-        setBackBtnClickListener()
-        setButtonEnableListener()
     }
 
     private fun postBuildingCreate1() {

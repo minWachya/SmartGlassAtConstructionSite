@@ -21,6 +21,13 @@ class ListBuildingFragment: BaseFragment<FragmentListBuildingBinding>(R.layout.f
         binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.getListBuilding(viewModel.getUserId())
+
+        setObserverListBuilding()
+        setObserverCreateBuilding()
+        setObserverOpenBuildingDetail()
+    }
+
+    private fun setObserverListBuilding() {
         viewModel.listBuildingResponse.observe(viewLifecycleOwner) { data ->
             binding.rvListBuilding.adapter = ListBuildingAdapter(viewModel).apply {
                 submitList(data.buildingList)
@@ -28,9 +35,15 @@ class ListBuildingFragment: BaseFragment<FragmentListBuildingBinding>(R.layout.f
             binding.viewModel = viewModel
             binding.admin = viewModel.listBuildingResponse.value?.admin ?: 0
         }
+    }
+
+    private fun setObserverCreateBuilding() {
         viewModel.openCreateBuildingEvent.observe(viewLifecycleOwner, EventObserver {
             openCreateBuilding()
         })
+    }
+
+    private fun setObserverOpenBuildingDetail() {
         viewModel.openBuildingDetailEvent.observe(viewLifecycleOwner, EventObserver {
             openBuildingDetail(it)
         })
