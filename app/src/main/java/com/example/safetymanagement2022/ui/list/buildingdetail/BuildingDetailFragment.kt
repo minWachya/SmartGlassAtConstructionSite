@@ -36,6 +36,7 @@ import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.net.URL
+import kotlin.math.abs
 
 
 @AndroidEntryPoint
@@ -57,7 +58,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             binding.tvFloor.text = if(data.minFloor == 0) "지상 1층" else if(data.maxFloor == 0) "지하 1층" else "지상 1층"
             setShowSelectFloorDialog(data.minFloor, data.maxFloor)
             setDrawing(if(data.minFloor == 0) 1 else if(data.maxFloor == 0) 0 else 1, 1)
-            val arrFloor = setFloorList(data.minFloor, data.maxFloor)
+            val arrFloor = setFloorList(abs(data.minFloor), data.maxFloor)
             setSpinnerBtn(arrFloor)
         }
 
@@ -198,7 +199,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
         val data = viewModel.buildingDetail.value
         if (data != null) {
             val imgUrlIndex: Int = if(minMax == 1) data.maxFloor - (floor + 1)
-                                    else data.maxFloor + data.minFloor - (floor + 1)
+                                    else data.maxFloor + abs(data.minFloor) - (floor + 1)
             try{
                 GlideApp.with(requireActivity())
                     .load(data.drawingList[imgUrlIndex])

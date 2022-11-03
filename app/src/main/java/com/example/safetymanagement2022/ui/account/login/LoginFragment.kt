@@ -1,9 +1,12 @@
 package com.example.safetymanagement2022.ui.account.login
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.safetymanagement2022.R
@@ -37,10 +40,15 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
         setRegisterButtonListener()
 
         viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
-            Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
-            if (response.message.contains("성공")) {
-                // 메인 화면으로 이동
-                findNavController().navigate(R.id.action_frag_login_to_navigation_home)
+            if(checkPermission()) {
+                Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
+                if (response.message.contains("성공")) {
+                    // 메인 화면으로 이동
+                    findNavController().navigate(R.id.action_frag_login_to_navigation_home)
+                }
+            } else {
+                requestPermission()
+                Toast.makeText(context, "권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
         settingViewModel.changePwResponse.observe(viewLifecycleOwner) { response ->
@@ -78,9 +86,28 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
     }
 
     private fun setRegisterButtonListener() {
-        binding.tvRegister.setOnClickListener {
-            // 회원가입 화면으로 이동
-            findNavController().navigate(R.id.action_frag_login_to_frag_register)
+        if(checkPermission()) {
+            binding.tvRegister.setOnClickListener {
+                // 회원가입 화면으로 이동
+                findNavController().navigate(R.id.action_frag_login_to_frag_register)
+            }
+        }
+        else {
+            requestPermission()
+            Toast.makeText(context, "권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
+
+    // 권한 확인
+    private fun checkPermission(): Boolean {
+        // 문서 접근 권한 승인상태
+        val permission = ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        return permission == PackageManager.PERMISSION_GRANTED
+    }
+
+    // 권한 요청
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 99)
+    }
+
 }
