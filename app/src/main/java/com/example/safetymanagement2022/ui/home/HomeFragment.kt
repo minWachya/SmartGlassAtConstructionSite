@@ -81,7 +81,9 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun setConnectGlassBtnListener(userId: String, isConnected: Int) {
         binding.btnConnectSamrtglass.setOnClickListener {
-            if (isConnected == KEY_ENABLE) disConnectIot(userId)
+            if (isConnected == KEY_ENABLE) {
+                disConnectIot(userId)
+            }
             else setConnectIot(userId)
         }
     }

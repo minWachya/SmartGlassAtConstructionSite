@@ -59,7 +59,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
             binding.rvIssueDetail.adapter = BuildingDetailAdapter(data.issueList)
             binding.rvIssueDetail.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             binding.tvFloor.text = if(data.minFloor == 0) "지상 1층" else if(data.maxFloor == 0) "지하 1층" else "지상 1층"
-            setShowSelectFloorDialog(data.minFloor, data.maxFloor)
+            setShowSelectFloorDialog(abs(data.minFloor), data.maxFloor)
             setDrawing(if(data.minFloor == 0) 1 else if(data.maxFloor == 0) 0 else 1, 1)
             val arrFloor = setFloorList(abs(data.minFloor), data.maxFloor)
             setSpinnerBtn(arrFloor)
