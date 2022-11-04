@@ -21,6 +21,7 @@ import com.example.safetymanagement2022.common.*
 import com.example.safetymanagement2022.data.remote.model.response.SafetyIssue
 import com.example.safetymanagement2022.databinding.FragmentBuildingDetailBinding
 import com.example.safetymanagement2022.ui.base.BaseFragment
+import com.example.safetymanagement2022.ui.common.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -43,6 +44,8 @@ import kotlin.math.abs
 class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layout.fragment_building_detail) {
     private val viewModel: BuildingDetailViewModel by viewModels()
     lateinit var issueList: List<SafetyIssue>
+
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,6 +71,10 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
     private fun setDownload() {
         binding.tvDownload.setOnClickListener {
             lifecycleScope.launch(IO) {
+                withContext(Main) {
+                    loadingDialog = LoadingDialog(requireContext())
+                    loadingDialog.show()
+                }
                 // 폴더 생성(해당 경로의 폴더가 존재하지 않으면 해당 경로에 폴더 생성)
                 val folderPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/DetectUs/"
                 val folder = File(folderPath)
@@ -90,7 +97,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
 
                     // text 추가
                     xwpfRunContext.fontSize = 10
-                    xwpfRunContext.setText(it.floor + ": " + it.details)
+                    xwpfRunContext.setText(it.room + " - " + it.floor + " - " + it.details)
 
                     val xwpfParagraphImage: XWPFParagraph = xwpfDocument.createParagraph()
                     val xwpfRunImage: XWPFRun = xwpfParagraphImage.createRun()
@@ -118,6 +125,7 @@ class BuildingDetailFragment: BaseFragment<FragmentBuildingDetailBinding>(R.layo
                 xwpfDocument.close()
 
                 withContext(Main) {
+                    loadingDialog.dismiss()
                     Toast.makeText(context, "파일을 성공적으로 저장했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }

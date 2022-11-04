@@ -60,6 +60,7 @@
         <entry key="app/src/main/res/layout/activity_building_detail.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/activity_glass_create.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_basic.xml" value="0.23233695652173914" />
+        <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.17980072463768115" />
         <entry key="app/src/main/res/layout/fragment_building_create_1.xml" value="0.21422101449275363" />
         <entry key="app/src/main/res/layout/fragment_building_detail.xml" value="0.18214416503906256" />
         <entry key="app/src/main/res/layout/fragment_glass_create.xml" value="0.17980072463768115" />
