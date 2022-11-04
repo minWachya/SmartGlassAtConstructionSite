@@ -41,15 +41,27 @@
         <TextView
             android:id="@+id/tv_building"
             style="@style/TextMedium"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="18dp"
             android:text="@{safetyIssue.name != null ? @string/unit_home_issue(safetyIssue.name, safetyIssue.floor) : safetyIssue.floor}"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_location"
             app:layout_constraintTop_toTopOf="@id/tv_safety_issue"
             tools:text="건물1" />
+
+        <TextView
+            android:id="@+id/tv_room"
+            style="@style/TextMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:text="@{safetyIssue.room}"
+            android:textAlignment="textEnd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_building"
+            app:layout_constraintTop_toTopOf="@id/iv_location"
+            tools:text="00호" />
 
         <TextView
             android:id="@+id/tv_detail"
